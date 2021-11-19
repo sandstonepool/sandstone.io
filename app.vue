@@ -221,37 +221,6 @@ section {
   }
 }
 
-/* FAQ */
-
-#faq summary {
-  cursor: pointer;
-}
-
-#faq details summary::before {
-  padding-right: 0.25rem;
-  content: "+ ";
-}
-
-#faq details[open] summary::before {
-  padding-right: 0.25rem;
-  content: "- ";
-  transform: rotate(24deg);
-}
-
-#faq details[open] summary ~ * {
-  animation: sweep 0.5s ease-in-out;
-}
-
-@keyframes sweep {
-  0% {
-    opacity: 0;
-    margin-left: -10px;
-  }
-  100% {
-    opacity: 1;
-    margin-left: 0px;
-  }
-}
 </style>
 
 <template>
@@ -473,107 +442,10 @@ section {
     </section>
 
     <section id="faq">
-      <h2>Frequently Asked Questions</h2>
-      <div class="inner">
-        <details>
-          <summary>Is staking safe?</summary>
-          <p>
-            Yes. Staking on your $ADA tokens on is very safe. Cardano is one of
-            the few Proof of Stake blockchains that allows you to keep your
-            coins in your wallet when you stake. They’re yours and you can
-            access them whenever you need to. There is no lock up period when
-            you stake on the network.
-          </p>
-        </details>
-        <details>
-          <summary>When will I see my rewards?</summary>
-          <p>
-            Time on the Cardano blockchain is measured in epochs (120hrs or 5
-            days). While there is no lock up period for staking, you won’t see
-            your first rewards for 5 epochs. This is because rewards are
-            calculated retrospectively about 2 epoch in the past.
-          </p>
-        </details>
-        <details>
-          <summary>
-            Do I need to claim rewards each time they're awarded?
-          </summary>
-          <p>
-            No, your rewards are compounded automatically in your total
-            delegation, and included in the calculation of future rewards. The
-            only time you need to claim your rewards is to bring them back on to
-            your wallet. We recommend doing this roughly every quarter.
-          </p>
-        </details>
-        <details>
-          <summary>
-            What should I look for when choosing a stake pool to delegate to?
-          </summary>
-          <p>
-            Cardano strives to be the most decentralised blockchain out there,
-            so choosing a Single Pool Operator (SPO) will contribute to that
-            aim. Consider SPOs that are active in the Cardano community, minting
-            blocks every epoch and have several ways to communicate with, so you
-            can reach them if you have any questions.
-          </p>
-        </details>
-        <details>
-          <summary>
-            Are single pool better than larger operators (e.g. Binance, Kraken,
-            Atomic, etc)?
-          </summary>
-          <p>
-            Yes they are. Single Pool Operators (SPO) are focussed on one single
-            pool, and contribute directly to the decentralisation of the Cardano
-            network. They also tend to work harder for their pools. Larger pool
-            operators run like factories and trim costs to maximize profits.
-          </p>
-        </details>
-        <details>
-          <summary>How are blocks allocated to stake pools per epoch?</summary>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora
-            unde alias sapiente iste voluptate dolore error odit suscipit
-            similique illo necessitatibus amet, reprehenderit nihil accusamus
-            sed perferendis quibusdam! Iste, quae!
-          </p>
-        </details>
-        <details>
-          <summary>Do you take your 2% fee from the interest rate?</summary>
-          <p>
-            NO. The pool’s reward rate – the % interest you earn - is calculated
-            on the total rewards paid out. The two 2% fee is taken from the
-            rewards, not the percentage profits. Meaning 98% of all tokens paid
-            out go to you, the delegators.
-          </p>
-        </details>
-        <details>
-          <summary>
-            Do I need to stake each time I add coins to my wallet?
-          </summary>
-          <p>
-            NO. Once you’ve linked your wallet to a stake pool the balance is
-            automatically adjusted when you add or remove tokens from that
-            wallet.
-          </p>
-        </details>
-        <details>
-          <summary>My exchange offers staking, should I just do that?</summary>
-          <p>
-            We don’t think so. Exchanges can keep up to 20% of staking rewards.
-            Also contributing your delegation to the very large pool operators
-            gives them more power in swaying the direction of the Cardano
-            ecosystem. SPOs lead to greater decentralisation.
-          </p>
-        </details>
-        <details>
-          <summary>How do I unstake?</summary>
-          <p>
-            To unstake from a pool, simply choose another pool to delegate to.
-          </p>
-        </details>
-      </div>
+      <faq />
     </section>
+
+    <footer />
   </div>
 
   <!-- Footer />
