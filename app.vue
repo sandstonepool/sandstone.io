@@ -14,7 +14,6 @@ html body {
   max-width: 100vw;
   overflow-x: hidden;
   object-fit: fill;
-  -webkit-text-size-adjust: 100%;
   margin: 0;
 }
 
@@ -182,18 +181,20 @@ section {
   max-width: 1400px;
   padding-left: 60px;
   padding-right: 60px;
+
 }
 
 .tips {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  gap: 60px;
-  align-items: stretch;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 25%);
+  grid-template-rows: max-content;
+}
+
+.tips > * {
+  margin: 1em;
 }
 
 .tip {
-  width: 240px;
   height: 180px;
   padding: 20px;
   display: flex;
@@ -206,6 +207,18 @@ section {
   color: #0437ff;
   font-size: 30pt;
   margin: 15pt;
+}
+
+@media screen and (max-width: 1366px) {
+  .tips {
+    grid-template-columns: repeat(auto-fill, 50%);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .tips {
+    grid-template-columns: repeat(auto-fill, 100%);
+  }
 }
 
 /* FAQ */
@@ -281,7 +294,7 @@ section {
       </div>
       <div class="grid">
         <div>
-          <img src="~/assets/images/grid-security.svg" class="grid-image" />
+          <img src="~/assets/images/grid-security.svg" class="grid-image" alt=""/>
           <div>
             <h3>Security</h3>
             <div class="grid-text">
@@ -294,7 +307,7 @@ section {
           </div>
         </div>
         <div>
-          <img src="~/assets/images/grid-community.svg" class="grid-image" />
+          <img src="~/assets/images/grid-community.svg" class="grid-image" alt=""/>
           <div>
             <h3>Community</h3>
             <div class="grid-text">
@@ -313,10 +326,7 @@ section {
           </div>
         </div>
         <div>
-          <img
-            src="~/assets/images/grid-skin-in-the-game.svg"
-            class="grid-image"
-          />
+          <img src="~/assets/images/grid-skin-in-the-game.svg" class="grid-image" alt=""/>
           <div>
             <h3>Skin in the Game</h3>
             <div class="grid-text">
@@ -328,7 +338,7 @@ section {
           </div>
         </div>
         <div>
-          <img src="~/assets/images/grid-fees.svg" class="grid-image" />
+          <img src="~/assets/images/grid-fees.svg" class="grid-image" alt=""/>
           <div>
             <h3>Fees</h3>
             <div class="grid-text">

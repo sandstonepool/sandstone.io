@@ -29,7 +29,6 @@
 
     button .text {
         transition: color 0.5s ease;
-        -webkit-transition: color 0.5s ease;
     }
 
     button .icon {
