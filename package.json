@@ -6,7 +6,7 @@
     "start": "node .output/server/index.mjs"
   },
   "devDependencies": {
-    "nuxt3": "latest"
+    "nuxt3": "^3.0.0-27274229.29599f0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.26-2",

@@ -21,18 +21,10 @@
   <div class="box">
     <div class="box-border">
       <div class="box-border mod">
-        <div class="box-inner" v-bind:style="{ padding: this.padding }">
-          <slot />
+        <div class="box-inner">
+          <slot/>
         </div>
       </div>
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  props: {
-    padding: String
-  }
-}
-</script>

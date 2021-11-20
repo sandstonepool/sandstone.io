@@ -4,7 +4,6 @@
   row-gap: 60px;
   flex-wrap: wrap;
   flex-direction: row;
-  align-items: stretch;
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -17,8 +16,8 @@
   max-width: 200px;
   margin-right: 42px;
   margin-left: 42px;
-  padding-right: 0px;
-  padding-left: 0px;
+  padding-right: 0;
+  padding-left: 0;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -58,24 +57,14 @@
     <div class="stat">
       <div class="ada-icon-wrap">
         <div class="big-number">8M</div>
-        <img
-          src="images/ADA-icon.svg"
-          loading="lazy"
-          alt="ADA Logo"
-          class="image-7"
-        />
+        <img src="~/assets/images/ada-icon.svg" loading="lazy" alt="ADA"/>
       </div>
       <div class="number-label">Stake</div>
     </div>
     <div class="stat">
       <div class="ada-icon-wrap">
         <div class="big-number">810K</div>
-        <img
-          src="images/ADA-icon.svg"
-          loading="lazy"
-          alt="ADA Logo"
-          class="image-7"
-        />
+        <img src="~/assets/images/ada-icon.svg" alt="ADA"/>
       </div>
       <div class="number-label">Pledge</div>
     </div>

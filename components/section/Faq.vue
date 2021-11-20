@@ -1,8 +1,8 @@
 <style scoped>
 .questions {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 </style>
 <template>
@@ -11,11 +11,11 @@
     <div class="questions">
       <expandable title="Is staking safe?">
         <p>
-        Yes. Staking on your $ADA tokens on is very safe. Cardano is one of
-        the few Proof of Stake blockchains that allows you to keep your
-        coins in your wallet when you stake. They’re yours and you can
-        access them whenever you need to. There is no lock up period when
-        you stake on the network.
+          Yes. Staking on your $ADA tokens on is very safe. Cardano is one of
+          the few Proof of Stake blockchains that allows you to keep your
+          coins in your wallet when you stake. They’re yours and you can
+          access them whenever you need to. There is no lock up period when
+          you stake on the network.
         </p>
       </expandable>
       <expandable title="When will I see my rewards?">
@@ -91,9 +91,10 @@
 </template>
 
 <script>
-import Expandable from './Expandable.vue'
+import Expandable from '../Expandable.vue'
+
 export default {
-  components: { Expandable },
+  components: {Expandable},
 
 }
 </script>

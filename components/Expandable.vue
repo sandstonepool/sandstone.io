@@ -4,7 +4,7 @@ summary {
 }
 
 details {
-    margin: 20px;
+  margin: 20px;
 }
 
 details summary::before {
@@ -33,21 +33,23 @@ details[open] summary ~ * {
 </style>
 
 <template>
-     <box>
-        <details>
-          <summary>{{title}}</summary>
-          <div><slot></slot></div>
-        </details>
-      </box>
+  <box>
+    <details>
+      <summary>{{ title }}</summary>
+      <div>
+        <slot></slot>
+      </div>
+    </details>
+  </box>
 </template>
 
 <script>
 export default {
-    props: {
-        title: {
-            type: String,
-            required: true
-        }
+  props: {
+    title: {
+      type: String,
+      required: true
     }
+  }
 }
 </script>
