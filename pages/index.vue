@@ -141,17 +141,17 @@ section.breakout {
 
 /* SECURITY */
 
-.tips {
+#security .tips {
   display: grid;
   grid-template-columns: repeat(auto-fill, 25%);
   grid-template-rows: max-content;
 }
 
-.tips > * {
+#security .tips > * {
   margin: 1em;
 }
 
-.tip {
+#security .tip {
   height: 180px;
   padding: 20px;
   display: flex;
@@ -160,29 +160,57 @@ section.breakout {
   flex-direction: column;
 }
 
-.tip h3 {
+#security .tip h3 {
   color: #0437ff;
   font-size: 30pt;
   margin: 15pt;
 }
 
 @media screen and (max-width: 1366px) {
-  .tips {
+  #security .tips {
     grid-template-columns: repeat(auto-fill, 50%);
   }
 }
 
 @media screen and (max-width: 768px) {
-  .tips {
+  #security .tips {
     grid-template-columns: repeat(auto-fill, 100%);
   }
 }
 
 /* FAQ */
+#faq {
+  display: grid;
+  grid-gap: 4em;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: max-content;
+}
+
+#faq h2 {
+  grid-column: 1 / span 4;
+}
+
 #faq .questions {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 2em;
+  grid-column: 1 / span 3;
+}
+
+#faq .squiggle {
+  position: sticky;
+  top: 0;
+  grid-column: 4 / span 1;
+  width: 100%;
+}
+
+@media screen and (max-width: 1366px) {
+  #faq .questions {
+    grid-column: 1 / span 4;
+  }
+  #faq .squiggle {
+    visibility: hidden;
+  }
 }
 
 </style>
@@ -479,6 +507,7 @@ section.breakout {
           </p>
         </expandable>
       </div>
+      <img src="~/assets/images/sandstone-element-large.svg" alt="" class="squiggle"/>
     </section>
   </div>
 </template>
