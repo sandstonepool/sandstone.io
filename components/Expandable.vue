@@ -7,6 +7,10 @@ details {
   margin: 20px;
 }
 
+details summary {
+  font-weight: bold;
+}
+
 details summary::before {
   padding-right: 0.25rem;
   content: "+ ";

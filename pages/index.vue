@@ -181,6 +181,7 @@ section.breakout {
 /* FAQ */
 #faq {
   display: grid;
+  grid-area: span;
   grid-gap: 4em;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-template-rows: max-content;
@@ -202,6 +203,11 @@ section.breakout {
   top: 0;
   grid-column: 4 / span 1;
   width: 100%;
+  height: 0;
+}
+
+#faq .squiggle img {
+  width: 200px;
 }
 
 @media screen and (max-width: 1366px) {
@@ -507,7 +513,18 @@ section.breakout {
           </p>
         </expandable>
       </div>
-      <img src="~/assets/images/sandstone-element-large.svg" alt="" class="squiggle"/>
+      <div class="squiggle">
+        <img src="~/assets/images/sandstone-element-large.svg" alt=""/>
+        <p>The most common questions should be in this list. If you have any others, drop us a line.</p>
+        <p>
+          <Button>
+            Contact Us
+            <template v-slot:icon>
+              <font-awesome-icon icon="chevron-circle-right" size="2x" />
+            </template>
+          </Button>
+        </p>
+      </div>
     </section>
   </div>
 </template>
