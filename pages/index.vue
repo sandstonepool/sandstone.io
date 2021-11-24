@@ -8,7 +8,7 @@ section {
   padding-left: 60px;
   padding-right: 60px;
   margin: auto;
-  max-width: 1400px;
+  max-width: 1300px;
 }
 
 .half {
@@ -17,7 +17,7 @@ section {
 
 section .inner {
   margin: auto;
-  max-width: 1400px;
+  max-width: 1300px;
   padding-left: 60px;
   padding-right: 60px;
 }
@@ -214,6 +214,7 @@ section.breakout {
   #faq .questions {
     grid-column: 1 / span 4;
   }
+
   #faq .squiggle {
     visibility: hidden;
   }
@@ -520,7 +521,7 @@ section.breakout {
           <Button>
             Contact Us
             <template v-slot:icon>
-              <font-awesome-icon icon="chevron-circle-right" size="2x" />
+              <font-awesome-icon icon="chevron-circle-right" size="2x"/>
             </template>
           </Button>
         </p>
