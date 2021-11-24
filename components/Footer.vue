@@ -1,7 +1,9 @@
-<style scoped>
+<style lang="scss" scoped>
+@import "../assets/styles/sandstone";
+
 footer {
   position: relative;
-  background-image: linear-gradient(40deg, #1df4f4, #0437ff);
+  background-image: $gradient;
   width: 100vw;
   padding-top: 40px;
   padding-bottom: 120px;
@@ -48,7 +50,7 @@ footer h3 {
 #copyright {
   width: 100vw;
   color: white;
-  background: black;
+  background: $rich-black-fogra-39;
   line-height: 40pt;
   position: absolute;
   bottom: 0;
@@ -74,9 +76,9 @@ footer h3 {
     <div class="footer-content">
       <div class="footer-section">
         <h3>
-          <NuxtLink to="/">
+          <router-link to="/">
             <img src="~/assets/images/sandstone-logo.svg" alt="Sandstone" width="220px" class="filter-white"/>
-          </NuxtLink>
+          </router-link>
         </h3>
           Sandstone Ventures Pty Ltd<br>
           A.C.N 655 223 591
@@ -90,8 +92,8 @@ footer h3 {
       </div>
       <div id="information" class="footer-section">
         <h3>Information</h3>
-        <NuxtLink to="/contact">Contact Us</NuxtLink>
-        <NuxtLink to="/privacy">Privacy Policy</NuxtLink>
+        <a href="mailto:info@sandstone.io">Contact Us</a>
+        <router-link to="/privacy">Privacy Policy</router-link>
       </div>
       <div id="socials" class="footer-section">
         <h3>Social Links</h3>
@@ -109,6 +111,9 @@ footer h3 {
         </a>
       </div>
     </div>
-    <div id="copyright">© Sandstone Ventures Pty Ltd 2021</div>
+    <div id="copyright">
+      <font-awesome-icon :icon="['fas', 'copyright']" />
+      Sandstone Ventures Pty Ltd {{ new Date().getFullYear() }}
+    </div>
   </footer>
 </template>

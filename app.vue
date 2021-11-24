@@ -1,5 +1,6 @@
-<style>
-@import "assets/css/normalize.css";
+<style lang="scss">
+@import "assets/styles/sandstone";
+@import "assets/styles/normalize.css";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 html body {
@@ -9,7 +10,7 @@ html body {
   justify-content: flex-start;
   align-items: center;
   font-family: Poppins, sans-serif;
-  color: #000;
+  color: $rich-black-fogra-39;
   font-size: 12pt;
   line-height: 22px;
   max-width: 100vw;
@@ -37,11 +38,6 @@ h3 {
 </style>
 
 <template>
-  <Head>
-    <Title>Sandstone Stake Pool</Title>
-    <Link href="images/favicon.png" rel="shortcut icon" type="image/png" />
-    <Link href="images/webclip.jpg" rel="apple-touch-icon" />
-  </Head>
   <div>
     <NuxtPage/>
   </div>

@@ -223,6 +223,7 @@ section.breakout {
 </style>
 
 <template>
+
   <div class="content">
     <section id="intro">
       <div class="half">
@@ -517,14 +518,12 @@ section.breakout {
       <div class="squiggle">
         <img src="~/assets/images/sandstone-element-large.svg" alt=""/>
         <p>The most common questions should be in this list. If you have any others, drop us a line.</p>
-        <p>
-          <Button>
-            Contact Us
-            <template v-slot:icon>
-              <font-awesome-icon icon="chevron-circle-right" size="2x"/>
-            </template>
-          </Button>
-        </p>
+        <Button>
+          Contact Us
+          <template v-slot:icon>
+            <font-awesome-icon icon="chevron-circle-right" size="2x"/>
+          </template>
+        </Button>
       </div>
     </section>
   </div>
