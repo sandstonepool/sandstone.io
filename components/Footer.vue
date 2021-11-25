@@ -33,7 +33,7 @@ footer a {
 footer h3 {
   text-transform: uppercase;
   text-decoration: none;
-  color: #1df4f4;
+  color: $fluorescent-blue;
   font-size: 12pt;
 }
 
@@ -77,7 +77,7 @@ footer h3 {
       <div class="footer-section">
         <h3>
           <router-link to="/">
-            <img src="~/assets/images/sandstone-logo.svg" alt="Sandstone" width="220px" class="filter-white"/>
+            <img src="~/assets/images/sandstone-logo.svg" alt="Sandstone Logo" width="220px" class="filter-white" />
           </router-link>
         </h3>
           Sandstone Ventures Pty Ltd<br>
@@ -92,7 +92,7 @@ footer h3 {
       </div>
       <div id="information" class="footer-section">
         <h3>Information</h3>
-        <a href="mailto:info@sandstone.io">Contact Us</a>
+        <a href="mailto:info@sandstone.io?subject=General Enquiry">Contact Us</a>
         <router-link to="/privacy">Privacy Policy</router-link>
       </div>
       <div id="socials" class="footer-section">

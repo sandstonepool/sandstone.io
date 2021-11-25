@@ -39,6 +39,7 @@ h3 {
 
 <template>
   <div>
-    <NuxtPage/>
+    <NuxtPage />
+    <Footer/>
   </div>
 </template>

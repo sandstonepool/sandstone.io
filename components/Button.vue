@@ -13,13 +13,13 @@ button {
   text-decoration: none;
   cursor: pointer;
   border-style: none;
-  box-shadow: 3px 3px 10px lighten($rich-black-fogra-39, 70%);
+  box-shadow: $depth-shadow;
   transition: all ease 0.2s;
 }
 
 button:hover {
   background: $gradient-radial;
-  box-shadow: 1px 1px 10px $carolina-blue;
+  box-shadow: $highlight-shadow;
 }
 
 .icon {
@@ -37,7 +37,3 @@ button:hover {
     </span>
   </button>
 </template>
-
-<script>
-
-</script>
