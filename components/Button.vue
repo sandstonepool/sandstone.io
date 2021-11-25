@@ -14,7 +14,7 @@ button {
   cursor: pointer;
   border-style: none;
   box-shadow: $depth-shadow;
-  transition: all ease 0.2s;
+  transition: box-shadow ease 0.2s;
 }
 
 button:hover {

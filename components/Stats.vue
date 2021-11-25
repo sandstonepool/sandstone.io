@@ -1,21 +1,15 @@
 <style scoped>
 .stats {
-  display: flex;
-  row-gap: 60px;
-  flex-wrap: wrap;
-  flex-direction: row;
-  width: 100%;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(4, max-content);
+  grid-gap: 20px;
+  justify-content: space-around;
   align-items: center;
 }
 
 .stat {
   display: flex;
-  width: 100%;
   height: 180px;
-  max-width: 200px;
-  margin-right: 42px;
-  margin-left: 42px;
   padding-right: 0;
   padding-left: 0;
   flex-direction: column;
@@ -26,7 +20,7 @@
 .big-number {
   color: #0437ff;
   font-size: 55px;
-  line-height: 55px;
+  line-height: 100%;
   font-weight: 700;
   text-align: center;
 }
@@ -39,12 +33,16 @@
 
 .ada-icon-wrap {
   display: flex;
+  min-width: 100px;
 }
 
-@media screen and (max-width: 1265px) {
-  .stat {
-    max-width: 300px;
+@media screen and (max-width: 768px) {
+  .stats {
+    grid-template-columns: repeat(2, max-content);
+    grid-template-rows: repeat(2, max-content);
   }
+  /*.big-number { font-size: 55px; }*/
+  /*.number-label { font-size: 28px }*/
 }
 </style>
 
@@ -64,7 +62,7 @@
     <div class="stat">
       <div class="ada-icon-wrap">
         <div class="big-number">810K</div>
-        <img src="~/assets/images/ada-icon.svg" alt="ADA"/>
+        <img src="~/assets/images/ada-icon.svg" loading="lazy" alt="ADA"/>
       </div>
       <div class="number-label">Pledge</div>
     </div>

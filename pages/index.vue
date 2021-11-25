@@ -260,7 +260,7 @@ section.breakout {
         </div>
         <div class="grid">
           <div>
-            <img src="~/assets/images/grid-security.svg" class="grid-image" alt=""/>
+            <img src="~/assets/images/grid-security.svg" class="grid-image" alt="" loading="lazy"/>
             <div>
               <h3>Security</h3>
               <div class="grid-text">
@@ -273,7 +273,7 @@ section.breakout {
             </div>
           </div>
           <div>
-            <img src="~/assets/images/grid-community.svg" class="grid-image" alt=""/>
+            <img src="~/assets/images/grid-community.svg" class="grid-image" alt="" loading="lazy"/>
             <div>
               <h3>Community</h3>
               <div class="grid-text">
@@ -292,7 +292,7 @@ section.breakout {
             </div>
           </div>
           <div>
-            <img src="~/assets/images/grid-skin-in-the-game.svg" class="grid-image" alt=""/>
+            <img src="~/assets/images/grid-skin-in-the-game.svg" class="grid-image" alt="" loading="lazy"/>
             <div>
               <h3>Skin in the Game</h3>
               <div class="grid-text">
@@ -304,7 +304,7 @@ section.breakout {
             </div>
           </div>
           <div>
-            <img src="~/assets/images/grid-fees.svg" class="grid-image" alt=""/>
+            <img src="~/assets/images/grid-fees.svg" class="grid-image" alt="" loading="lazy"/>
             <div>
               <h3>Fees</h3>
               <div class="grid-text">
