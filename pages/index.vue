@@ -1,5 +1,5 @@
-<style lang="scss">
-@import "assets/styles/sandstone";
+<style>
+@import "assets/css/sandstone.css";
 
 section {
   margin-bottom: 150px;
@@ -101,7 +101,7 @@ section.breakout {
 /* GETTING STARTED */
 
 .separated {
-  border-bottom: 2px solid $fluorescent-blue;
+  border-bottom: 2px solid var(--fluorescent-blue);
   position: relative;
   margin: 0 auto;
   padding-bottom: 20px;
@@ -109,7 +109,7 @@ section.breakout {
 
 .separated:before {
   background: none;
-  border-bottom: 2px solid $blue-ryb;
+  border-bottom: 2px solid var(--blue-ryb);
   content: "";
   display: block;
   position: absolute;
@@ -121,11 +121,11 @@ section.breakout {
 }
 
 .grid-number {
-  color: $fluorescent-blue;
+  color: var(--fluorescent-blue);
   font-size: 80px;
   line-height: 100%;
   font-weight: 800;
-  text-shadow: $depth-shadow;
+  text-shadow: var(--depth-shadow);
 }
 
 /* ABOUT US */

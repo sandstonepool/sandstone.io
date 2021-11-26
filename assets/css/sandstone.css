@@ -1,0 +1,14 @@
+:root {
+
+--fluorescent-blue: #1df4f4ff;
+--carolina-blue: #009ffdff;
+--blue-ryb: #0437ffff;
+--rich-black-fogra-39: #020202ff;
+
+--depth-shadow: 3px 3px 10px lighten(var(--rich-black-fogra-39), 70%);
+--highlight-shadow: 1px 1px 10px var(--carolina-blue);
+
+--gradient: linear-gradient(40deg, var(--fluorescent-blue), var(--carolina-blue), var(--blue-ryb));
+--gradient-radial: radial-gradient(circle at 10px 50px, var(--fluorescent-blue) 10%, var(--carolina-blue) 70%, var(--blue-ryb));
+
+}

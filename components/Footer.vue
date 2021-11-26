@@ -1,9 +1,9 @@
-<style lang="scss" scoped>
-@import "../assets/styles/sandstone";
+<style scoped>
+@import "assets/css/sandstone.css";
 
 footer {
   position: relative;
-  background-image: $gradient;
+  background-image: var(--gradient);
   width: 100vw;
   padding-top: 40px;
   padding-bottom: 120px;
@@ -33,7 +33,7 @@ footer a {
 footer h3 {
   text-transform: uppercase;
   text-decoration: none;
-  color: $fluorescent-blue;
+  color: var(--fluorescent-blue);
   font-size: 12pt;
 }
 
@@ -50,7 +50,7 @@ footer h3 {
 #copyright {
   width: 100vw;
   color: white;
-  background: $rich-black-fogra-39;
+  background: var(--rich-black-fogra-39);
   line-height: 40pt;
   position: absolute;
   bottom: 0;

@@ -1,6 +1,6 @@
-<style lang="scss">
-@import "assets/styles/sandstone";
-@import "assets/styles/normalize.css";
+<style>
+@import "assets/css/sandstone.css";
+@import "assets/css/normalize.css";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 html body {
@@ -10,7 +10,7 @@ html body {
   justify-content: flex-start;
   align-items: center;
   font-family: Poppins, sans-serif;
-  color: $rich-black-fogra-39;
+  color: var(--rich-black-fogra-39);
   font-size: 12pt;
   line-height: 22px;
   max-width: 100vw;

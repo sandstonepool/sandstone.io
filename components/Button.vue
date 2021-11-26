@@ -1,5 +1,5 @@
-<style lang="scss" scoped>
-@import "assets/styles/sandstone";
+<style scoped>
+@import "assets/css/sandstone.css";
 
 button {
   display: flex;
@@ -7,19 +7,19 @@ button {
   padding: 10px 10px;
   align-items: center;
   border-radius: 12px;
-  background: $gradient;
+  background: var(--gradient);
   color: #fff;
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
   border-style: none;
-  box-shadow: $depth-shadow;
+  box-shadow: var(--depth-shadow);
   transition: box-shadow ease 0.2s;
 }
 
 button:hover {
-  background: $gradient-radial;
-  box-shadow: $highlight-shadow;
+  background: var(--gradient-radial);
+  box-shadow: var(--highlight-shadow);
 }
 
 .icon {

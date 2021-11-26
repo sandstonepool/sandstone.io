@@ -1,5 +1,5 @@
-<style lang="scss" scoped>
-@import "../assets/styles/sandstone";
+<style scoped>
+@import "assets/css/sandstone.css";
 
 header {
   position: sticky;
@@ -13,11 +13,11 @@ header {
 
 header:after {
   position: absolute;
-  bottom: -20px;
+  bottom: -40px;
   content: '';
-  height: 20px;
+  height: 40px;
   width: 100vw;
-  background: linear-gradient(to top, transparent, white);
+  background-image: linear-gradient(to bottom, rgba(255,255,255,1), rgba(255,255,255,0));
 }
 
 header .header-content {
@@ -40,7 +40,7 @@ header nav {
 header nav a {
   text-decoration: none;
   font-weight: bolder;
-  color: $blue-ryb;
+  color: var(--blue-ryb);
 }
 
 header .logo {
