@@ -7,10 +7,10 @@
     "tw": "npx tailwind-config-viewer -o -p 4000"
   },
   "devDependencies": {
-    "nuxt3": "latest",
-    "vue@next": "^3.2.22",
+    "nuxt3": "^3.0.0-27296423.f3082ca",
+    "patch-vue-directive-ssr": "^0.0.1",
     "postcss": "^8.4.1",
-    "patch-vue-directive-ssr": "^0.0.1"
+    "vue@next": "^3.2.22"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.26-2",
