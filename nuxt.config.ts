@@ -1,6 +1,15 @@
 import { defineNuxtConfig } from 'nuxt3'
 
 export default defineNuxtConfig({
-    target: "static",
-    modules: [ '@nuxtjs/sitemap' ]
+    modules: ['@nuxtjs/sitemap'],
+    build: {
+        postcss: {
+            postcssOptions: {
+                plugins: {
+                    tailwindcss: {},
+                    autoprefixer: {},
+                }
+            }
+        },
+    }
 })
