@@ -13,8 +13,12 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['Poppins', 'sans-serif']
+      colors: {
+        blue: {
+          light: '#1df4f4ff',
+          DEFAULT: '#009ffdff',
+          dark: '#0437ffff',
+        }
       }
     },
   },

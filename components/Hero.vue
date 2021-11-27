@@ -1,34 +1,44 @@
-<style scoped>
-.hero .button-panel {
-  margin-top: 60px;
-}
-</style>
-
 <template>
-  <div class="hero">
-    <h1>
-      Professional Staking for Maximum Rewards
-    </h1>
-    <div>
-      Sandstone is a professionally operated stake pool on the Cardano
-      blockchain. Engineered with bank-grade infrastructure to secure
-      consistently high rewards for our community.
-      <p/>
-      Put simply, we make blocks.
+  <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+    <div class="sm:text-center lg:text-left">
+      <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+        <span class="block xl:inline">Professional Staking for</span>
+        {{ ' ' }}
+        <span class="block text-blue-dark xl:inline">Maximum Rewards</span>
+      </h1>
+      <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+        Sandstone is a professionally operated stake pool on the Cardano
+        blockchain. Engineered with bank-grade infrastructure to secure
+        consistently high rewards for our community.
+      </p>
+      <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+        Put simply, we make blocks.
+      </p>
+      <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+          <a href="#" class="btn">
+            Learn More
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="2em">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+      </div>
     </div>
-    <div class="button-panel">
-      <Button>
-        Stake with Sandstone
-        <template v-slot:icon>
-          <font-awesome-icon icon="chevron-circle-right" size="2x" />
-        </template>
-      </Button>
-    </div>
-  </div>
+  </main>
+<!--  <div class="flex gap-10">-->
+<!--    <h1>Professional Staking for Maximum Rewards</h1>-->
+<!--    <div>-->
+<!--      Sandstone is a professionally operated stake pool on the Cardano-->
+<!--      blockchain. Engineered with bank-grade infrastructure to secure-->
+<!--      consistently high rewards for our community.-->
+<!--    </div>-->
+<!--    <div>-->
+<!--      Put simply, we make blocks.-->
+<!--    </div>-->
+<!--    <button class="btn my-10">-->
+<!--      Stake with Sandstone-->
+<!--      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="2em">-->
+<!--        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />-->
+<!--      </svg>-->
+<!--    </button>-->
+<!--  </div>-->
 </template>
-<script>
-import Button from "./Button";
-export default {
-  components: {Button}
-}
-</script>

@@ -3,7 +3,7 @@
 
 footer {
   position: relative;
-  background-image: var(--gradient);
+  background-image: var(--gradient-blue);
   width: 100vw;
   padding-top: 40px;
   padding-bottom: 120px;
@@ -27,7 +27,6 @@ footer a {
   text-decoration: unset;
   margin: 2px 0;
   padding-left: 0;
-  vertical-align: middle;
 }
 
 footer h3 {
@@ -43,8 +42,8 @@ footer h3 {
   font-size: smaller;
 }
 
-#socials a > * {
-  vertical-align: middle;
+#socials a {
+  @apply flex items-center gap-2;
 }
 
 #copyright {
@@ -98,21 +97,20 @@ footer h3 {
       <div id="socials" class="footer-section">
         <h3>Social Links</h3>
         <a target="_blank" href="https://twitter.com/sandstonepool" role="button">
-          <font-awesome-icon :icon="['fab', 'twitter']" size="2x" :mask="['fas', 'circle']" transform="shrink-6" inverse/>
+          <img src="assets/images/twitter_white.svg" alt="twitter" width="30px" />
           Twitter
         </a>
         <a target="_blank" href="https://t.me/sandstonepool" role="button">
-          <font-awesome-icon :icon="['fab', 'telegram']" size="2x" inverse/>
+          <img src="assets/images/telegram_white.svg" alt="telegram" width="30px" />
           Telegram
         </a>
         <a target="_blank" href="https://github.com/sandstonepool" role="button">
-          <font-awesome-icon :icon="['fab', 'github']" size="2x" inverse/>
+          <img src="assets/images/github_white.svg" alt="github" width="30px" />
           GitHub
         </a>
       </div>
     </div>
     <div id="copyright">
-      <font-awesome-icon :icon="['fas', 'copyright']" />
       Sandstone Ventures Pty Ltd {{ new Date().getFullYear() }}
     </div>
   </footer>

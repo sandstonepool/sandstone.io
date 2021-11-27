@@ -125,7 +125,7 @@ section.breakout {
   font-size: 80px;
   line-height: 100%;
   font-weight: 800;
-  text-shadow: var(--depth-shadow);
+  text-shadow: 3px 3px 10px lightgray;
 }
 
 /* ABOUT US */
@@ -230,9 +230,7 @@ section.breakout {
     <Header :links="links"/>
     <div class="content">
       <section id="intro">
-        <div class="half">
-          <hero/>
-        </div>
+        <hero/>
       </section>
 
       <section id="why-sandstone">
@@ -522,12 +520,12 @@ section.breakout {
         <div class="squiggle">
           <img src="~/assets/images/sandstone-element-large.svg" alt=""/>
           <p>The most common questions should be in this list. If you have any others, drop us a line.</p>
-          <Button onclick='location.href="mailto:info@sandstone.io?subject=General Enquiry"'>
+          <a class="btn mt-10" href="mailto:info@sandstone.io?subject=General Enquiry">
             Contact Us
-            <template v-slot:icon>
-              <font-awesome-icon icon="chevron-circle-right" size="2x"/>
-            </template>
-          </Button>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="2em">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
         </div>
       </section>
     </div>
@@ -536,10 +534,10 @@ section.breakout {
 
 <script setup>
 const links = [
-  { location: "#why-sandstone", message: "Why Sandstone?" },
-  { location: "#getting-started", message: "Getting Started" },
-  { location: "#about-us", message: "About Us"},
-  { location: "#security", message: "Security" },
-  { location: "#faq", message: "F.A.Q" }
+  {location: "#why-sandstone", message: "Why Sandstone?"},
+  {location: "#getting-started", message: "Getting Started"},
+  {location: "#about-us", message: "About Us"},
+  {location: "#security", message: "Security"},
+  {location: "#faq", message: "F.A.Q"}
 ]
 </script>

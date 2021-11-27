@@ -51,12 +51,12 @@ header .logo {
 <template>
   <header>
     <div class="header-content">
-      <a href="#intro" v-smooth-scroll="{ duration: 1000, offset: -160 }">
-        <img class="logo" src="assets/images/sandstone-logo.svg" alt="Sandstone Stake Pool">
-      </a>
-      <nav>
-        <a v-for="link in links" :href=link.location v-smooth-scroll="{ duration: 1000, offset: -160 }">{{ link.message }}</a>
-      </nav>
+<!--      <a href="#intro" v-smooth-scroll="{ duration: 1000, offset: -160 }">-->
+<!--        <img class="logo" src="assets/images/sandstone-logo.svg" alt="Sandstone Stake Pool">-->
+<!--      </a>-->
+<!--      <nav>-->
+<!--        <a v-for="link in links" :href=link.location v-smooth-scroll="{ duration: 1000, offset: -160 }">{{ link.message }}</a>-->
+<!--      </nav>-->
     </div>
   </header>
 </template>
