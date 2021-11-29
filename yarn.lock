@@ -262,22 +262,6 @@
   dependencies:
     mime "^3.0.0"
 
-"@growthbunker/vuedarkmode@0.5.9":
-  version "0.5.9"
-  resolved "https://registry.yarnpkg.com/@growthbunker/vuedarkmode/-/vuedarkmode-0.5.9.tgz#c592715f9902537aa38466d51f48275bc0f3bb47"
-  integrity sha512-I5dpLxOPEDwLH6COLRI+/1BqaHC4B45L5gSkUMnnLxvNetRzCeMrTAGTO6chGMNsxIuKbtHVQYlFZI3fFEGsbw==
-  dependencies:
-    v-click-outside "2.1.4"
-    v-hotkey "0.6.0"
-    vee-validate "3.0.11"
-
-"@growthbunker/vuesocial@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@growthbunker/vuesocial/-/vuesocial-0.1.2.tgz#cf62e973687f21802c8d930dba1126594b24f57c"
-  integrity sha512-aMzS42G8JIrst9ZO8TZBXR5uKhpgiUC1Z7B44MTGG2miV3hPveMuApYFZf3PYvaLZCdOnXPvgA7G8sbdyAJVRg==
-  dependencies:
-    "@growthbunker/vuedarkmode" "0.5.9"
-
 "@heroicons/vue@^1.0.5":
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/@heroicons/vue/-/vue-1.0.5.tgz#ccef02a9a75e47129a0b8faf5d1d93bd90723264"
@@ -5485,21 +5469,6 @@ utils-merge@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
-
-v-click-outside@2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/v-click-outside/-/v-click-outside-2.1.4.tgz#7d7813b09a0fd4a9d0fbccc2ca12ca7c5591e087"
-  integrity sha512-NbQiwRjJjeKptI1qr1co2Ox44fUWEnj08chR1nw3DVrNCQHjb+sqlevzb1zCXMgb7orTFE0wpiecqMlbOZ15EQ==
-
-v-hotkey@0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/v-hotkey/-/v-hotkey-0.6.0.tgz#265c309e937e27411d1e8e97b96fbbda1be7d1d3"
-  integrity sha512-HsIQa8L5aWB9aJDuHGbCTfIZk5nT7891wtvxUoF3AjT/+Pb7nu3DfhIyO4Vz0jRP8faOJpQn2NkATXAg6hNckA==
-
-vee-validate@3.0.11:
-  version "3.0.11"
-  resolved "https://registry.yarnpkg.com/vee-validate/-/vee-validate-3.0.11.tgz#5ffe3d501893801529186642d20241cf632f1341"
-  integrity sha512-2KRLdtM/y+bU2o9KC7cZBGPRUsBxQaoFb3IlBOUkj6l24Gx5XWXxNkhaAXK97BRLOdM4CH/gJYFi9DOm0N7dTQ==
 
 vite@^2.6.14:
   version "2.6.14"

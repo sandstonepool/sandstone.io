@@ -11,17 +11,6 @@ details summary {
   font-weight: bold;
 }
 
-details summary::before {
-  padding-right: 0.25rem;
-  content: "+ ";
-}
-
-details[open] summary::before {
-  padding-right: 0.25rem;
-  content: "- ";
-  transform: rotate(24deg);
-}
-
 details[open] summary ~ * {
   animation: sweep 0.5s ease-in-out;
 }

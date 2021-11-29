@@ -25,7 +25,6 @@ section .inner {
 }
 
 section.breakout {
-  background-color: rgba(29, 244, 244, 0.1);
   width: 100vw;
   position: relative;
   margin-left: -50vw;
@@ -81,15 +80,7 @@ section.breakout {
 
 /* INTRODUCTION SECTION */
 
-#intro {
-  background-image: url("assets/images/hero-1080.png");
-  background-repeat: no-repeat;
-  background-clip: border-box;
-  background-position: 200px 100px;
-  height: 850px;
-  padding-right: -60px;
-  margin-right: -60px;
-}
+#intro {}
 
 /* WHY SANDSTONE? */
 
@@ -142,7 +133,9 @@ section.breakout {
   }
 }
 
-/* SECURITY */
+#security {
+  background-color: rgba(29, 244, 244, 0.1);
+}
 
 #security .tips {
   display: grid;
@@ -230,7 +223,7 @@ section.breakout {
     <Header :links="links"/>
     <div class="content">
       <section id="intro">
-        <hero/>
+        <hero />
       </section>
 
       <section id="why-sandstone">

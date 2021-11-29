@@ -97,15 +97,15 @@ footer h3 {
       <div id="socials" class="footer-section">
         <h3>Social Links</h3>
         <a target="_blank" href="https://twitter.com/sandstonepool" role="button">
-          <img src="assets/images/twitter_white.svg" alt="twitter" width="30px" />
+          <img src="~/assets/images/twitter_white.svg" alt="twitter" width="30px" />
           Twitter
         </a>
         <a target="_blank" href="https://t.me/sandstonepool" role="button">
-          <img src="assets/images/telegram_white.svg" alt="telegram" width="30px" />
+          <img src="~/assets/images/telegram_white.svg" alt="telegram" width="30px" />
           Telegram
         </a>
         <a target="_blank" href="https://github.com/sandstonepool" role="button">
-          <img src="assets/images/github_white.svg" alt="github" width="30px" />
+          <img src="~/assets/images/github_white.svg" alt="github" width="30px" />
           GitHub
         </a>
       </div>
