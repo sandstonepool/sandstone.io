@@ -70,9 +70,9 @@ footer h3 {
     <div class="footer-content">
       <div class="footer-section">
         <h3>
-          <router-link to="/">
+          <a href="/#">
             <img src="~/assets/images/sandstone-logo.svg" alt="Sandstone Logo" width="220px" class="filter-white" />
-          </router-link>
+          </a>
         </h3>
           Sandstone Ventures Pty Ltd<br>
           A.C.N 655 223 591
@@ -87,7 +87,7 @@ footer h3 {
       <div id="information" class="footer-section">
         <h3>Information</h3>
         <a href="mailto:info@sandstone.io?subject=General Enquiry">Contact Us</a>
-        <router-link to="/privacy">Privacy Policy</router-link>
+        <router-link to="privacy">Privacy Policy</router-link>
       </div>
       <div id="socials" class="footer-section">
         <h3>Social Links</h3>

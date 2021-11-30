@@ -12,12 +12,13 @@
         </div>
         <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-between">
           <div class="flex-shrink-0 flex items-center">
-            <a href="#">
+            <a href="/#">
               <img class="h-6 w-auto sm:h-6" src="~/assets/images/sandstone-logo.svg" alt=""/>
             </a>
           </div>
           <div class="hidden sm:block sm:ml-6">
             <div class="flex space-x-4">
+<!--              <router-link v-for="item in navigation" smooth-scroll="item.anchor" :key="item.name" :to="{ path: '/', hash: item.anchor }" class="text-blue-dark hover:text-blue-light hover:bg-blue-900 px-3 py-2 rounded-md text-sm font-medium">{{ item.name }}</router-link>-->
               <a v-for="item in navigation" :key="item.name" :href="item.anchor" class="text-blue-dark hover:text-blue-light hover:bg-blue-900 px-3 py-2 rounded-md text-sm font-medium">{{ item.name }}</a>
             </div>
           </div>
@@ -26,7 +27,7 @@
     </div>
     <DisclosurePanel class="sm:hidden">
       <div class="px-2 pt-2 pb-3 space-y-1">
-        <DisclosureButton :v-smooth-scroll="item.anchor" v-for="item in navigation" :key="item.name" as="a" :href="item.anchor" class="text-blue-dark hover:text-blue-light hover:bg-blue-900 block px-3 py-2 rounded-md text-base cursor-pointer" >{{ item.name }}</DisclosureButton>
+        <DisclosureButton v-for="item in navigation" :key="item.name" as="a" :href="item.anchor" class="text-blue-dark hover:text-blue-light hover:bg-blue-900 block px-3 py-2 rounded-md text-base cursor-pointer" >{{ item.name }}</DisclosureButton>
       </div>
     </DisclosurePanel>
   </Disclosure>
@@ -54,16 +55,6 @@ export default {
     BellIcon,
     MenuIcon,
     XIcon,
-  },
-  // created() {
-  //   this.$watch(
-  //       () => this.$route.params,
-  //       () => {
-  //         console.log(document.querySelector("div"))
-  //         // console.log(this.$el.querySelector('#why-sandstone'))
-  //         // alert(this.$el.querySelector())
-  //       }
-  //   )
-  // },
+  }
 }
 </script>

@@ -1,9 +1,10 @@
-import {defineNuxtConfig} from 'nuxt3'
+import { defineNuxtConfig } from 'nuxt3'
 
 export default defineNuxtConfig({
     modules: [
         ['@nuxtjs/sitemap']
     ],
+    components: true,
     build: {
         postcss: {
             postcssOptions: {
@@ -13,5 +14,5 @@ export default defineNuxtConfig({
                 }
             }
         },
-    }
+    },
 })
