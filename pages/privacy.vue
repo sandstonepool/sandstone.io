@@ -95,7 +95,7 @@
 
 <template>
   <div>
-    <Header/>
+    <nav-bar :navigation="[]"/>
     <div id="privacy">
       <section id="policy">
         <h1>Privacy Policy</h1>
@@ -290,3 +290,9 @@
     </div>
   </div>
 </template>
+<script>
+import NavBar from "../components/NavBar";
+export default {
+  components: {NavBar}
+}
+</script>

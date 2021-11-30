@@ -220,13 +220,13 @@ section.breakout {
 
 <template>
   <div>
-    <Header :links="links"/>
+    <nav-bar :navigation="navigation" />
     <div class="content">
-      <section id="intro">
+      <section id="intro" class="scroll-snap-y">
         <hero />
       </section>
 
-      <section id="why-sandstone">
+      <section id="why-sandstone" class="scroll-snap-y">
         <h2>Why stake with Sandstone?</h2>
         <div class="half">
           <div>
@@ -308,7 +308,7 @@ section.breakout {
         </div>
       </section>
 
-      <section id="getting-started">
+      <section id="getting-started" class="scroll-snap-y">
         <h2>Getting Started</h2>
         <div class="grid">
           <div class="separated">
@@ -344,7 +344,7 @@ section.breakout {
         </div>
       </section>
 
-      <section id="about-us">
+      <section id="about-us" class="scroll-snap-y">
         <div>
           <h2>About Us</h2>
           <p>
@@ -380,7 +380,7 @@ section.breakout {
         </div>
       </section>
 
-      <section id="security" class="breakout">
+      <section id="security" class="breakout scroll-snap-y">
         <div class="inner">
           <h2>Watch Out!</h2>
           <p>
@@ -429,7 +429,7 @@ section.breakout {
         </div>
       </section>
 
-      <section id="faq">
+      <section id="faq" class="scroll-snap-y">
         <h2>Frequently Asked Questions</h2>
         <div class="questions">
           <expandable title="Is staking safe?">
@@ -526,11 +526,17 @@ section.breakout {
 </template>
 
 <script setup>
-const links = [
-  {location: "#why-sandstone", message: "Why Sandstone?"},
-  {location: "#getting-started", message: "Getting Started"},
-  {location: "#about-us", message: "About Us"},
-  {location: "#security", message: "Security"},
-  {location: "#faq", message: "F.A.Q"}
+import NavBar from "../components/NavBar";
+import Hero from '~/components/Hero';
+import Expandable from "~/components/Expandable";
+import Box from "~/components/Box"
+import Stats from "~/components/Stats"
+
+const navigation = [
+  { anchor: "#why-sandstone", name: "Why Sandstone?" },
+  { anchor: "#getting-started", name: "Getting Started" },
+  { anchor: "#about-us", name: "About Us" },
+  { anchor: "#security", name: "Security" },
+  { anchor: "#faq", name: "F.A.Q" }
 ]
 </script>

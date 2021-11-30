@@ -1,13 +1,12 @@
 <style scoped>
-@import "assets/css/sandstone.css";
 
 footer {
   position: relative;
-  background-image: var(--gradient-blue);
   width: 100vw;
   padding-top: 40px;
   padding-bottom: 120px;
   color: white;
+  @apply bg-gradient-to-tr from-blue-light via-blue to-blue-dark;
 }
 
 footer .footer-content {
@@ -49,16 +48,12 @@ footer h3 {
 #copyright {
   width: 100vw;
   color: white;
-  background: var(--rich-black-fogra-39);
   line-height: 40pt;
   position: absolute;
   bottom: 0;
   text-align: center;
   font-size: smaller;
-}
-
-.filter-white {
-  filter: contrast(0) brightness(100);
+  @apply bg-gray-900;
 }
 
 @media screen and (max-width: 1366px) {
