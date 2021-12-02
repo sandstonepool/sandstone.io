@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.0",
-    "nuxt3": "latest",
+    "nuxt3": "^3.0.0-27306529.1ef6e3f",
     "patch-vue-directive-ssr": "^0.0.1",
     "postcss": "^8.4.3",
     "tailwindcss": "^2.2.19"
@@ -17,6 +17,9 @@
   "dependencies": {
     "@headlessui/vue": "^1.4.2",
     "@heroicons/vue": "^1.0.5",
-    "@nuxtjs/sitemap": "^2.4.0"
+    "@nuxtjs/sitemap": "^2.4.0",
+    "animejs": "^3.2.1",
+    "canvas-confetti": "^1.4.0",
+    "numeral": "^2.0.6"
   }
 }
