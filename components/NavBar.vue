@@ -33,28 +33,14 @@
   </Disclosure>
 </template>
 
-<script>
-import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/vue/outline'
+<script setup>
+import { Disclosure } from '@headlessui/vue'
+import { MenuIcon, XIcon } from '@heroicons/vue/outline'
 
-export default {
-  props: {
-    navigation: {
+const props = defineProps({
+  navigation: {
       type: Array,
       required: true
     }
-  },
-  components: {
-    Disclosure,
-    DisclosureButton,
-    DisclosurePanel,
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuItems,
-    BellIcon,
-    MenuIcon,
-    XIcon,
-  }
-}
+})
 </script>
