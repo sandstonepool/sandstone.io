@@ -105,7 +105,7 @@ const formatTax = (value) => numeral(value).format('0.00%')
 const formatTotalStake = (value) => `${numeral(value).divide(1000000).format('0.00a').toUpperCase()} ₳`
 const formatPledge = (value) => `${numeral(value).divide(1000000).format('0a').toUpperCase()} ₳`
 
-const { data: stats } = useAsyncData('pool', () => $fetch(url), {
+const { data: stats } = await useAsyncData('pool', () => $fetch(url), {
   transform: payload => payload.data,
   pick: ['total_stake', 'tax_ratio', 'pledge', 'delegators']
 })
