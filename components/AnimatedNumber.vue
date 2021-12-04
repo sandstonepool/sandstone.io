@@ -1,5 +1,5 @@
 <template>
-  <span v-animated v-html="formattedValue"></span>
+  <div v-animated v-html="formattedValue"></div>
 </template>
 <script setup>
 import anime from 'animejs'

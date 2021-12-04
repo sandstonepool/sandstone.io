@@ -1,8 +1,9 @@
 <style scoped>
 
 footer {
-  position: relative;
-  width: 100vw;
+  position: absolute;
+  left: 0;
+  right: 0;
   padding-top: 40px;
   padding-bottom: 120px;
   color: white;
@@ -46,7 +47,8 @@ footer h3 {
 }
 
 #copyright {
-  width: 100vw;
+  left: 0;
+  right: 0;
   color: white;
   line-height: 40pt;
   position: absolute;

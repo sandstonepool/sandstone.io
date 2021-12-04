@@ -1,100 +1,52 @@
 <style scoped>
 .stats {
-  display: grid;
-  grid-template-columns: repeat(4, max-content);
-  grid-gap: 20px;
-  justify-content: space-around;
-  align-items: center;
+  @apply grid justify-around items-center grid-cols-2 grid-rows-2 lg:grid-cols-4 lg:grid-rows-none;
 }
 
 .stat {
-  display: flex;
-  height: 180px;
-  min-width: 240px;
-  max-width: 240px;
-  overflow: hidden;
-  padding-right: 0;
-  padding-left: 0;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @apply flex overflow-hidden flex-col justify-center gap-x-8 gap-y-0;
+  height: 200px;
 }
 
-.big-number {
-  color: #0437ff;
-  font-size: 55px;
-  line-height: 100%;
-  font-weight: 700;
-  text-align: center;
-  white-space: nowrap;
+.stat :first-child {
+  @apply font-bold text-center whitespace-nowrap text-blue-dark p-0;
 }
 
-.number-label {
-  margin-top: 10px;
-  font-size: 25px;
-  font-weight: 700;
-}
-
-.ada-icon-wrap {
-  display: flex;
-  min-width: 100px;
-}
-
-@media screen and (max-width: 768px) {
-  .stats {
-    grid-template-columns: repeat(2, max-content);
-    grid-template-rows: repeat(2, max-content);
-  }
-}
-
-.confetti {
-  position: absolute;
-  height: 300%;
-  top: -100%;
-  width: 100%;
-  background: transparent;
-  @apply z-50
+.stat :last-child {
+  @apply font-medium text-center whitespace-nowrap text-black p-0;
 }
 </style>
 
 <template>
-  <canvas v-confetti class="confetti"></canvas>
-  <div class="stats">
+  <div class="stats" v-confetti>
     <div class="stat">
-      <div class="big-number">
-        <animated-number :value="[ 0.0, stats.tax_ratio ]" :duration="duration" :easing="easing" :fmt="formatTax"/>
-      </div>
-      <div class="number-label">Tax</div>
+        <animated-number v-resize-text="{ ratio: 0.65 }" :value="[ 0.0, stats?.tax_ratio ]" :duration="duration"
+                         :easing="easing" :fmt="formatTax"/>
+      <div v-resize-text="{ ratio: 1.2 }">Tax</div>
     </div>
     <div class="stat">
-      <div class="ada-icon-wrap">
-        <div class="big-number">
-          <animated-number :value="[1000000000000, stats.total_stake]" :duration="duration" :easing="easing" :fmt="formatTotalStake" />
-        </div>
-      </div>
-      <div class="number-label">Stake</div>
+        <animated-number v-resize-text="{ ratio: 0.65 }" :value="[1000000000000, stats?.total_stake]" :duration="duration"
+                         :easing="easing" :fmt="formatTotalStake"/>
+      <div v-resize-text="{ ratio: 1.2 }">Stake</div>
     </div>
     <div class="stat">
-      <div class="ada-icon-wrap">
-        <div class="big-number">
-          <animated-number :value="[1000000000, stats.pledge ]" :duration="duration" :easing="easing" :fmt="formatPledge"/>
-        </div>
-      </div>
-      <div class="number-label">Pledge</div>
+        <animated-number v-resize-text="{ ratio: 0.65 }" :value="[1000000000, stats?.pledge ]" :duration="duration"
+                         :easing="easing" :fmt="formatPledge"/>
+      <div v-resize-text="{ ratio: 1.2 }">Pledge</div>
     </div>
     <div class="stat">
-      <div class="big-number">
-        <animated-number :value="[0, stats.delegators ]" :duration="duration" :easing="easing" :round="1" />
-      </div>
-      <div class="number-label">Delegators</div>
+        <animated-number v-resize-text="{ ratio: 0.65 }" :value="[0, stats?.delegators ]" :duration="duration"
+                         :easing="easing" :round="1"/>
+      <div v-resize-text="{ ratio: 1.2 }">Delegators</div>
     </div>
   </div>
 </template>
 
 <script setup>
 import AnimatedNumber from './AnimatedNumber'
-import * as confetti from 'canvas-confetti'
+import confetti from 'canvas-confetti'
 import numeral from 'numeral'
+import { debounce } from 'lodash'
 
 const poolId = '40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318'
 const url = `https://js.adapools.org/pools/${poolId}/summary.json`
@@ -111,21 +63,61 @@ const { data: stats } = await useFetch(url, {
 })
 
 const vConfetti = {
-  mounted(el) {
-    const myConfetti = confetti.create(el, {
-      resize: true,
-      useWorker: true
-    })
+  beforeMount(el) {
+    const handler = debounce(() => {
+      const { top, bottom } = el.getBoundingClientRect()
+      const centerLine = window.innerHeight / 2
+      if(top < centerLine && bottom > centerLine) {
 
-    myConfetti({
-      particleCount: 400,
-      spread: 150,
-      origin: {
-        x: 0.5,
-        y: 0.6
+        // Remove the listener (this is a one shot event)
+        window.removeEventListener('scroll', handler)
+
+        confetti({
+          particleCount: 400,
+          spread: 80,
+          angle: 70,
+          startVelocity: 100,
+          origin: {
+            x: -0.1,
+            y: 0.8
+          }
+        })
+
+        confetti({
+          particleCount: 400,
+          spread: 80,
+          angle: 110,
+          startVelocity: 100,
+          origin: {
+            x: 1.1,
+            y: 0.8
+          }
+        })
+
+        confetti({
+          particleCount: 400,
+          spread: 180,
+          angle: 90,
+          startVelocity: 80,
+          origin: {
+            x: 0.5,
+            y: 1.2
+          }
+        })
       }
-    })
+    }, 200)
+
+    window.addEventListener('scroll', handler)
   }
 }
+</script>
 
+<script>
+import VueResizeText from 'vue3-resize-text'
+
+export default {
+  directives: {
+    ResizeText: VueResizeText.ResizeText
+  }
+}
 </script>

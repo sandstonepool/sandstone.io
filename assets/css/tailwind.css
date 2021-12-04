@@ -9,20 +9,8 @@
         scroll-padding-top: 100px;
     }
 
-    html body {
-        display: flex;
-        overflow: visible;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        font-family: Poppins, sans-serif;
-        color: var(--rich-black-fogra-39);
-        font-size: 12pt;
-        line-height: 22px;
-        max-width: 100vw;
-        overflow-x: hidden;
-        object-fit: fill;
-        margin: 0;
+    body {
+        @apply font-body text-gray-900;
     }
 
     h1 {
@@ -37,11 +25,13 @@
         font-size: 35px;
         line-height: 50px;
         font-weight: 600;
+        margin-bottom: 20px;
     }
 
     h3 {
         font-size: 25px;
         font-weight: 600;
+        margin-bottom: 20px;
     }
 
 }
