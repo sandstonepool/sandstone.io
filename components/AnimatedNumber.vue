@@ -42,26 +42,22 @@ const props = defineProps({
   }
 })
 
-const animateValue = (value) => {
-  const { begin, easing, duration, complete, update, run, delay, round, autoplay} = props
-  anime({
-    targets: animatedValue,
-    value: value,
-    duration,
-    easing,
-    update,
-    begin,
-    complete,
-    run,
-    delay,
-    round,
-    autoplay
-  })
-}
-
 const vAnimated = {
   mounted: () => {
-    animateValue(props.value)
+      const { value, begin, easing, duration, complete, update, run, delay, round, autoplay } = props
+      anime({
+        targets: animatedValue,
+        value,
+        duration,
+        easing,
+        update,
+        begin,
+        complete,
+        run,
+        delay,
+        round,
+        autoplay
+      })
   }
 }
 </script>

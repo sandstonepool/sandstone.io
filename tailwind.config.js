@@ -1,10 +1,11 @@
 module.exports = {
-  mode: 'jit',
+  // mode: 'jit',
   purge: [
     "./components/**/*.{vue,js}",
     "./layouts/**/*.vue",
     "./pages/**/*.vue",
     "./app.vue",
+    "./composables/**/*.{js,ts}",
     "./plugins/**/*.{js,ts}",
     "./nuxt.config.{js,ts}",
   ],
