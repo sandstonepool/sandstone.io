@@ -200,9 +200,7 @@ section.breakout {
 <template>
   <div>
 
-    <client-only>
-      <nav-bar :navigation="navigation"/>
-    </client-only>
+    <nav-bar :navigation="navigation"/>
 
     <hero id="intro"/>
 

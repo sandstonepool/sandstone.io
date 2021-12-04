@@ -31,26 +31,33 @@
   </Disclosure>
 </template>
 
-<script setup>
-const props = defineProps({
-  navigation: {
-      type: Array,
-      required: true
-    }
-})
-</script>
-
 <script>
-import {Disclosure, DisclosureButton, DisclosurePanel} from "@headlessui/vue";
-import {MenuIcon, XIcon} from "@heroicons/vue/outline";
+import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
+import { BellIcon, MenuIcon, XIcon } from '@heroicons/vue/outline'
 
 export default {
   components: {
     Disclosure,
     DisclosureButton,
     DisclosurePanel,
+    Menu,
+    MenuButton,
+    MenuItem,
+    MenuItems,
+    BellIcon,
     MenuIcon,
-    XIcon
-  }
+    XIcon,
+  },
+  props: {
+    navigation: {
+      type: Array,
+      required: true
+    }
+  },
+  setup(props) {
+    return {
+      navigation: props.navigation
+    }
+  },
 }
 </script>
