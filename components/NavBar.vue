@@ -1,7 +1,6 @@
 <template>
-  <div>
     <Disclosure as="nav" class="fixed w-screen z-50 pl-4 pr-4 bg-white shadow-xl left-0 right-0 top-0"
-                v-slot="{ open }">
+                :v-slot="open">
       <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div class="relative flex items-center justify-between h-16">
           <div class="absolute inset-y-0 left-0 flex items-center md:hidden">
@@ -38,7 +37,6 @@
         </div>
       </DisclosurePanel>
     </Disclosure>
-  </div>
 </template>
 
 <script>
@@ -66,6 +64,7 @@ export default {
   },
   setup(props) {
     return {
+      open: false,
       navigation: props.navigation
     }
   },
