@@ -56,5 +56,5 @@ const formatTax = (value) => numeral(value).format('0.00%')
 const formatTotalStake = (value) => `${numeral(value).divide(1000000).format('0.00a').toUpperCase()} ₳`
 const formatPledge = (value) => `${numeral(value).divide(1000000).format('0a').toUpperCase()} ₳`
 
-const { poolStats } = await useAdaStats('40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318')
+const { poolStats } = useAdaStats('40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318')
 </script>
