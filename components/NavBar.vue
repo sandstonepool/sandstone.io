@@ -1,6 +1,6 @@
 <template>
-    <Disclosure as="nav" class="fixed w-screen z-50 pl-4 pr-4 bg-white shadow-xl left-0 right-0 top-0"
-                :v-slot="open">
+  <client-only>
+    <Disclosure as="nav" class="fixed w-screen z-50 pl-4 pr-4 bg-white shadow-xl left-0 right-0 top-0">
       <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div class="relative flex items-center justify-between h-16">
           <div class="absolute inset-y-0 left-0 flex items-center md:hidden">
@@ -37,36 +37,33 @@
         </div>
       </DisclosurePanel>
     </Disclosure>
+  </client-only>
 </template>
 
 <script>
-import {Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/vue'
-import {BellIcon, MenuIcon, XIcon} from '@heroicons/vue/outline'
+import {defineNuxtComponent} from "#app";
+import { Disclosure, DisclosurePanel, DisclosureButton } from '@headlessui/vue'
+import { XIcon, MenuIcon } from '@heroicons/vue/solid'
 
-export default {
+export default defineNuxtComponent({
   components: {
     Disclosure,
     DisclosureButton,
     DisclosurePanel,
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuItems,
-    BellIcon,
-    MenuIcon,
     XIcon,
+    MenuIcon
   },
   props: {
     navigation: {
       type: Array,
-      required: true
+      required: false,
+      default: []
+    },
+    open: {
+      type: Boolean,
+      required: false,
+      default: false
     }
-  },
-  setup(props) {
-    return {
-      open: false,
-      navigation: props.navigation
-    }
-  },
-}
+  }
+})
 </script>
