@@ -1,15 +1,14 @@
-import { useFetch } from "#app"
+export default (poolId) => {
+    const poolStats = ref(null)
+    const error = ref(false)
 
-export default async (poolId) => {
-    const {data: poolStats, error } = await useFetch(`https://js.adapools.org/pools/${poolId}/summary.json`, {
-        transform: payload => payload.data,
-        pick: ['total_stake', 'tax_ratio', 'pledge', 'delegators']
-    })
-
-    if(error) console.error(error.value)
+    const fetchPoolStats = async () => {
+        const res = await fetch(`https://js.adapools.org/pools/${poolId}/summary.json`)
+        poolStats.value  = (await res.json()).data
+    }
 
     return {
-        poolId,
-        poolStats
+        poolStats: readonly(poolStats),
+        fetchPoolStats
     }
 }
