@@ -40,7 +40,7 @@
         <div v-resize-text="resizeSmall">Pledge</div>
       </div>
       <div class="stat">
-        <animated-number v-resize-text="resizeLarge" :value="poolStats.delegators" :duration="duration"
+        <animated-number v-resize-text="resizeLarge" :value="poolStats?.delegators" :duration="duration"
                          :easing="easing"
                          :round="1"/>
         <div v-resize-text="resizeSmall">Delegators</div>
@@ -50,13 +50,13 @@
 </template>
 
 <script setup>
-import AnimatedNumber from './AnimatedNumber'
 import numeral from 'numeral'
 import VueResizeText from 'vue3-resize-text'
-import usePoolStats from '../composables/usePoolStats'
+import AnimatedNumber from './AnimatedNumber'
 import Intersect from './Intersect'
 import confetti from 'canvas-confetti'
-import useDebouncedRef from "../composables/useDebouncedRef";
+import usePoolStats from '../composables/usePoolStats'
+import useDebouncedRef from '../composables/useDebouncedRef'
 
 const vResizeText = VueResizeText.ResizeText
 
