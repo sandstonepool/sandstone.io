@@ -75,7 +75,7 @@
 }
 
 #privacy dl {
-  text-indent: 0em;
+  text-indent: 0;
 }
 
 #privacy dl > dt {
@@ -95,7 +95,6 @@
 
 <template>
   <div>
-    <nav-bar :navigation="[]"/>
     <div id="privacy">
       <section id="policy">
         <h1>Privacy Policy</h1>
@@ -291,14 +290,6 @@
   </div>
 </template>
 
-<script>
-import NavBar from '~/components/NavBar'
-export default {
-  components: {
-    NavBar
-  },
-  mounted() {
-    scrollTo(0, 0)
-  }
-}
+<script setup>
+onMounted(() => scrollTo(0, 0))
 </script>

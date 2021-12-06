@@ -20,9 +20,9 @@
             <div class="hidden md:block sm:ml-6">
               <div class="flex space-x-4">
                 <a v-for="item in navigation" :key="item.name" :href="item.anchor"
-                   class="text-blue-dark hover:text-blue-light hover:bg-blue-900 px-3 py-2 rounded-md text-sm font-medium">{{
-                    item.name
-                  }}</a>
+                   class="text-blue-dark hover:text-blue-light hover:bg-blue-900 px-3 py-2 rounded-md text-sm font-medium">
+                  {{ item.name}}
+                </a>
               </div>
             </div>
           </div>
@@ -40,30 +40,32 @@
   </client-only>
 </template>
 
-<script>
-import {defineNuxtComponent} from "#app";
+<script setup>
 import { Disclosure, DisclosurePanel, DisclosureButton } from '@headlessui/vue'
 import { XIcon, MenuIcon } from '@heroicons/vue/solid'
 
-export default defineNuxtComponent({
-  components: {
-    Disclosure,
-    DisclosureButton,
-    DisclosurePanel,
-    XIcon,
-    MenuIcon
-  },
-  props: {
-    navigation: {
-      type: Array,
-      required: false,
-      default: []
-    },
-    open: {
-      type: Boolean,
-      required: false,
-      default: false
-    }
+defineProps({
+  open: {
+    type: Boolean,
+    required: false,
+    default: false
   }
 })
+
+const navigation = ref([])
+
+const updateLinks = async () => {
+  // Query all section elements that have an ID and data-name attribute.
+  navigation.value = Array.from(document.querySelectorAll('section[data-name][id]').values(), value => {
+    return { anchor: `#${value.id}`, name: value.dataset.name }
+  })
+}
+
+const clearLinks = async () => {
+  navigation.value = []
+}
+
+const route = useRoute()
+watch(() => route.path, clearLinks)
+onBeforeMount(updateLinks)
 </script>
