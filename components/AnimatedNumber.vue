@@ -1,9 +1,10 @@
 <template>
-  <div v-animated v-html="formattedValue"></div>
+  <div v-html="formattedValue"></div>
 </template>
 <script setup>
 import anime from 'animejs'
 
+const animationRef = ref()
 const animatedValue = ref(0)
 const formattedValue = computed(() => props.fmt(Number(animatedValue.value)))
 
@@ -42,22 +43,25 @@ const props = defineProps({
   }
 })
 
-const vAnimated = {
-  mounted: () => {
-      const { value, begin, easing, duration, complete, update, run, delay, round, autoplay } = props
-      anime({
-        targets: animatedValue,
-        value,
-        duration,
-        easing,
-        update,
-        begin,
-        complete,
-        run,
-        delay,
-        round,
-        autoplay
-      })
-  }
+const initialize = () => {
+  animationRef.value = anime({
+    targets: animatedValue,
+    value: props.value,
+    duration: props.duration,
+    easing: props.easing,
+    update: props.update,
+    begin: props.begin,
+    complete: props.complete,
+    run: props.run,
+    delay: props.delay,
+    round: props.round,
+    autoplay: props.autoplay
+  })
 }
+
+onMounted(initialize)
+
+defineExpose({
+  animate: () => animationRef.value.restart()
+})
 </script>

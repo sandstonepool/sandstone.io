@@ -18,37 +18,49 @@
 </style>
 
 <template>
-  <div class="stats" v-confetti>
-    <div class="stat">
-      <animated-number v-resize-text="resizeLarge" :value="[0, poolStats?.tax_ratio]" :duration="duration" :easing="easing"
-                       :fmt="formatTax"/>
-      <div v-resize-text="resizeSmall">Tax</div>
+  <intersect threshold="1.0" @intersected="refreshStats">
+    <div class="stats" :key="refreshKey">
+      <div class="stat">
+        <animated-number v-resize-text="resizeLarge" :value="[0, poolStats?.tax_ratio]" :duration="duration"
+                         :easing="easing"
+                         :fmt="formatTax"/>
+        <div v-resize-text="resizeSmall">Tax</div>
+      </div>
+      <div class="stat">
+        <animated-number v-resize-text="resizeLarge" :value="[1000000000, poolStats?.total_stake]"
+                         :duration="duration"
+                         :easing="easing"
+                         :fmt="formatTotalStake"/>
+        <div v-resize-text="resizeSmall">Stake</div>
+      </div>
+      <div class="stat">
+        <animated-number v-resize-text="resizeLarge" :value="[1000000000, poolStats?.pledge]" :duration="duration"
+                         :easing="easing"
+                         :fmt="formatPledge"/>
+        <div v-resize-text="resizeSmall">Pledge</div>
+      </div>
+      <div class="stat">
+        <animated-number v-resize-text="resizeLarge" :value="poolStats.delegators" :duration="duration"
+                         :easing="easing"
+                         :round="1"/>
+        <div v-resize-text="resizeSmall">Delegators</div>
+      </div>
     </div>
-    <div class="stat">
-      <animated-number v-resize-text="resizeLarge" :value="[1000000000, poolStats?.total_stake]" :duration="duration" :easing="easing"
-                       :fmt="formatTotalStake"/>
-      <div v-resize-text="resizeSmall">Stake</div>
-    </div>
-    <div class="stat">
-      <animated-number v-resize-text="resizeLarge" :value="[1000000000, poolStats?.pledge]" :duration="duration" :easing="easing"
-                       :fmt="formatPledge"/>
-      <div v-resize-text="resizeSmall">Pledge</div>
-    </div>
-    <div class="stat">
-      <animated-number v-resize-text="resizeLarge" :value="[0, poolStats?.delegators]" :duration="duration" :easing="easing"
-                       :round="1"/>
-      <div v-resize-text="resizeSmall">Delegators</div>
-    </div>
-  </div>
+  </intersect>
 </template>
 
 <script setup>
 import AnimatedNumber from './AnimatedNumber'
 import numeral from 'numeral'
-import useAdaStats from "../composables/useAdaStats"
+import VueResizeText from 'vue3-resize-text'
+import usePool from "../composables/usePoolStats";
+import Intersect from "./Intersect";
+import confetti from "canvas-confetti";
 
-const resizeLarge = { ratio: 0.65 }
-const resizeSmall = { ratio: 1.2 }
+const vResizeText = VueResizeText.ResizeText
+
+const resizeLarge = {ratio: 0.65}
+const resizeSmall = {ratio: 1.2}
 const duration = 3000
 const easing = 'easeOutCubic'
 
@@ -56,5 +68,43 @@ const formatTax = (value) => numeral(value).format('0.00%')
 const formatTotalStake = (value) => `${numeral(value).divide(1000000).format('0.00a').toUpperCase()} ₳`
 const formatPledge = (value) => `${numeral(value).divide(1000000).format('0a').toUpperCase()} ₳`
 
-const { poolStats } = useAdaStats('40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318')
+const { poolId, poolStats } = await usePool('40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318')
+
+const refreshKey = ref(0)
+const refreshStats = () => {
+  refreshKey.value++
+
+  confetti({
+    particleCount: 400,
+    spread: 80,
+    angle: 70,
+    startVelocity: 100,
+    origin: {
+      x: -0.1,
+      y: 0.8
+    }
+  })
+
+  confetti({
+    particleCount: 400,
+    spread: 80,
+    angle: 110,
+    startVelocity: 100,
+    origin: {
+      x: 1.1,
+      y: 0.8
+    }
+  })
+
+  confetti({
+    particleCount: 400,
+    spread: 180,
+    angle: 90,
+    startVelocity: 80,
+    origin: {
+      x: 0.5,
+      y: 1.2
+    }
+  })
+}
 </script>
