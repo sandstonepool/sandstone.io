@@ -18,7 +18,7 @@
 </style>
 
 <template>
-  <intersect threshold="1.0" @intersected="refreshStats">
+  <intersect threshold="1.0" @intersected="animate">
     <div class="stats" :key="refreshKey">
       <div class="stat">
         <animated-number v-resize-text="resizeLarge" :value="[0, poolStats?.tax_ratio]" :duration="duration"
@@ -53,9 +53,10 @@
 import AnimatedNumber from './AnimatedNumber'
 import numeral from 'numeral'
 import VueResizeText from 'vue3-resize-text'
-import usePool from "../composables/usePoolStats";
-import Intersect from "./Intersect";
-import confetti from "canvas-confetti";
+import usePoolStats from '../composables/usePoolStats'
+import Intersect from './Intersect'
+import confetti from 'canvas-confetti'
+import useDebouncedRef from "../composables/useDebouncedRef";
 
 const vResizeText = VueResizeText.ResizeText
 
@@ -68,12 +69,11 @@ const formatTax = (value) => numeral(value).format('0.00%')
 const formatTotalStake = (value) => `${numeral(value).divide(1000000).format('0.00a').toUpperCase()} ₳`
 const formatPledge = (value) => `${numeral(value).divide(1000000).format('0a').toUpperCase()} ₳`
 
-const { poolId, poolStats } = await usePool('40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318')
+const {poolId, poolStats} = await usePoolStats('40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318')
 
-const refreshKey = ref(0)
-const refreshStats = () => {
-  refreshKey.value++
-
+const refreshKey = useDebouncedRef(0, 500)
+const animate = () => refreshKey.value += 1
+watch(refreshKey, () => {
   confetti({
     particleCount: 400,
     spread: 80,
@@ -106,5 +106,5 @@ const refreshStats = () => {
       y: 1.2
     }
   })
-}
+})
 </script>
