@@ -1,7 +1,10 @@
 import { defineNuxtConfig } from 'nuxt3'
 
 export default defineNuxtConfig({
-    nitro: {},
+    nitro: {
+        preset: "netlify"
+    },
+    ssr: true,
     target: "server",
     components: true,
     build: {

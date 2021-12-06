@@ -70,6 +70,7 @@ const formatTotalStake = (value) => `${numeral(value).divide(1000000).format('0.
 const formatPledge = (value) => `${numeral(value).divide(1000000).format('0a').toUpperCase()} ₳`
 
 const {poolId, poolStats} = await usePoolStats('40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318')
+console.debug(`'Fetched pool stats for ${poolId}: ${JSON.stringify(poolStats.value)}`)
 
 const refreshKey = useDebouncedRef(0, 500)
 const animate = () => refreshKey.value += 1
