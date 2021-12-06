@@ -5,7 +5,7 @@ export default defineNuxtConfig({
         preset: "netlify"
     },
     ssr: true,
-    target: "server",
+    target: "static",
     components: true,
     build: {
         postcss: {
