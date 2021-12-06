@@ -1,14 +1,20 @@
 export default (poolId) => {
     const poolStats = ref(null)
-    const error = ref(false)
+    const fetching = ref(false)
 
     const fetchPoolStats = async () => {
-        const res = await fetch(`https://js.adapools.org/pools/${poolId}/summary.json`)
-        poolStats.value  = (await res.json()).data
+        try {
+            fetching.value = true
+            const res = await fetch(`https://js.adapools.org/pools/${poolId}/summary.json`)
+            poolStats.value = (await res.json()).data
+        } finally {
+            fetching.value = false
+        }
     }
 
     return {
         poolStats: readonly(poolStats),
-        fetchPoolStats
+        fetchPoolStats,
+        fetching
     }
 }
