@@ -18,35 +18,37 @@
 </style>
 
 <template>
-  <intersect threshold="1.0" @intersected="animate">
-    <div class="stats" :key="refreshKey">
-      <div class="stat">
-        <animated-number v-resize-text="resizeLarge" :value="[0, poolStats?.tax_ratio]" :duration="duration"
-                         :easing="easing"
-                         :fmt="formatTax"/>
-        <div v-resize-text="resizeSmall">Tax</div>
+  <client-only>
+    <intersect threshold="1.0" @intersected="animate">
+      <div class="stats" :key="refreshKey">
+        <div class="stat">
+          <animated-number v-resize-text="resizeLarge" :value="[0, poolStats?.tax_ratio]" :duration="duration"
+                           :easing="easing"
+                           :fmt="formatTax"/>
+          <div v-resize-text="resizeSmall">Tax</div>
+        </div>
+        <div class="stat">
+          <animated-number v-resize-text="resizeLarge" :value="[1000000000, poolStats?.total_stake]"
+                           :duration="duration"
+                           :easing="easing"
+                           :fmt="formatTotalStake"/>
+          <div v-resize-text="resizeSmall">Stake</div>
+        </div>
+        <div class="stat">
+          <animated-number v-resize-text="resizeLarge" :value="[1000000000, poolStats?.pledge]" :duration="duration"
+                           :easing="easing"
+                           :fmt="formatPledge"/>
+          <div v-resize-text="resizeSmall">Pledge</div>
+        </div>
+        <div class="stat">
+          <animated-number v-resize-text="resizeLarge" :value="poolStats?.delegators" :duration="duration"
+                           :easing="easing"
+                           :round="1"/>
+          <div v-resize-text="resizeSmall">Delegators</div>
+        </div>
       </div>
-      <div class="stat">
-        <animated-number v-resize-text="resizeLarge" :value="[1000000000, poolStats?.total_stake]"
-                         :duration="duration"
-                         :easing="easing"
-                         :fmt="formatTotalStake"/>
-        <div v-resize-text="resizeSmall">Stake</div>
-      </div>
-      <div class="stat">
-        <animated-number v-resize-text="resizeLarge" :value="[1000000000, poolStats?.pledge]" :duration="duration"
-                         :easing="easing"
-                         :fmt="formatPledge"/>
-        <div v-resize-text="resizeSmall">Pledge</div>
-      </div>
-      <div class="stat">
-        <animated-number v-resize-text="resizeLarge" :value="poolStats?.delegators" :duration="duration"
-                         :easing="easing"
-                         :round="1"/>
-        <div v-resize-text="resizeSmall">Delegators</div>
-      </div>
-    </div>
-  </intersect>
+    </intersect>
+  </client-only>
 </template>
 
 <script setup>
