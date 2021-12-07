@@ -22,7 +22,7 @@
       </div>
       <div>
         <box class="mt-20 mb-24">
-          <stats poolId="40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318"/>
+          <stats/>
         </box>
       </div>
       <div class="grid">

@@ -1,6 +1,6 @@
 <template>
   <client-only>
-    <Disclosure as="nav" class="fixed w-screen z-50 pl-4 pr-4 bg-white shadow-xl left-0 right-0 top-0">
+    <Disclosure as="nav" class="fixed w-screen z-50 pl-4 pr-4 bg-white shadow-xl left-0 right-0 top-0" v-slot="{ open }">
       <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div class="relative flex items-center justify-between h-16">
           <div class="absolute inset-y-0 left-0 flex items-center md:hidden">
@@ -45,11 +45,6 @@ import { Disclosure, DisclosurePanel, DisclosureButton } from '@headlessui/vue'
 import { XIcon, MenuIcon } from '@heroicons/vue/solid'
 
 const props = defineProps({
-  open: {
-    type: Boolean,
-    required: false,
-    default: false
-  },
   navigation: {
     type: Array[{
       name: String,
