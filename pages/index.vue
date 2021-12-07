@@ -1,207 +1,8 @@
-<style scoped>
-section {
-  margin-bottom: 150px;
-}
-
-.half {
-  max-width: 50%;
-}
-
-section .inner {
-  margin: auto;
-  max-width: 1300px;
-  padding-left: 60px;
-  padding-right: 60px;
-}
-
-section.breakout {
-  position: relative;
-
-  margin-top: 100px;
-  padding-bottom: 60px;
-  padding-top: 60px;
-}
-
-.grid {
-  display: flex;
-  row-gap: 60px;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-items: stretch;
-  width: 100%;
-}
-
-.grid > * {
-  display: flex;
-  column-gap: 40px;
-  width: 50%;
-  flex-direction: row;
-  align-items: flex-start;
-}
-
-.grid h3 {
-  margin-top: 0;
-}
-
-.grid-image {
-  width: 80px;
-}
-
-.grid-text {
-  padding-right: 30px;
-}
-
-@media screen and (max-width: 768px) {
-  .half {
-    max-width: 100%;
-  }
-
-  .grid > * {
-    width: 100%;
-    flex-direction: column;
-  }
-
-  .grid h3 {
-    margin-top: 25px;
-  }
-}
-
-/* SECTIONS */
-#intro { @apply mx-auto max-w-7xl mt-32 px-8; }
-#why-sandstone { @apply mx-auto max-w-7xl mt-24 px-8; }
-#getting-started { @apply mx-auto max-w-7xl mt-24 px-8; }
-#about-us { @apply mx-auto max-w-7xl mt-24 px-8; }
-#security {  }
-#faq { @apply mx-auto max-w-7xl mt-24 px-8; }
-
-.separated {
-  border-bottom: 2px solid var(--fluorescent-blue);
-  position: relative;
-  margin: 0 auto;
-  padding-bottom: 20px;
-}
-
-.separated:before {
-  background: none;
-  border-bottom: 2px solid var(--blue-ryb);
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 2px;
-  pointer-events: none;
-}
-
-.grid-number {
-  @apply text-blue-light text-7xl font-bold pr-8;
-  text-shadow: 3px 3px 10px lightgray;
-}
-
-/* ABOUT US */
-
-#about-us {
-  display: flex;
-  column-gap: 40px;
-  min-width: 100%;
-}
-
-@media screen and (max-width: 768px) {
-  #about-us {
-    flex-direction: column;
-  }
-}
-
-#security {
-  background-color: rgba(29, 244, 244, 0.1);
-}
-
-#security .tips {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 25%);
-  grid-template-rows: max-content;
-}
-
-#security .tips > * {
-  margin: 1em;
-}
-
-#security .tip {
-  height: 180px;
-  padding: 20px;
-  display: flex;
-  text-align: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-#security .tip h3 {
-  color: #0437ff;
-  font-size: 30pt;
-  margin: 15pt;
-}
-
-@media screen and (max-width: 1366px) {
-  #security .tips {
-    grid-template-columns: repeat(auto-fill, 50%);
-  }
-}
-
-@media screen and (max-width: 768px) {
-  #security .tips {
-    grid-template-columns: repeat(auto-fill, 100%);
-  }
-}
-
-/* FAQ */
-#faq {
-  display: grid;
-  grid-area: span;
-  grid-gap: 4em;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-template-rows: max-content;
-}
-
-#faq h2 {
-  grid-column: 1 / span 4;
-}
-
-#faq .questions {
-  display: flex;
-  flex-direction: column;
-  gap: 2em;
-  grid-column: 1 / span 3;
-}
-
-#faq .squiggle {
-  position: sticky;
-  top: 0;
-  grid-column: 4 / span 1;
-  width: 100%;
-  height: 0;
-}
-
-#faq .squiggle img {
-  width: 200px;
-}
-
-@media screen and (max-width: 1366px) {
-  #faq .questions {
-    grid-column: 1 / span 4;
-  }
-
-  #faq .squiggle {
-    visibility: hidden;
-  }
-}
-</style>
-
 <template>
   <div>
-    <hero id="intro"/>
+    <hero id="intro" class="mx-auto max-w-7xl mt-20 mb-20 px-8"/>
 
-    <section id="why-sandstone" data-name="Why Sandstone?">
+    <section id="why-sandstone" data-name="Why Sandstone?" class="mx-auto max-w-7xl mt-20 mb-20 px-8">
       <h2>Why stake with Sandstone?</h2>
       <div class="half">
         <div>
@@ -221,7 +22,7 @@ section.breakout {
       </div>
       <div>
         <box class="mt-20 mb-24">
-          <stats/>
+          <stats poolId="40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318"/>
         </box>
       </div>
       <div class="grid">
@@ -229,7 +30,7 @@ section.breakout {
           <img src="~/assets/images/grid-security.svg" class="grid-image" alt="" loading="lazy"/>
           <div>
             <h3>Security</h3>
-            <div class="grid-text">
+            <div>
               Sandstone servers are cloud hosted for maximum security. Our
               system is designed with built-in backups (redundancy). So we will
               never be offline. Which means you’ll always be collecting rewards,
@@ -242,7 +43,7 @@ section.breakout {
           <img src="~/assets/images/grid-community.svg" class="grid-image" alt="" loading="lazy"/>
           <div>
             <h3>Community</h3>
-            <div class="grid-text">
+            <div>
               As a long-standing member of the Cardano community, we contributed
               to the Incentivised Tesnet (ITN) phase with additional software
               that became known as the ‘<em>Stable-Alpha</em>’ builds. We also
@@ -261,7 +62,7 @@ section.breakout {
           <img src="~/assets/images/grid-skin-in-the-game.svg" class="grid-image" alt="" loading="lazy"/>
           <div>
             <h3>Skin in the Game</h3>
-            <div class="grid-text">
+            <div>
               We pride ourselves on running a highly rewarding pool dedicated to
               supporting the decentralisation of Cardano. We’ve maintained a
               very high pledge as proof of our long term investment in our pool
@@ -273,7 +74,7 @@ section.breakout {
           <img src="~/assets/images/grid-fees.svg" class="grid-image" alt="" loading="lazy"/>
           <div>
             <h3>Fees</h3>
-            <div class="grid-text">
+            <div>
               To support the community, we keep our fees very low at Sandstone,
               less than 2% in fact. This ensures 98% of all staking rewards go
               to you, the delegator.
@@ -283,11 +84,11 @@ section.breakout {
       </div>
     </section>
 
-    <section id="getting-started" data-name="Getting Started">
+    <section id="getting-started" data-name="Getting Started" class="mx-auto max-w-7xl mt-20 mb-20 px-8">
       <h2>Getting Started</h2>
-      <div class="grid">
-        <div class="separated">
-          <div class="grid-number">1.</div>
+      <div class="grid sm:grid-rows-1 sm:grid-cols-1 md:grid-rows-2 md:grid-cols-2 auto-cols-auto auto-rows-max mt-8">
+        <div class="separated inline-flex p-4 align-baseline">
+          <div class="text-blue-light text-7xl font-bold pr-8 text-shadow">1.</div>
           <p>
             Ensure that your ADA is securely stored using a reputable wallet. We
             recommend
@@ -295,22 +96,22 @@ section.breakout {
             for a good user experience.
           </p>
         </div>
-        <div class="separated">
-          <div class="grid-number">2.</div>
+        <div class="separated inline-flex p-4 align-baseline">
+          <div class="text-blue-light text-7xl font-bold pr-8 text-shadow">2.</div>
           <p>
             Search for the <b>SAND</b> ticker using the wallet pool delegation
             list. Alternatively, copy and paste our unique Pool Id.
           </p>
         </div>
-        <div class="separated">
-          <div class="grid-number">3.</div>
+        <div class="separated inline-flex p-4 align-baseline">
+          <div class="text-blue-light text-7xl font-bold pr-8 text-shadow">3.</div>
           <p>
             Select the amount of ADA you wish to delegate with Sandstone and tap
             "Delegate".
           </p>
         </div>
-        <div class="separated">
-          <div class="grid-number">4.</div>
+        <div class="separated inline-flex p-4 align-baseline">
+          <div class="text-blue-light text-7xl font-bold pr-8 text-shadow">4.</div>
           <p>
             You're done! Staking rewards are paid every two epoch, which is
             approximately every ten days.
@@ -319,7 +120,7 @@ section.breakout {
       </div>
     </section>
 
-    <section id="about-us" data-name="About Us">
+    <section id="about-us" data-name="About Us" class="mx-auto max-w-7xl mt-20 mb-20 px-8 grid md:grid-cols-2 md:grid-rows-1 gap-24">
       <div>
         <h2>About Us</h2>
         <p>
@@ -355,43 +156,44 @@ section.breakout {
       </div>
     </section>
 
-    <section id="security" data-name="Security" class="breakout">
-      <div class="inner">
+    <div class="w-full mx-auto mt-12 mb-12 pt-8 pb-8 bg-blue-subtle">
+      <section id="security" data-name="Security" class="mx-auto max-w-7xl px-8">
         <h2>Watch Out!</h2>
         <p>
           Please be careful of scammers. Follow these simple rules at all times.
         </p>
-        <div class="tips">
+        <div
+            class="grid sm:grid-rows-1 sm:grid-cols-1 md:grid-rows-2 md:grid-cols-2 lg:grid-rows-1 lg:grid-cols-4 auto-cols-auto auto-rows-max gap-4 mt-8">
           <box>
-            <div class="tip">
-              <h3>1</h3>
+            <div class="text-center p-6">
+              <h3 class="text-blue-dark text-6xl">1</h3>
               <p>
                 Never give out your wallet seed phrase, ever. You don’t need to
                 share it for staking.
               </p>
             </div>
           </box>
-          <box>
-            <div class="tip">
-              <h3>2</h3>
+          <box class="text-center">
+            <div class="text-center p-6">
+              <h3 class="text-blue-dark text-6xl">2</h3>
               <p>
                 Never send you coins to a stake pool – coins remain in your
                 wallet when you stake.
               </p>
             </div>
           </box>
-          <box>
-            <div class="tip">
-              <h3>3</h3>
+          <box class="text-center">
+            <div class="text-center p-6">
+              <h3 class="text-blue-dark text-6xl">3</h3>
               <p>
                 Get your $ADA off the exchange and onto a wallet before you
                 stake.
               </p>
             </div>
           </box>
-          <box>
-            <div class="tip">
-              <h3>4</h3>
+          <box class="text-center">
+            <div class="text-center p-6">
+              <h3 class="text-blue-dark text-6xl">4</h3>
               <p>Only download wallets from official sites.</p>
               <p>
                 <a href="#" class="link">Yoroi</a> |
@@ -401,100 +203,102 @@ section.breakout {
             </div>
           </box>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
 
-    <section id="faq" data-name="F.A.Q">
+    <section id="faq" data-name="F.A.Q" class="mx-auto max-w-7xl mt-20 mb-20 px-8">
       <h2>Frequently Asked Questions</h2>
-      <div class="questions">
-        <expandable title="Is staking safe?">
-          <p>
-            Yes. Staking on your $ADA tokens on is very safe. Cardano is one of
-            the few Proof of Stake blockchains that allows you to keep your
-            coins in your wallet when you stake. They’re yours and you can
-            access them whenever you need to. There is no lock up period when
-            you stake on the network.
-          </p>
-        </expandable>
-        <expandable title="When will I see my rewards?">
-          <p>
-            Time on the Cardano blockchain is measured in epochs (120hrs or 5
-            days). While there is no lock up period for staking, you won’t see
-            your first rewards for 5 epochs. This is because rewards are
-            calculated retrospectively about 2 epoch in the past.
-          </p>
-        </expandable>
-        <expandable title="Do I need to claim rewards each time they're awarded?">
-          <p>
-            No, your rewards are compounded automatically in your total
-            delegation, and included in the calculation of future rewards. The
-            only time you need to claim your rewards is to bring them back on to
-            your wallet. We recommend doing this roughly every quarter.
-          </p>
-        </expandable>
-        <expandable title="What should I look for when choosing a stake pool to delegate to?">
-          <p>
-            Cardano strives to be the most decentralised blockchain out there, so
-            choosing a Single Pool Operator (SPO) will contribute to that aim.
-            Consider SPOs that are active in the Cardano community, minting blocks
-            every epoch and have several ways to communicate with, so you can
-            reach them if you have any questions.
-          </p>
-        </expandable>
-        <expandable title="Are single pool better than larger operators (e.g. Binance, Kraken, Atomic, etc)?">
-          <p>
-            Yes they are. Single Pool Operators (SPO) are focussed on one single
-            pool, and contribute directly to the decentralisation of the Cardano
-            network. They also tend to work harder for their pools. Larger pool
-            operators run like factories and trim costs to maximize profits.
-          </p>
-        </expandable>
-        <expandable title="How are blocks allocated to stake pools per epoch?">
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora unde
-            alias sapiente iste voluptate dolore error odit suscipit similique
-            illo necessitatibus amet, reprehenderit nihil accusamus sed
-            perferendis quibusdam! Iste, quae!
-          </p>
-        </expandable>
-        <expandable title="Do you take your 2% fee from the interest rate?">
-          <p>
-            NO. The pool’s reward rate – the % interest you earn - is calculated
-            on the total rewards paid out. The two 2% fee is taken from the
-            rewards, not the percentage profits. Meaning 98% of all tokens paid
-            out go to you, the delegators.
-          </p>
-        </expandable>
-        <expandable title="Do I need to stake each time I add coins to my wallet?">
-          <p>
-            NO. Once you’ve linked your wallet to a stake pool the balance is
-            automatically adjusted when you add or remove tokens from that wallet.
-          </p>
-        </expandable>
-        <expandable title="My exchange offers staking, should I just do that?">
-          <p>
-            We don’t think so. Exchanges can keep up to 20% of staking rewards.
-            Also contributing your delegation to the very large pool operators
-            gives them more power in swaying the direction of the Cardano
-            ecosystem. SPOs lead to greater decentralisation.
-          </p>
-        </expandable>
-        <expandable title="How do I unstake?">
-          <p>
-            To unstake from a pool, simply choose another pool to delegate to.
-          </p>
-        </expandable>
-      </div>
-      <div class="squiggle">
-        <img src="~/assets/images/sandstone-element-large.svg" alt=""/>
-        <p>The most common questions should be in this list. If you have any others, drop us a line.</p>
-        <a class="btn mt-10" href="mailto:info@sandstone.io?subject=General Enquiry">
-          Contact Us
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-3" fill="none" viewBox="0 0 24 24"
-               stroke="currentColor" width="2em">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"/>
-          </svg>
-        </a>
+      <div class="grid sm:grid-cols-1 md:grid-cols-3 md:grid-rows-1 gap-16">
+        <div class="grid gap-6 md:col-span-2">
+          <expandable title="Is staking safe?">
+            <p>
+              Yes. Staking on your $ADA tokens on is very safe. Cardano is one of
+              the few Proof of Stake blockchains that allows you to keep your
+              coins in your wallet when you stake. They’re yours and you can
+              access them whenever you need to. There is no lock up period when
+              you stake on the network.
+            </p>
+          </expandable>
+          <expandable title="When will I see my rewards?">
+            <p>
+              Time on the Cardano blockchain is measured in epochs (120hrs or 5
+              days). While there is no lock up period for staking, you won’t see
+              your first rewards for 5 epochs. This is because rewards are
+              calculated retrospectively about 2 epoch in the past.
+            </p>
+          </expandable>
+          <expandable title="Do I need to claim rewards each time they're awarded?">
+            <p>
+              No, your rewards are compounded automatically in your total
+              delegation, and included in the calculation of future rewards. The
+              only time you need to claim your rewards is to bring them back on to
+              your wallet. We recommend doing this roughly every quarter.
+            </p>
+          </expandable>
+          <expandable title="What should I look for when choosing a stake pool to delegate to?">
+            <p>
+              Cardano strives to be the most decentralised blockchain out there, so
+              choosing a Single Pool Operator (SPO) will contribute to that aim.
+              Consider SPOs that are active in the Cardano community, minting blocks
+              every epoch and have several ways to communicate with, so you can
+              reach them if you have any questions.
+            </p>
+          </expandable>
+          <expandable title="Are single pool better than larger operators (e.g. Binance, Kraken, Atomic, etc)?">
+            <p>
+              Yes they are. Single Pool Operators (SPO) are focussed on one single
+              pool, and contribute directly to the decentralisation of the Cardano
+              network. They also tend to work harder for their pools. Larger pool
+              operators run like factories and trim costs to maximize profits.
+            </p>
+          </expandable>
+          <expandable title="How are blocks allocated to stake pools per epoch?">
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora unde
+              alias sapiente iste voluptate dolore error odit suscipit similique
+              illo necessitatibus amet, reprehenderit nihil accusamus sed
+              perferendis quibusdam! Iste, quae!
+            </p>
+          </expandable>
+          <expandable title="Do you take your 2% fee from the interest rate?">
+            <p>
+              NO. The pool’s reward rate – the % interest you earn - is calculated
+              on the total rewards paid out. The two 2% fee is taken from the
+              rewards, not the percentage profits. Meaning 98% of all tokens paid
+              out go to you, the delegators.
+            </p>
+          </expandable>
+          <expandable title="Do I need to stake each time I add coins to my wallet?">
+            <p>
+              NO. Once you’ve linked your wallet to a stake pool the balance is
+              automatically adjusted when you add or remove tokens from that wallet.
+            </p>
+          </expandable>
+          <expandable title="My exchange offers staking, should I just do that?">
+            <p>
+              We don’t think so. Exchanges can keep up to 20% of staking rewards.
+              Also contributing your delegation to the very large pool operators
+              gives them more power in swaying the direction of the Cardano
+              ecosystem. SPOs lead to greater decentralisation.
+            </p>
+          </expandable>
+          <expandable title="How do I unstake?">
+            <p>
+              To unstake from a pool, simply choose another pool to delegate to.
+            </p>
+          </expandable>
+        </div>
+        <div class="md:sticky w-full top-0 md:h-0">
+          <img src="~/assets/images/sandstone-element-large.svg" alt="" class="sm:hidden md:block"/>
+          <p>The most common questions should be in this list. If you have any others, drop us a line.</p>
+          <a class="btn mt-10" href="mailto:info@sandstone.io?subject=General Enquiry">
+            Contact Us
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-3" fill="none" viewBox="0 0 24 24"
+                 stroke="currentColor" width="2em">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
       </div>
     </section>
   </div>
@@ -505,4 +309,13 @@ import Hero from '~/components/Hero'
 import Expandable from "~/components/Expandable"
 import Box from "~/components/Box"
 import Stats from "~/components/Stats"
+
+const navigation = inject('navigation')
+navigation.value = [
+  { name: 'Why Sandstone?', anchor: '#why-sandstone'},
+  { name: 'Getting Started', anchor: '#getting-started'},
+  { name: 'About Us',  anchor: "#about-us" },
+  { name: 'Security', anchor: '#security'},
+  { name: 'F.A.Q', anchor: '#faq'},
+]
 </script>

@@ -7,7 +7,7 @@ footer {
   padding-top: 40px;
   padding-bottom: 120px;
   color: white;
-  @apply bg-gradient-to-tr from-blue-light via-blue to-blue-dark;
+  @apply bg-gradient-to-tr from-blue-light to-blue-dark;
 }
 
 footer .footer-content {
@@ -89,7 +89,7 @@ footer h3 {
       <div id="information" class="footer-section">
         <h3>Information</h3>
         <a href="mailto:info@sandstone.io?subject=General Enquiry">Contact Us</a>
-        <router-link to="privacy">Privacy Policy</router-link>
+        <NuxtLink to="privacy">Privacy Policy</NuxtLink>
       </div>
       <div id="socials" class="footer-section">
         <h3>Social Links</h3>

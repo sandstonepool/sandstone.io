@@ -38,12 +38,12 @@
 
 @layer utilities {
 
-    .scroll-snap-y {
-        scroll-snap-type: x proximity;
-    }
-
     .filter-white {
         filter: contrast(0) brightness(100);
+    }
+
+    .text-shadow {
+        text-shadow: 3px 3px 10px lightgray;
     }
 
 }

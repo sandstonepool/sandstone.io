@@ -6,7 +6,7 @@
 
 <template>
   <div>
-    <NavBar />
+    <NavBar :navigation="navigation"/>
     <slot />
     <Footer/>
   </div>
@@ -15,4 +15,7 @@
 <script setup>
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
+
+const navigation = ref([])
+provide('navigation', navigation)
 </script>

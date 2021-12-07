@@ -23,3 +23,20 @@
 .btn:hover {
     background: var(--gradient-radial);
 }
+
+.separated {
+    border-bottom: 2px solid var(--fluorescent-blue);
+    position: relative;
+}
+
+.separated:before {
+    background: none;
+    border-bottom: 2px solid var(--blue-ryb);
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 2px;
+    pointer-events: none;
+}

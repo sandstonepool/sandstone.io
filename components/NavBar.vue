@@ -13,9 +13,9 @@
           </div>
           <div class="flex-1 flex items-center justify-center md:items-stretch md:justify-between">
             <div class="flex-shrink-0 flex items-center">
-              <a href="/#">
+              <NuxtLink to="/">
                 <img class="h-6 w-auto sm:h-6" src="~/assets/images/sandstone-logo.svg" alt=""/>
-              </a>
+              </NuxtLink>
             </div>
             <div class="hidden md:block sm:ml-6">
               <div class="flex space-x-4">
@@ -44,28 +44,19 @@
 import { Disclosure, DisclosurePanel, DisclosureButton } from '@headlessui/vue'
 import { XIcon, MenuIcon } from '@heroicons/vue/solid'
 
-defineProps({
+const props = defineProps({
   open: {
     type: Boolean,
     required: false,
     default: false
+  },
+  navigation: {
+    type: Array[{
+      name: String,
+      anchor: String
+    }],
+    required: false,
+    default: []
   }
 })
-
-const navigation = ref([])
-
-const updateLinks = async () => {
-  // Query all section elements that have an ID and data-name attribute.
-  navigation.value = Array.from(document.querySelectorAll('section[data-name][id]').values(), value => {
-    return { anchor: `#${value.id}`, name: value.dataset.name }
-  })
-}
-
-const clearLinks = async () => {
-  navigation.value = []
-}
-
-const route = useRoute()
-watch(() => route.path, clearLinks)
-onBeforeMount(updateLinks)
 </script>

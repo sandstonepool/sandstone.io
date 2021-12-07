@@ -2,6 +2,7 @@
 .box-border {
   position: relative;
   height: 100%;
+  width: 100%;
   display: block;
   border-style: solid;
   border-width: 2px;
@@ -14,7 +15,6 @@
   border-color: #0437ff;
   background-color: rgba(255, 255, 255, 0.7);
 }
-
 </style>
 
 <template>

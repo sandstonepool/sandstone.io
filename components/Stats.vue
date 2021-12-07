@@ -55,8 +55,6 @@ import VueResizeText from 'vue3-resize-text'
 import AnimatedNumber from './AnimatedNumber'
 import Intersect from './Intersect'
 import confetti from 'canvas-confetti'
-import usePoolStats from '../composables/usePoolStats'
-import useDebouncedRef from '../composables/useDebouncedRef'
 
 const vResizeText = VueResizeText.ResizeText
 
@@ -69,43 +67,63 @@ const formatTax = (value) => numeral(value).format('0.00%')
 const formatTotalStake = (value) => `${numeral(value).divide(1000000).format('0.00a').toUpperCase()} ₳`
 const formatPledge = (value) => `${numeral(value).divide(1000000).format('0a').toUpperCase()} ₳`
 
-const {poolStats, fetchPoolStats} = usePoolStats('40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318')
-onMounted(await fetchPoolStats)
+const props = defineProps({
+  poolId: {
+    type: String,
+    required: true
+  }
+})
 
-const refreshKey = useDebouncedRef(0, 500)
-const animate = () => refreshKey.value += 1
-watch(refreshKey, () => {
-  confetti({
-    particleCount: 400,
-    spread: 80,
-    angle: 70,
-    startVelocity: 100,
-    origin: {
-      x: -0.1,
-      y: 0.8
-    }
-  })
+const {data: poolStats} = await useLazyFetch(`https://js.adapools.org/pools/${props.poolId}/summary.json`, {
+  pick: ['tax_ratio', 'total_stake', 'pledge', 'delegators'],
+  transform: payload => payload.data
+})
 
-  confetti({
-    particleCount: 400,
-    spread: 80,
-    angle: 110,
-    startVelocity: 100,
-    origin: {
-      x: 1.1,
-      y: 0.8
-    }
-  })
+const refreshKey = ref(0)
+const lockout = ref(false)
 
-  confetti({
-    particleCount: 400,
-    spread: 180,
-    angle: 90,
-    startVelocity: 80,
-    origin: {
-      x: 0.5,
-      y: 1.2
-    }
-  })
+const animate = () => {
+  if (!lockout.value) {
+    lockout.value = true
+    setTimeout(() => lockout.value = false, 60000)
+    refreshKey.value += 1
+  }
+}
+
+watch(refreshKey, (newValue, oldValue) => {
+  if (newValue > oldValue) {
+    confetti({
+      particleCount: 400,
+      spread: 80,
+      angle: 70,
+      startVelocity: 100,
+      origin: {
+        x: -0.1,
+        y: 0.8
+      }
+    })
+
+    confetti({
+      particleCount: 400,
+      spread: 80,
+      angle: 110,
+      startVelocity: 100,
+      origin: {
+        x: 1.1,
+        y: 0.8
+      }
+    })
+
+    confetti({
+      particleCount: 400,
+      spread: 180,
+      angle: 90,
+      startVelocity: 80,
+      origin: {
+        x: 0.5,
+        y: 1.2
+      }
+    })
+  }
 })
 </script>

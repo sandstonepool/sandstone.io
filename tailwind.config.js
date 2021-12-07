@@ -24,8 +24,9 @@ module.exports = {
       colors: {
         blue: {
           light: '#1df4f4ff',
-          DEFAULT: '#009ffdff',
+          DEFAULT: '#0437ffff',
           dark: '#0437ffff',
+          subtle: 'rgba(29, 244, 244, 0.1)'
         }
       }
     },

@@ -292,4 +292,7 @@
 
 <script setup>
 onMounted(() => scrollTo(0, 0))
+
+const navigation = inject('navigation')
+navigation.value = []
 </script>
