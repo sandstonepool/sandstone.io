@@ -4,8 +4,7 @@
     "dev": "nuxi dev",
     "build": "nuxi build",
     "start": "node .output/server/index.mjs",
-    "tw": "npx tailwind-config-viewer -o -p 4000",
-    "postinstall": "yarn upgrade"
+    "tw": "npx tailwind-config-viewer -o -p 4000"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.0",
