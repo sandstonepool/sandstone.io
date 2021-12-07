@@ -4,7 +4,7 @@
   padding-right: 60px;
   margin: auto;
   max-width: 1400px;
-  counter-reset: section
+  counter-reset: section;
 }
 
 #privacy p {
@@ -47,7 +47,7 @@
   content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) " ";
 }
 
-#privacy section {
+#privacy section:last-child {
   margin-bottom: 100px;
 }
 
