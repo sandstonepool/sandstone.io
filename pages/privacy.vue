@@ -2,9 +2,9 @@
 #privacy {
   padding-left: 60px;
   padding-right: 60px;
-  margin: auto;
   max-width: 1400px;
   counter-reset: section;
+  margin: 4em auto 4em auto;
 }
 
 #privacy p {
@@ -45,10 +45,6 @@
 #privacy h5:before {
   counter-increment: detail;
   content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) " ";
-}
-
-#privacy section:last-child {
-  margin-bottom: 100px;
 }
 
 #privacy ol, ul {
