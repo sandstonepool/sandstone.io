@@ -1,4 +1,4 @@
-<style>
+<style scoped>
 #privacy {
   padding-left: 60px;
   padding-right: 60px;
@@ -7,15 +7,23 @@
   counter-reset: section
 }
 
+#privacy p {
+  margin-top: 1em;
+}
+
 #privacy h2 {
+  margin-top: 1em;
   counter-reset: sub-section
 }
 
 #privacy h3 {
+  margin-top: 1em;
   counter-reset: composite
 }
 
 #privacy h4 {
+  margin-top: 1em;
+  font-weight: bolder;
   counter-reset: detail
 }
 
@@ -44,11 +52,15 @@
 }
 
 #privacy ol, ul {
+  margin-top: 1em;
+}
+
+#privacy ol, ul {
   counter-reset: list;
 }
 
 #privacy ol > li {
-  padding-left: 2.0em;
+  padding-left: 4rem;
   list-style: none;
   position: relative;
   margin-bottom: 6px;
@@ -58,7 +70,7 @@
   counter-increment: list;
   content: "(" counter(list, lower-alpha) ")";
   position: absolute;
-  left: -2.0em;
+  left: 0.1em;
 }
 
 #privacy ul > li {
@@ -75,6 +87,7 @@
 }
 
 #privacy dl {
+  margin-top: 1em;
   text-indent: 0;
 }
 
