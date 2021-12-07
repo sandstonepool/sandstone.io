@@ -74,10 +74,8 @@ const props = defineProps({
   }
 })
 
-const {data: poolStats} = await useFetch(`https://js.adapools.org/pools/${props.poolId}/summary.json`, {
-  pick: ['tax_ratio', 'total_stake', 'pledge', 'delegators'],
-  transform: payload => payload.data
-})
+const response = await fetch(`https://js.adapools.org/pools/${props.poolId}/summary.json`)
+const poolStats = ref((await response.json()).data)
 
 const refreshKey = ref(0)
 const lockout = ref(false)
