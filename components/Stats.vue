@@ -67,7 +67,17 @@ const formatTax = (value) => numeral(value).format('0.00%')
 const formatTotalStake = (value) => `${numeral(value).divide(1000000).format('0.00a').toUpperCase()} ₳`
 const formatPledge = (value) => `${numeral(value).divide(1000000).format('0a').toUpperCase()} ₳`
 
-const { data: poolStats } = await useFetch('/api/stats')
+const props = defineProps({
+  poolId: {
+    type: String,
+    required: true
+  }
+})
+
+const {data: poolStats} = await useFetch(`https://js.adapools.org/pools/${props.poolId}/summary.json`, {
+  pick: ['tax_ratio', 'total_stake', 'pledge', 'delegators'],
+  transform: payload => payload.data
+})
 
 const refreshKey = ref(0)
 const lockout = ref(false)
