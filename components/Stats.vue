@@ -60,7 +60,7 @@ import confetti from 'canvas-confetti'
 
 const vResizeText = VueResizeText.ResizeText
 
-const resizeLarge = {ratio: 0.65}
+const resizeLarge = {ratio: 0.6}
 const resizeSmall = {ratio: 1.2}
 const duration = 3000
 const easing = 'easeOutCubic'

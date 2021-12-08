@@ -120,7 +120,8 @@
       </div>
     </section>
 
-    <section id="about-us" data-name="About Us" class="mx-auto max-w-7xl mt-20 mb-20 px-8 grid md:grid-cols-2 md:grid-rows-1 gap-24">
+    <section id="about-us" data-name="About Us"
+             class="mx-auto max-w-7xl mt-20 mb-20 px-8 grid md:grid-cols-2 md:grid-rows-1 gap-24">
       <div>
         <h2>About Us</h2>
         <p>
@@ -312,10 +313,10 @@ import Stats from "~/components/Stats"
 
 const navigation = inject('navigation')
 navigation.value = [
-  { name: 'Why Sandstone?', anchor: '#why-sandstone'},
-  { name: 'Getting Started', anchor: '#getting-started'},
-  { name: 'About Us',  anchor: "#about-us" },
-  { name: 'Security', anchor: '#security'},
-  { name: 'F.A.Q', anchor: '#faq'},
+  {name: 'Why Sandstone?', anchor: '#why-sandstone'},
+  {name: 'Getting Started', anchor: '#getting-started'},
+  {name: 'About Us', anchor: "#about-us"},
+  {name: 'Security', anchor: '#security'},
+  {name: 'F.A.Q', anchor: '#faq'},
 ]
 </script>
