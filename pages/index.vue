@@ -25,9 +25,9 @@
           <stats poolId="40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318"/>
         </box>
       </div>
-      <div class="grid">
-        <div>
-          <img src="~/assets/images/grid-security.svg" class="grid-image" alt="" loading="lazy"/>
+      <div class="grid sm:grid-rows-1 sm:grid-cols-1 md:grid-rows-2 md:grid-cols-2 gap-6">
+        <div class="flex items-start gap-6">
+          <img src="~/assets/images/grid-security.svg" alt="" class="relative"/>
           <div>
             <h3>Security</h3>
             <div>
@@ -39,8 +39,8 @@
             </div>
           </div>
         </div>
-        <div>
-          <img src="~/assets/images/grid-community.svg" class="grid-image" alt="" loading="lazy"/>
+        <div class="flex items-start gap-6">
+          <img src="~/assets/images/grid-community.svg" alt=""/>
           <div>
             <h3>Community</h3>
             <div>
@@ -58,8 +58,8 @@
             </div>
           </div>
         </div>
-        <div>
-          <img src="~/assets/images/grid-skin-in-the-game.svg" class="grid-image" alt="" loading="lazy"/>
+        <div class="flex items-start gap-6">
+          <img src="~/assets/images/grid-skin-in-the-game.svg" alt=""/>
           <div>
             <h3>Skin in the Game</h3>
             <div>
@@ -70,8 +70,8 @@
             </div>
           </div>
         </div>
-        <div>
-          <img src="~/assets/images/grid-fees.svg" class="grid-image" alt="" loading="lazy"/>
+        <div class="flex items-start gap-6">
+          <img src="~/assets/images/grid-fees.svg" alt=""/>
           <div>
             <h3>Fees</h3>
             <div>
