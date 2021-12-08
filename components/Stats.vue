@@ -48,6 +48,16 @@
         </div>
       </div>
     </intersect>
+    <template #placeholder>
+      <!-- Skeleton Placeholder -->
+      <div class="stats animate-pulse">
+        <div class="flex flex-col items-center justify-center align-middle gap-6 p-4" v-for="i in 4" :key="i">
+          <div class="rounded-full bg-gray-100 border border-gray-200 h-20 w-20"></div>
+          <div class="h-4 bg-gray-100 border border-gray-200 rounded w-2/3"></div>
+          <div class="h-4 bg-gray-100 border border-gray-200 rounded w-2/3"></div>
+        </div>
+      </div>
+    </template>
   </client-only>
 </template>
 

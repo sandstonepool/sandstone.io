@@ -290,7 +290,7 @@
           </expandable>
         </div>
         <div class="md:sticky w-full top-0 md:h-0">
-          <img src="~/assets/images/sandstone-element-large.svg" alt="" class="sm:hidden md:block"/>
+          <img src="~/assets/images/sandstone-element-large.svg" alt="" class="sm:hidden md:block w-1/2"/>
           <p>The most common questions should be in this list. If you have any others, drop us a line.</p>
           <a class="btn mt-10" href="mailto:info@sandstone.io?subject=General Enquiry">
             Contact Us
