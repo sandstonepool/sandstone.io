@@ -1,6 +1,9 @@
-# Nuxt 3 Minimal Starter
+# Sandstone Stake Pool Public Site
 
-We recommend to look at the [documentation](https://v3.nuxtjs.org).
+This site is built using the [Nuxt 3](https://v3.nuxtjs.org) framework and is built and deployed
+with [Netlify](https://www.netlify.com/).
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/74b0be38-d83b-4439-b98a-3f5f3fc45092/deploy-status)](https://app.netlify.com/sites/determined-mclean-dfdf5e/deploys)
 
 ## Setup
 
