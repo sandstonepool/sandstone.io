@@ -1,6 +1,6 @@
 <template>
   <div>
-    <hero id="intro" class="mx-auto max-w-7xl mt-20 mb-20 px-8"/>
+    <hero class="mx-auto max-w-7xl mt-20 mb-0 px-8"/>
 
     <section id="why-sandstone" data-name="Why Sandstone?" class="mx-auto max-w-7xl mt-20 mb-20 px-8">
       <h2>Why stake with Sandstone?</h2>
@@ -22,7 +22,7 @@
       </div>
       <div>
         <box class="mt-20 mb-24">
-          <stats poolId="40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318"/>
+          <stats poolId="40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318" :confetti="false"/>
         </box>
       </div>
       <div class="grid sm:grid-rows-1 sm:grid-cols-1 md:grid-rows-2 md:grid-cols-2 gap-6">

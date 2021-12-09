@@ -83,6 +83,11 @@ const props = defineProps({
   poolId: {
     type: String,
     required: true
+  },
+  confetti: {
+    type: Boolean,
+    required: false,
+    default: false
   }
 })
 
@@ -101,7 +106,7 @@ const animate = () => {
 }
 
 watch(refreshKey, (newValue, oldValue) => {
-  if (newValue > oldValue) {
+  if (props.confetti && (newValue > oldValue)) {
     confetti({
       particleCount: 400,
       spread: 80,
