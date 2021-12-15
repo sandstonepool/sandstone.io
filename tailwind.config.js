@@ -7,6 +7,7 @@ module.exports = {
     "./composables/**/*.{js,ts}",
     "./plugins/**/*.{js,ts}",
     "./nuxt.config.{js,ts}",
+    "./assets/**/*.css"
   ],
   theme: {
     extend: {
