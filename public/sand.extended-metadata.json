@@ -1,0 +1,20 @@
+{
+  "itn": {
+    "owner": "ed25519_pk120uk3rugx3fl2jrl2rfzmara6654klpywgwmwweu2n0z7mg7zc2s03jqsk",
+    "witness": "ed25519_sig18yvg26js9mayutavwrs9eatfprwd4hrdenj8y7s2sfv62sv6pkej39mq6zv0tgyfzmqn3ke5p48ytlnv9fng89rqcscyas9fd6cegpqe0ksl3"
+  },
+  "info": {
+    "url_png_icon_64x64": "https://www.sandstone.io/australia-64x64.png",
+    "url_png_logo": "https://www.sandstone.io/australia-512x512.png",
+    "location": "Perth, Western Australia",
+    "about": {
+      "server": "Cloud hosted (AWS) and tuned for high reliability."
+    }
+  },
+  "my-pool-ids": {
+    "0": "40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318"
+  },
+  "telegram-admin-handle": {
+    "0": "@michaelfazio"
+  }
+}
