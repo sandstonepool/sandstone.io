@@ -1,5 +1,6 @@
 module.exports = {
   content: [
+    "./directives/**/*.{js,ts}",
     "./components/**/*.{vue,js}",
     "./layouts/**/*.vue",
     "./pages/**/*.vue",
