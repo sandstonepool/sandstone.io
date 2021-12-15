@@ -10,7 +10,7 @@
     "autoprefixer": "^10.4.0",
     "nuxt3": "^3.0.0-27306529.1ef6e3f",
     "patch-vue-directive-ssr": "^0.0.1",
-    "postcss": "^8.4.3",
+    "postcss": "^8.4.5",
     "tailwindcss": "^3.0.5"
   },
   "dependencies": {
