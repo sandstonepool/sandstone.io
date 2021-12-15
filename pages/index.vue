@@ -1,30 +1,32 @@
 <template>
   <div>
-    <hero class="mx-auto max-w-7xl mt-20 mb-0 px-8"/>
+    <hero class="mx-auto max-w-7xl mt-20 mb-0 px-8" link="#why-sandstone"/>
 
     <section id="why-sandstone" class="mx-auto max-w-7xl mt-20 mb-20 px-8" data-name="Why Sandstone?">
       <h2>Why stake with Sandstone?</h2>
       <div class="half">
         <div>
           <p>
-            Because this pool is run by professionals who have been involved in
-            the Cardano ecosystem since 2017. We provide world-class technical
-            infrastructure with ultra-safe protocols. Proudly part of the Single
-            Pool Operator (SPO) group, we’re only focussed on this single stake
-            pool, keeping the network as decentralised as possible.
+            Sandstone is one of the very first Cardano Stake Pools to have established itself on the Cardano blockchain.
+            Our infrastructure is expertly designed and operated to ensure that we deliver the most reliable service
+            possible. Our foremost priorities are to maintaining the security of the Cardano blockchain and maximising
+            rewards to our delegators.
           </p>
           <p>
-            We’re in this for the long haul, having just secured a 3 year lease
-            on our cloud based infrastructure. So you can safely collect your
-            rewards with us, for the long term.
+            Success to us means being recognised as one of the most trusted players in the Cardano ecosystem. To
+            establish that trust, Sandstone has committed investments of approximately <strong>1 Million ₳</strong>
+            towards the cost of infrastructure, pool pledge, and other operating overheads.
+          </p>
+          <p>
+            By delegating to Sandstone, you will be helping to support us play a very important role in the Cardano
+            ecosystem. In return, our promise is to be relentless in the pursuit of rewards for our delegators and the
+            continued success for Cardano.
           </p>
         </div>
       </div>
-      <div>
-        <box class="mt-20 mb-24">
-          <stats :confetti="false" poolId="40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318"/>
-        </box>
-      </div>
+      <box class="mt-20 mb-24">
+        <stats :confetti="false" poolId="40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318"/>
+      </box>
       <div class="grid sm:grid-rows-1 sm:grid-cols-1 md:grid-rows-2 md:grid-cols-2 gap-6">
         <div class="flex items-start gap-6">
           <img alt="" class="relative" src="~/assets/images/grid-security.svg"/>

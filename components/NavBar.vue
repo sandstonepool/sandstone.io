@@ -13,9 +13,9 @@
           </div>
           <div class="flex-1 flex items-center justify-center md:items-stretch md:justify-between">
             <div class="flex-shrink-0 flex items-center">
-              <NuxtLink to="/">
+              <a href="/">
                 <img alt="" class="h-6 w-auto sm:h-6" src="~/assets/images/sandstone-logo.svg"/>
-              </NuxtLink>
+              </a>
             </div>
             <div class="hidden md:block sm:ml-6">
               <div class="flex space-x-4">
@@ -41,7 +41,6 @@
 </template>
 
 <script setup>
-
 const props = defineProps({
   navigation: {
     type: Array[{
@@ -52,4 +51,19 @@ const props = defineProps({
     default: []
   }
 })
+</script>
+
+<script>
+import {XIcon, MenuIcon} from '@heroicons/vue/solid'
+import {Disclosure, DisclosurePanel, DisclosureButton} from "@headlessui/vue";
+
+export default {
+  components: {
+    XIcon,
+    MenuIcon,
+    Disclosure,
+    DisclosurePanel,
+    DisclosureButton
+  }
+}
 </script>
