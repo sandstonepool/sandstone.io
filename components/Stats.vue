@@ -20,30 +20,30 @@
 <template>
   <client-only>
     <intersect threshold="1.0" @intersected="animate">
-      <div class="stats" :key="refreshKey">
+      <div :key="refreshKey" class="stats">
         <div class="stat">
-          <animated-number v-resize-text="resizeLarge" :value="[0, poolStats?.tax_ratio]" :duration="duration"
-                           :easing="easing"
-                           :fmt="formatTax"/>
+          <animated-number v-resize-text="resizeLarge" :duration="duration" :easing="easing"
+                           :fmt="formatTax"
+                           :value="[0, poolStats?.tax_ratio]"/>
           <div v-resize-text="resizeSmall">Tax</div>
         </div>
         <div class="stat">
-          <animated-number v-resize-text="resizeLarge" :value="[1000000000, poolStats?.total_stake]"
-                           :duration="duration"
+          <animated-number v-resize-text="resizeLarge" :duration="duration"
                            :easing="easing"
-                           :fmt="formatTotalStake"/>
+                           :fmt="formatTotalStake"
+                           :value="[1000000000, poolStats?.total_stake]"/>
           <div v-resize-text="resizeSmall">Stake</div>
         </div>
         <div class="stat">
-          <animated-number v-resize-text="resizeLarge" :value="[1000000000, poolStats?.pledge]" :duration="duration"
-                           :easing="easing"
-                           :fmt="formatPledge"/>
+          <animated-number v-resize-text="resizeLarge" :duration="duration" :easing="easing"
+                           :fmt="formatPledge"
+                           :value="[1000000000, poolStats?.pledge]"/>
           <div v-resize-text="resizeSmall">Pledge</div>
         </div>
         <div class="stat">
-          <animated-number v-resize-text="resizeLarge" :value="poolStats?.delegators" :duration="duration"
-                           :easing="easing"
-                           :round="1"/>
+          <animated-number v-resize-text="resizeLarge" :duration="duration" :easing="easing"
+                           :round="1"
+                           :value="poolStats?.delegators"/>
           <div v-resize-text="resizeSmall">Delegators</div>
         </div>
       </div>
@@ -51,7 +51,7 @@
     <template #placeholder>
       <!-- Skeleton Placeholder -->
       <div class="stats animate-pulse">
-        <div class="flex flex-col items-center justify-center align-middle gap-6 p-4" v-for="i in 4" :key="i">
+        <div v-for="i in 4" :key="i" class="flex flex-col items-center justify-center align-middle gap-6 p-4">
           <div class="rounded-full bg-gray-100 border border-gray-200 h-20 w-20"></div>
           <div class="h-4 bg-gray-100 border border-gray-200 rounded w-2/3"></div>
           <div class="h-4 bg-gray-100 border border-gray-200 rounded w-2/3"></div>

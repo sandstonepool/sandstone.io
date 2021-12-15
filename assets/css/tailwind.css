@@ -4,50 +4,50 @@
 
 @layer base {
 
-    html {
-        scroll-behavior: smooth;
-        scroll-padding-top: 100px;
-    }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+  }
 
-    body {
-        @apply font-body text-gray-900;
-    }
+  body {
+    @apply font-body text-gray-900;
+  }
 
-    h1 {
-        font-weight: 800;
-        font-size: 45px;
-        line-height: 50px;
-        margin-bottom: 20px;
-    }
+  h1 {
+    font-weight: 800;
+    font-size: 45px;
+    line-height: 50px;
+    margin-bottom: 20px;
+  }
 
-    h2 {
-        color: #0437ff;
-        font-size: 35px;
-        line-height: 50px;
-        font-weight: 600;
-        margin-bottom: 20px;
-    }
+  h2 {
+    color: #0437ff;
+    font-size: 35px;
+    line-height: 50px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
 
-    h3 {
-        font-size: 25px;
-        font-weight: 600;
-        margin-bottom: 20px;
-    }
+  h3 {
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
 
-    p {
-        margin-bottom: 1em;
-    }
+  p {
+    margin-bottom: 1em;
+  }
 
 }
 
 @layer utilities {
 
-    .filter-white {
-        filter: contrast(0) brightness(100);
-    }
+  .filter-white {
+    filter: contrast(0) brightness(100);
+  }
 
-    .text-shadow {
-        text-shadow: 3px 3px 10px lightgray;
-    }
+  .text-shadow {
+    text-shadow: 3px 3px 10px lightgray;
+  }
 
 }

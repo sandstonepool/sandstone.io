@@ -2,7 +2,7 @@
   <div>
     <hero class="mx-auto max-w-7xl mt-20 mb-0 px-8"/>
 
-    <section id="why-sandstone" data-name="Why Sandstone?" class="mx-auto max-w-7xl mt-20 mb-20 px-8">
+    <section id="why-sandstone" class="mx-auto max-w-7xl mt-20 mb-20 px-8" data-name="Why Sandstone?">
       <h2>Why stake with Sandstone?</h2>
       <div class="half">
         <div>
@@ -22,12 +22,12 @@
       </div>
       <div>
         <box class="mt-20 mb-24">
-          <stats poolId="40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318" :confetti="false"/>
+          <stats :confetti="false" poolId="40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318"/>
         </box>
       </div>
       <div class="grid sm:grid-rows-1 sm:grid-cols-1 md:grid-rows-2 md:grid-cols-2 gap-6">
         <div class="flex items-start gap-6">
-          <img src="~/assets/images/grid-security.svg" alt="" class="relative"/>
+          <img alt="" class="relative" src="~/assets/images/grid-security.svg"/>
           <div>
             <h3>Security</h3>
             <div>
@@ -40,7 +40,7 @@
           </div>
         </div>
         <div class="flex items-start gap-6">
-          <img src="~/assets/images/grid-community.svg" alt=""/>
+          <img alt="" src="~/assets/images/grid-community.svg"/>
           <div>
             <h3>Community</h3>
             <div>
@@ -49,9 +49,9 @@
               that became known as the ‘<em>Stable-Alpha</em>’ builds. We also
               assisted great projects like
               <a
-                  href="https://github.com/AndrewWestberg/cncli"
-                  target="_blank"
-                  class="link"
+                class="link"
+                href="https://github.com/AndrewWestberg/cncli"
+                target="_blank"
               >Andrew Westberg&#x27;s cncli tool</a
               >. But don&#x27;t take our word for it. Ask around. Our reputation
               speaks volumes.
@@ -59,7 +59,7 @@
           </div>
         </div>
         <div class="flex items-start gap-6">
-          <img src="~/assets/images/grid-skin-in-the-game.svg" alt=""/>
+          <img alt="" src="~/assets/images/grid-skin-in-the-game.svg"/>
           <div>
             <h3>Skin in the Game</h3>
             <div>
@@ -71,7 +71,7 @@
           </div>
         </div>
         <div class="flex items-start gap-6">
-          <img src="~/assets/images/grid-fees.svg" alt=""/>
+          <img alt="" src="~/assets/images/grid-fees.svg"/>
           <div>
             <h3>Fees</h3>
             <div>
@@ -84,7 +84,7 @@
       </div>
     </section>
 
-    <section id="getting-started" data-name="Getting Started" class="mx-auto max-w-7xl mt-20 mb-20 px-8">
+    <section id="getting-started" class="mx-auto max-w-7xl mt-20 mb-20 px-8" data-name="Getting Started">
       <h2>Getting Started</h2>
       <div class="grid sm:grid-rows-1 sm:grid-cols-1 md:grid-rows-2 md:grid-cols-2 auto-cols-auto auto-rows-max mt-8">
         <div class="separated inline-flex p-4 align-baseline">
@@ -92,7 +92,7 @@
           <p>
             Ensure that your ADA is securely stored using a reputable wallet. We
             recommend
-            <a href="https://yoroi-wallet.com/#/" class="link">Yoroi</a> wallet
+            <a class="link" href="https://yoroi-wallet.com/#/">Yoroi</a> wallet
             for a good user experience.
           </p>
         </div>
@@ -120,8 +120,8 @@
       </div>
     </section>
 
-    <section id="about-us" data-name="About Us"
-             class="mx-auto max-w-7xl mt-20 mb-20 px-8 grid md:grid-cols-2 md:grid-rows-1 gap-24">
+    <section id="about-us" class="mx-auto max-w-7xl mt-20 mb-20 px-8 grid md:grid-cols-2 md:grid-rows-1 gap-24"
+             data-name="About Us">
       <div>
         <h2>About Us</h2>
         <p>
@@ -158,13 +158,13 @@
     </section>
 
     <div class="w-full mx-auto mt-12 mb-12 pt-8 pb-8 bg-blue-subtle">
-      <section id="security" data-name="Security" class="mx-auto max-w-7xl px-8">
+      <section id="security" class="mx-auto max-w-7xl px-8" data-name="Security">
         <h2>Watch Out!</h2>
         <p>
           Please be careful of scammers. Follow these simple rules at all times.
         </p>
         <div
-            class="grid sm:grid-rows-1 sm:grid-cols-1 md:grid-rows-2 md:grid-cols-2 lg:grid-rows-1 lg:grid-cols-4 auto-cols-auto auto-rows-max gap-4 mt-8">
+          class="grid sm:grid-rows-1 sm:grid-cols-1 md:grid-rows-2 md:grid-cols-2 lg:grid-rows-1 lg:grid-cols-4 auto-cols-auto auto-rows-max gap-4 mt-8">
           <box>
             <div class="text-center p-6">
               <h3 class="text-blue-dark text-6xl">1</h3>
@@ -197,9 +197,9 @@
               <h3 class="text-blue-dark text-6xl">4</h3>
               <p>Only download wallets from official sites.</p>
               <p>
-                <a href="#" class="link">Yoroi</a> |
-                <a href="#" class="link">ADA Lite</a> |
-                <a href="#" class="link">Atomic</a>
+                <a class="link" href="#">Yoroi</a> |
+                <a class="link" href="#">ADA Lite</a> |
+                <a class="link" href="#">Atomic</a>
               </p>
             </div>
           </box>
@@ -207,7 +207,7 @@
       </section>
     </div>
 
-    <section id="faq" data-name="F.A.Q" class="mx-auto max-w-7xl mt-20 mb-20 px-8">
+    <section id="faq" class="mx-auto max-w-7xl mt-20 mb-20 px-8" data-name="F.A.Q">
       <h2>Frequently Asked Questions</h2>
       <div class="grid sm:grid-cols-1 md:grid-cols-3 md:grid-rows-1 gap-16">
         <div class="grid gap-6 md:col-span-2">
@@ -290,13 +290,13 @@
           </expandable>
         </div>
         <div class="md:sticky w-full top-0 md:h-0">
-          <img src="~/assets/images/sandstone-element-large.svg" alt="" class="sm:hidden md:block w-1/2"/>
+          <img alt="" class="sm:hidden md:block w-1/2" src="~/assets/images/sandstone-element-large.svg"/>
           <p>The most common questions should be in this list. If you have any others, drop us a line.</p>
           <a class="btn mt-10" href="mailto:info@sandstone.io?subject=General Enquiry">
             Contact Us
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 stroke-3" fill="none" viewBox="0 0 24 24"
-                 stroke="currentColor" width="2em">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"/>
+            <svg class="h-6 w-6 stroke-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                 width="2em" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
             </svg>
           </a>
         </div>

@@ -17,7 +17,7 @@ var observer = undefined
 onMounted(() => {
   observer = new IntersectionObserver((entries, _) => {
     entries.forEach(entry => {
-      if(entry.isIntersecting) {
+      if (entry.isIntersecting) {
         emit('intersected')
       }
     })

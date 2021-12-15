@@ -7,7 +7,7 @@
 <template>
   <div>
     <NavBar :navigation="navigation"/>
-    <slot />
+    <slot/>
     <Footer/>
   </div>
 </template>

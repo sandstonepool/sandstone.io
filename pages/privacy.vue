@@ -111,7 +111,7 @@
           Protecting your privacy and the confidentiality of your personal information is extremely important to us.
           This
           Privacy Policy is for customers of Sandstone Ventures Pty Ltd <span>(<NuxtLink
-            to="/">SANDSTONE</NuxtLink>)</span>.
+          to="/">SANDSTONE</NuxtLink>)</span>.
           SANDSTONE is committed to protecting your privacy when you use our products and services and when you visit
           our
           website.
@@ -257,7 +257,7 @@
         <p>
           We will never knowingly send you unsolicited commercial electronic messages. More information on the Spam Act
           2003 is available from the regulator’s website:
-          <a target="_blank" href="https://www.acma.gov.au/spam">www.acma.gov.au/spam</a>. We may use information
+          <a href="https://www.acma.gov.au/spam" target="_blank">www.acma.gov.au/spam</a>. We may use information
           that we know about your likes and interests to tell you about other SANDSTONE programs, products and services.
           We
           may know about your likes and interests because you have provided that information.
@@ -277,7 +277,7 @@
           If you have a complaint about the way we handle your personal information, you may contact the Office of the
           Australian Information Commissioner by calling them at <a href="tel:1300-363-992">1300 363 992</a>, making a
           complaint online at
-          <a target="_blank" href="https://www.oaic.gov.au">www.oaic.gov.au</a> or writing to the Office of the
+          <a href="https://www.oaic.gov.au" target="_blank">www.oaic.gov.au</a> or writing to the Office of the
           Australian
           Information Commissioner, GPO Box 5218 Sydney, NSW 2001.
         </p>
