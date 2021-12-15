@@ -14,7 +14,7 @@
           </p>
           <p>
             Success to us means being recognised as one of the most trusted players in the Cardano ecosystem. To
-            establish that trust, Sandstone has committed investments of approximately <strong>1 Million ₳</strong>
+            establish that trust, Sandstone has committed investments of approximately <strong class="underline decoration-2 decoration-blue-dark">1 Million ₳</strong>
             towards the cost of infrastructure, pool pledge, and other operating overheads.
           </p>
           <p>
@@ -25,7 +25,7 @@
         </div>
       </div>
       <box class="mt-20 mb-24">
-        <stats :confetti="false" poolId="40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318"/>
+        <stats :confetti="false" :poolId="poolId"/>
       </box>
       <div class="grid sm:grid-rows-1 sm:grid-cols-1 md:grid-rows-2 md:grid-cols-2 gap-6">
         <div class="flex items-start gap-6">
@@ -33,11 +33,10 @@
           <div>
             <h3>Security</h3>
             <div>
-              Sandstone servers are cloud hosted for maximum security. Our
-              system is designed with built-in backups (redundancy). So we will
-              never be offline. Which means you’ll always be collecting rewards,
-              we mint blocks in
-              <strong>every epoch</strong>.
+              Sandstone servers are cloud hosted and monitored 24/7. Our
+              system is designed to be fault-tolerant and highly-available.
+              This makes us incredibly reliable and means greater rewards
+              earning potential for our delegators.
             </div>
           </div>
         </div>
@@ -46,17 +45,10 @@
           <div>
             <h3>Community</h3>
             <div>
-              As a long-standing member of the Cardano community, we contributed
-              to the Incentivised Tesnet (ITN) phase with additional software
-              that became known as the ‘<em>Stable-Alpha</em>’ builds. We also
-              assisted great projects like
-              <a
-                class="link"
-                href="https://github.com/AndrewWestberg/cncli"
-                target="_blank"
-              >Andrew Westberg&#x27;s cncli tool</a
-              >. But don&#x27;t take our word for it. Ask around. Our reputation
-              speaks volumes.
+              As a long-standing member of the Cardano community, we've contributed
+              significantly towards the development of Cardano, particularly during
+              the early stages of the Incentivised Test Network (ITN). But don't take
+              our word for it. Ask around. Our reputation speaks volumes.
             </div>
           </div>
         </div>
@@ -78,8 +70,8 @@
             <h3>Fees</h3>
             <div>
               To support the community, we keep our fees very low at Sandstone,
-              less than 2% in fact. This ensures 98% of all staking rewards go
-              to you, the delegator.
+              less than <strong class="underline decoration-2 decoration-blue-dark">2%</strong> in fact. This ensures <strong class="underline decoration-2 decoration-blue-dark">98%</strong> of all rewards go to you,
+              the delegator.
             </div>
           </div>
         </div>
@@ -101,8 +93,8 @@
         <div class="separated inline-flex p-4 align-baseline">
           <div class="text-blue-light text-7xl font-bold pr-8 text-shadow">2.</div>
           <p>
-            Search for the <b>SAND</b> ticker using the wallet pool delegation
-            list. Alternatively, copy and paste our unique Pool Id.
+            Search for the <strong>SAND</strong> ticker using the wallet pool delegation
+            list. Alternatively, copy and paste our unique <strong class="underline decoration-2 decoration-blue-dark cursor-pointer" @click="toClipboard">Pool Id</strong>.
           </p>
         </div>
         <div class="separated inline-flex p-4 align-baseline">
@@ -199,9 +191,9 @@
               <h3 class="text-blue-dark text-6xl">4</h3>
               <p>Only download wallets from official sites.</p>
               <p>
-                <a class="link" href="#">Yoroi</a> |
-                <a class="link" href="#">ADA Lite</a> |
-                <a class="link" href="#">Atomic</a>
+                <a class="underline decoration-2 decoration-blue-dark cursor-pointer" href="https://yoroi-wallet.com/#/" target="_blank">Yoroi</a> |
+                <a class="underline decoration-2 decoration-blue-dark cursor-pointer" href="https://adalite.io/" target="_blank">ADA Lite</a> |
+                <a class="underline decoration-2 decoration-blue-dark cursor-pointer" href="https://atomicwallet.io/" target="_blank">Atomic</a>
               </p>
             </div>
           </box>
@@ -321,4 +313,16 @@ navigation.value = [
   {name: 'Security', anchor: '#security'},
   {name: 'F.A.Q', anchor: '#faq'},
 ]
+
+const poolId = '40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318'
+
+const toClipboard = (event) => {
+  const clipboardData =
+    event.clipboardData ||
+    window.clipboardData ||
+    event.originalEvent?.clipboardData ||
+    navigator.clipboard;
+
+  clipboardData.writeText(poolId);
+}
 </script>
