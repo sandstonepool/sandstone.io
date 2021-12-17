@@ -6,7 +6,7 @@
 
 <template>
   <div>
-    <Html>
+    <Html lang="en">
     <Head>
       <Title>Sandstone Stake Pool</Title>
       <Meta charset="UTF-8"></Meta>
