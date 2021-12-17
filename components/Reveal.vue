@@ -1,10 +1,10 @@
 <template>
   <Box>
-    <Disclosure as="div" v-slot="{ open }" class="p-4">
+    <Disclosure as="div" class="p-4" v-slot="{ open }">
       <DisclosureButton
-        class="flex justify-between w-full px-4 py-2 text-md font-medium text-left rounded-lg focus:outline-none">
+        class="inline-flex justify-between w-full px-4 py-2 text-md font-medium text-left rounded-lg focus:outline-none">
         <span>{{ summary }}</span>
-        <ChevronUpIcon :class="open ? 'transform rotate-180' : ''" class="w-5 h-5 text-blue-dark"/>
+        <ChevronUpIcon :class="open ? 'transform rotate-180' : ''" class="flex-shrink-0 h-8 w-8 text-blue-dark"/>
       </DisclosureButton>
       <transition
         enter-active-class="transition duration-400 ease-out"
