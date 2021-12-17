@@ -96,10 +96,12 @@
           <div class="text-blue-light text-7xl font-bold pr-8 text-shadow">2.</div>
           <p>
             Search for the <strong>SAND</strong> ticker using the wallet pool delegation
-            list. Alternatively, copy and paste our unique Pool ID: <strong
-            class="bg-blue-subtle text-blue-dark rounded-md px-2 cursor-pointer text-sm font-mono" @click="toClipboard">
-            40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318
-          </strong>
+            list. Alternatively, copy and paste our unique Pool ID:
+            <strong
+              class="inline-flex gap-x-1 mt-4 bg-blue-subtle text-blue-600 rounded-md px-2 cursor-pointer text-sm font-mono"
+              @click="toClipboard">
+              <ClipboardCopyIcon class="inline-block w-4 h-4 stroke-blue-dark"/>{{ poolId }}
+            </strong>
           </p>
         </div>
         <div class="separated inline-flex p-4 align-baseline">
@@ -292,11 +294,6 @@
 </template>
 
 <script setup>
-import Hero from '~/components/Hero'
-import Box from "~/components/Box"
-import Stats from "~/components/Stats"
-import Reveal from "../components/Reveal";
-
 const navigation = inject('navigation')
 navigation.value = [
   {name: 'Why Sandstone?', anchor: '#why-sandstone'},
@@ -316,5 +313,23 @@ const toClipboard = (event) => {
     navigator.clipboard;
 
   clipboardData.writeText(poolId);
+}
+</script>
+
+<script>
+import Hero from "~/components/Hero"
+import Box from "~/components/Box"
+import Stats from "~/components/Stats"
+import Reveal from "~/components/Reveal"
+import {ClipboardCopyIcon} from "@heroicons/vue/outline"
+
+export default {
+  components: {
+    Hero,
+    Box,
+    Stats,
+    Reveal,
+    ClipboardCopyIcon
+  }
 }
 </script>
