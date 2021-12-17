@@ -128,10 +128,9 @@
           returns on your staked tokens.
         </p>
         <p>
-          Sandstone is an exceptionally high performing Stake Pool Operator (SPO). We're committed to supporting
-          Cardano’s decentralisation and are actively building out solutions that run on the Cardano blockchain. We're
-          determined to be recognised globally as the most professionally run, reliable, and trustworthy pools on the
-          Cardano blockchain for years to come.
+          Sandstone is an exceptionally operated Stake Pool. We're committed to supporting Cardano’s decentralisation
+          and are actively building out solutions that run on the Cardano blockchain. We're determined to be recognised
+          globally as the most professionally run, reliable, and trustworthy pools on the Cardano blockchain.
         </p>
       </div>
       <div>
