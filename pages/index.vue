@@ -100,8 +100,9 @@
             <client-only>
               <Popper closeDelay="500" arrow placement="top" content="Copied to Clipboard">
                 <strong
-                  class="inline-flex gap-x-1 bg-blue-subtle text-blue-600 rounded-md px-2 cursor-pointer text-middle"
-                  @click="toClipboard">Pool ID <ClipboardCopyIcon class="w-4 h-4"/></strong>
+                  class="inline-flex flex-nowrap gap-x-2 bg-blue-subtle text-blue-dark rounded-md px-2 cursor-pointer"
+                  @click="toClipboard">Pool ID<ClipboardCopyIcon class="w-5 h-5"/>
+                </strong>
               </Popper>
             </client-only>
           </p>
@@ -325,7 +326,8 @@ const toClipboard = (event) => {
 
 <script>
 import Popper from "vue3-popper"
-import {ClipboardCopyIcon} from "@heroicons/vue/solid"
+import {ClipboardCopyIcon} from "@heroicons/vue/outline"
+
 export default {
   components: {
     ClipboardCopyIcon
