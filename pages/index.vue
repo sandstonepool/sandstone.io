@@ -278,7 +278,7 @@
           </reveal>
         </div>
 
-        <div class="sticky w-full top-0">
+        <div class="sticky w-full top-14 sm:h-18 sm:block sm:top-14 md:h-0">
           <img class="hidden md:block md:block w-1/2" src="~/assets/images/sandstone-element-large.svg" alt=""/>
           <p>The most common questions should be in this list. If you have any others, drop us a line.</p>
           <a class="btn mt-10" href="mailto:info@sandstone.io?subject=General Enquiry">
