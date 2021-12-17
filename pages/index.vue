@@ -96,8 +96,10 @@
           <div class="text-blue-light text-7xl font-bold pr-8 text-shadow">2.</div>
           <p>
             Search for the <strong>SAND</strong> ticker using the wallet pool delegation
-            list. Alternatively, copy and paste our unique <strong
-            class="underline decoration-2 decoration-blue-dark cursor-pointer" @click="toClipboard">Pool Id</strong>.
+            list. Alternatively, copy and paste our unique Pool ID: <strong
+            class="bg-blue-subtle text-blue-dark rounded-md px-2 cursor-pointer text-sm font-mono" @click="toClipboard">
+            40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318
+          </strong>
           </p>
         </div>
         <div class="separated inline-flex p-4 align-baseline">
