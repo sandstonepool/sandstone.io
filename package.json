@@ -21,6 +21,7 @@
     "canvas-confetti": "^1.4.0",
     "lodash": "^4.17.21",
     "numeral": "^2.0.6",
+    "vue3-popper": "^1.4.1",
     "vue3-resize-text": "^0.1.0"
   }
 }
