@@ -197,11 +197,11 @@
               <p>Only download wallets from official sites.</p>
               <p>
                 <a class="underline decoration-2 decoration-blue-dark cursor-pointer" href="https://yoroi-wallet.com/#/"
-                   target="_blank">Yoroi</a> |
+                   rel="noopener" target="_blank">Yoroi</a> |
                 <a class="underline decoration-2 decoration-blue-dark cursor-pointer" href="https://adalite.io/"
-                   target="_blank">ADA Lite</a> |
+                   rel="noopener" target="_blank">ADA Lite</a> |
                 <a class="underline decoration-2 decoration-blue-dark cursor-pointer" href="https://atomicwallet.io/"
-                   target="_blank">Atomic</a>
+                   rel="noopener" target="_blank">Atomic</a>
               </p>
             </div>
           </box>

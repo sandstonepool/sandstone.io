@@ -81,11 +81,11 @@ footer h3 {
       </div>
       <div id="resources" class="footer-section">
         <h3>Resources</h3>
-        <a href="https://cardanoscan.io/pool/40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318" target="_blank">Cardanoscan</a>
-        <a href="https://yoroi-wallet.com/#/" target="_blank">Yoroi Wallet</a>
-        <a href="https://adapools.org/pool/40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318" target="_blank">ADAPools</a>
+        <a href="https://cardanoscan.io/pool/40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318" rel="noopener" target="_blank">Cardanoscan</a>
+        <a href="https://yoroi-wallet.com/#/" rel="noopener" target="_blank">Yoroi Wallet</a>
+        <a href="https://adapools.org/pool/40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318" rel="noopener" target="_blank">ADAPools</a>
         <a href="https://pooltool.io/pool/40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318/awards"
-           target="_blank">PoolTool</a>
+           rel="noopener" target="_blank">PoolTool</a>
       </div>
       <div id="information" class="footer-section">
         <h3>Information</h3>
@@ -94,15 +94,15 @@ footer h3 {
       </div>
       <div id="socials" class="footer-section">
         <h3>Social Links</h3>
-        <a href="https://twitter.com/sandstonepool" role="button" target="_blank">
+        <a href="https://twitter.com/sandstonepool" role="button" rel="noopener" target="_blank">
           <img alt="twitter" src="~/assets/images/twitter_white.svg" width="30px"/>
           Twitter
         </a>
-        <a href="https://t.me/sandstonepool" role="button" target="_blank">
+        <a href="https://t.me/sandstonepool" role="button" rel="noopener" target="_blank">
           <img alt="telegram" src="~/assets/images/telegram_white.svg" width="30px"/>
           Telegram
         </a>
-        <a href="https://github.com/sandstonepool" role="button" target="_blank">
+        <a href="https://github.com/sandstonepool" role="button" rel="noopener" target="_blank">
           <img alt="github" src="~/assets/images/github_white.svg" width="30px"/>
           GitHub
         </a>
