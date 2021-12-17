@@ -1,15 +1,15 @@
-import { defineNuxtConfig } from 'nuxt3'
+import {defineNuxtConfig} from 'nuxt3'
 
 export default defineNuxtConfig({
-    components: true,
-    build: {
-        postcss: {
-            postcssOptions: {
-                plugins: {
-                    tailwindcss: {},
-                    autoprefixer: {},
-                }
-            }
-        },
+  components: true,
+  build: {
+    postcss: {
+      postcssOptions: {
+        plugins: {
+          tailwindcss: {},
+          autoprefixer: {},
+        }
+      }
     },
+  }
 })

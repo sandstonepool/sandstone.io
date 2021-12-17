@@ -6,6 +6,16 @@
 
 <template>
   <div>
+    <Html>
+    <Head>
+      <Title>Sandstone Stake Pool</Title>
+      <Meta charset="UTF-8"></Meta>
+      <Meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></Meta>
+      <Meta name="description" content="The most trusted and reliable stake pool on the Cardano blockchain"></Meta>
+      <Link rel="shortcut icon" type="image/x-icon" href="/images/sandstone-64x64.png"/>
+      <Link rel="apple-touch-icon" type="image/x-icon" href="/images/sandstone-64x64.png"/>
+    </Head>
+    </Html>
     <NavBar :navigation="navigation"/>
     <slot/>
     <Footer/>
