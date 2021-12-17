@@ -219,7 +219,7 @@
           <reveal summary="What kind of infrastructure do you run on?">
             Our core infrastructure is cloud hosted with Amazon Web Services and primarily operates from the AWS
             Asia Pacific (Sydney) region. We operate at least three relays at any one point in time. Relays are
-            distributed across three physically separate datacenters to ensure maximum availability. In event of an
+            distributed across three physically separate datacenters to ensure maximum availability. In the event of an
             isolated failure, our core block producer is configured to instantly and automatically fail-over between
             datacenters within the region. Should we experience a regional outage, the entire stake pool can be
             recovered to another region (even internationally) within one hour.
