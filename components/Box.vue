@@ -18,12 +18,10 @@
 </style>
 
 <template>
-  <div class="box">
-    <div class="box-border">
-      <div class="box-border mod">
-        <div class="box-inner">
-          <slot/>
-        </div>
+  <div class="box-border">
+    <div class="box-border mod">
+      <div class="box-inner">
+        <slot/>
       </div>
     </div>
   </div>

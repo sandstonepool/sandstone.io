@@ -14,7 +14,8 @@
           </p>
           <p>
             Success to us means being recognised as one of the most trusted players in the Cardano ecosystem. To
-            establish that trust, Sandstone has committed investments of approximately <strong class="underline decoration-2 decoration-blue-dark">1 Million ₳</strong>
+            establish that trust, Sandstone has committed investments of approximately <strong
+            class="underline decoration-2 decoration-blue-dark">1 Million ₳</strong>
             towards the cost of infrastructure, pool pledge, and other operating overheads.
           </p>
           <p>
@@ -70,7 +71,8 @@
             <h3>Fees</h3>
             <div>
               To support the community, we keep our fees very low at Sandstone,
-              less than <strong class="underline decoration-2 decoration-blue-dark">2%</strong> in fact. This ensures <strong class="underline decoration-2 decoration-blue-dark">98%</strong> of all rewards go to you,
+              less than <strong class="underline decoration-2 decoration-blue-dark">2%</strong> in fact. This ensures
+              <strong class="underline decoration-2 decoration-blue-dark">98%</strong> of all rewards go to you,
               the delegator.
             </div>
           </div>
@@ -94,7 +96,8 @@
           <div class="text-blue-light text-7xl font-bold pr-8 text-shadow">2.</div>
           <p>
             Search for the <strong>SAND</strong> ticker using the wallet pool delegation
-            list. Alternatively, copy and paste our unique <strong class="underline decoration-2 decoration-blue-dark cursor-pointer" @click="toClipboard">Pool Id</strong>.
+            list. Alternatively, copy and paste our unique <strong
+            class="underline decoration-2 decoration-blue-dark cursor-pointer" @click="toClipboard">Pool Id</strong>.
           </p>
         </div>
         <div class="separated inline-flex p-4 align-baseline">
@@ -191,9 +194,12 @@
               <h3 class="text-blue-dark text-6xl">4</h3>
               <p>Only download wallets from official sites.</p>
               <p>
-                <a class="underline decoration-2 decoration-blue-dark cursor-pointer" href="https://yoroi-wallet.com/#/" target="_blank">Yoroi</a> |
-                <a class="underline decoration-2 decoration-blue-dark cursor-pointer" href="https://adalite.io/" target="_blank">ADA Lite</a> |
-                <a class="underline decoration-2 decoration-blue-dark cursor-pointer" href="https://atomicwallet.io/" target="_blank">Atomic</a>
+                <a class="underline decoration-2 decoration-blue-dark cursor-pointer" href="https://yoroi-wallet.com/#/"
+                   target="_blank">Yoroi</a> |
+                <a class="underline decoration-2 decoration-blue-dark cursor-pointer" href="https://adalite.io/"
+                   target="_blank">ADA Lite</a> |
+                <a class="underline decoration-2 decoration-blue-dark cursor-pointer" href="https://atomicwallet.io/"
+                   target="_blank">Atomic</a>
               </p>
             </div>
           </box>
@@ -205,86 +211,75 @@
       <h2>Frequently Asked Questions</h2>
       <div class="grid sm:grid-cols-1 md:grid-cols-3 md:grid-rows-1 gap-16">
         <div class="grid gap-6 md:col-span-2">
-          <expandable title="Is staking safe?">
-            <p>
-              Yes. Staking on your $ADA tokens on is very safe. Cardano is one of
-              the few Proof of Stake blockchains that allows you to keep your
-              coins in your wallet when you stake. They’re yours and you can
-              access them whenever you need to. There is no lock up period when
-              you stake on the network.
-            </p>
-          </expandable>
-          <expandable title="When will I see my rewards?">
-            <p>
-              Time on the Cardano blockchain is measured in epochs (120hrs or 5
-              days). While there is no lock up period for staking, you won’t see
-              your first rewards for 5 epochs. This is because rewards are
-              calculated retrospectively about 2 epoch in the past.
-            </p>
-          </expandable>
-          <expandable title="Do I need to claim rewards each time they're awarded?">
-            <p>
-              No, your rewards are compounded automatically in your total
-              delegation, and included in the calculation of future rewards. The
-              only time you need to claim your rewards is to bring them back on to
-              your wallet. We recommend doing this roughly every quarter.
-            </p>
-          </expandable>
-          <expandable title="What should I look for when choosing a stake pool to delegate to?">
-            <p>
-              Cardano strives to be the most decentralised blockchain out there, so
-              choosing a Single Pool Operator (SPO) will contribute to that aim.
-              Consider SPOs that are active in the Cardano community, minting blocks
-              every epoch and have several ways to communicate with, so you can
-              reach them if you have any questions.
-            </p>
-          </expandable>
-          <expandable title="Are single pool better than larger operators (e.g. Binance, Kraken, Atomic, etc)?">
-            <p>
-              Yes they are. Single Pool Operators (SPO) are focussed on one single
-              pool, and contribute directly to the decentralisation of the Cardano
-              network. They also tend to work harder for their pools. Larger pool
-              operators run like factories and trim costs to maximize profits.
-            </p>
-          </expandable>
-          <expandable title="How are blocks allocated to stake pools per epoch?">
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempora unde
-              alias sapiente iste voluptate dolore error odit suscipit similique
-              illo necessitatibus amet, reprehenderit nihil accusamus sed
-              perferendis quibusdam! Iste, quae!
-            </p>
-          </expandable>
-          <expandable title="Do you take your 2% fee from the interest rate?">
-            <p>
-              NO. The pool’s reward rate – the % interest you earn - is calculated
-              on the total rewards paid out. The two 2% fee is taken from the
-              rewards, not the percentage profits. Meaning 98% of all tokens paid
-              out go to you, the delegators.
-            </p>
-          </expandable>
-          <expandable title="Do I need to stake each time I add coins to my wallet?">
-            <p>
-              NO. Once you’ve linked your wallet to a stake pool the balance is
-              automatically adjusted when you add or remove tokens from that wallet.
-            </p>
-          </expandable>
-          <expandable title="My exchange offers staking, should I just do that?">
-            <p>
-              We don’t think so. Exchanges can keep up to 20% of staking rewards.
-              Also contributing your delegation to the very large pool operators
-              gives them more power in swaying the direction of the Cardano
-              ecosystem. SPOs lead to greater decentralisation.
-            </p>
-          </expandable>
-          <expandable title="How do I unstake?">
-            <p>
-              To unstake from a pool, simply choose another pool to delegate to.
-            </p>
-          </expandable>
+          <reveal summary="Is staking safe?">
+            Yes. Staking ADA tokens is very safe. Cardano is one of the few Proof of Stake blockchains that allows you
+            to keep total custody of your tokens while staking them. They’re yours and you can access them whenever you
+            need to. There is no lock up period when you stake on the network.
+          </reveal>
+          <reveal summary="What kind of infrastructure do you run on?">
+            Our core infrastructure is cloud hosted with Amazon Web Services and primarily operates from the AWS
+            Asia Pacific (Sydney) region. We operate at least three relays at any one point in time. Relays are
+            distributed across three physically separate datacenters to ensure maximum availability. In event of an
+            isolated failure, our core block producer is configured to instantly and automatically fail-over between
+            datacenters within the region. Should we experience a regional outage, the entire stake pool can be
+            recovered to another region (even internationally) within one hour.
+          </reveal>
+          <reveal summary="When will I receive rewards?">
+            Time on the Cardano blockchain is measured in epochs (120hrs or 5 days). While there is no lock up period
+            for staking, you won’t see your first rewards for 2 epochs. This is because rewards are calculated
+            retrospectively about 2 epoch in the past.
+          </reveal>
+          <reveal summary="Do I need to claim rewards each time they're awarded?">
+            No, your rewards are compounded automatically in your total delegation, and included in the calculation of
+            future rewards. The only time you need to claim your rewards is when transferring them back to your
+            spending wallet.
+          </reveal>
+          <reveal summary="What should I look for when choosing a stake pool to delegate to?">
+            Here are a few things to look out for, assuming your objective is to maximise rewards earning
+            potential. Select a for pool that consistently mints blocks every epoch, has a low tax rate, and also has a
+            reasonable amount if their own funds delegated to their pool (i.e. pool pledge). Avoid pools that do not
+            have a public website that outlines their operation. Look for evidence that the pool has considered the
+            security, reliability, and performance of their operation. Make sure that the pool provides a way for you to
+            contact them in-case you have any questions or concerns. Ask for recommendations from other reputable
+            members of the Cardano community.
+          </reveal>
+          <reveal
+            summary="Are single pool better than larger multi-pool operators (e.g. Binance, Kraken, Atomic, etc)?">
+            Single Pool Operators focus on operating one single pool and contribute directly to the
+            decentralisation of the Cardano network because of this. This doesn't automatically mean that large
+            multi-pool operators are bad. However, one thing to look out for is how much pledge those pool operators
+            have allocated to each of their individual pools. By operating multiple pools, they might be spreading their
+            resources too thinly. Consequently, operators who manage multiple pools tend to have a lower average pledge,
+            which reduces the chances of being allocated blocks relative to the number of total delegators. Generally
+            this results in overall lower rewards earning potential for delegators. Sandstone is a Single Pool Operator
+            with a fairly significant pledge.
+          </reveal>
+          <reveal summary="How are blocks allocated to stake pools per epoch?">
+            The number of blocks assigned to each stake pool is proportional to the total amount of pledge and
+            delegation staked with the pool. Hence, pools with higher total delegation and pledge are more likely to be
+            allocated blocks. However, one must also consider that rewards are shared by delegators proportional to each
+            individually staked amount. Hence, it is not correct to say that pools that produce a larger number of
+            blocks each epoch are more profitable. In fact, often times the opposite is true.
+          </reveal>
+          <reveal summary="I use an exchange that offers Staking. Should I just do that?">
+            We don't think so. Exchanges often charge a much higher fee for using their staking services (we've
+            seen as high as 20%!). Furthermore, this type of staking is known as 'custodial' staking, which means the
+            exchange is in total control of your funds. If the exchange were to be compromised by hackers or become
+            insolvent for any reason then all of your funds could be permanently lost. Storing your digital assets with
+            a reputable wallet and delegating directly to a stake pool is much safer and often far more profitable.
+          </reveal>
+          <reveal summary="Where is your base of operation?">
+            Sandstone is an Australian owned and operated company (ACN 655223591).
+          </reveal>
+          <reveal summary="Do you pay government tax?">
+            Yes! As an Australian registered company we are bound by local laws, including those regarding taxation. As
+            such, Sandstone pays company taxes in-line with requires requirements set by the Australian Tax Office (ATO)
+            and the Australian Securities & Investments Commission (ASIC).
+          </reveal>
         </div>
-        <div class="md:sticky w-full top-0 md:h-0">
-          <img alt="" class="sm:hidden md:block w-1/2" src="~/assets/images/sandstone-element-large.svg"/>
+
+        <div class="sticky w-full top-0">
+          <img class="hidden md:block md:block w-1/2" src="~/assets/images/sandstone-element-large.svg" alt=""/>
           <p>The most common questions should be in this list. If you have any others, drop us a line.</p>
           <a class="btn mt-10" href="mailto:info@sandstone.io?subject=General Enquiry">
             Contact Us
@@ -301,9 +296,9 @@
 
 <script setup>
 import Hero from '~/components/Hero'
-import Expandable from "~/components/Expandable"
 import Box from "~/components/Box"
 import Stats from "~/components/Stats"
+import Reveal from "../components/Reveal";
 
 const navigation = inject('navigation')
 navigation.value = [
