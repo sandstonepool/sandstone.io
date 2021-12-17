@@ -238,8 +238,8 @@
             Here are a few things to look out for, assuming your objective is to maximise rewards earning
             potential. Select a for pool that consistently mints blocks every epoch, has a low tax rate, and also has a
             reasonable amount if their own funds delegated to their pool (i.e. pool pledge). Avoid pools that do not
-            have a public website that outlines their operation. Look for evidence that the pool has considered the
-            security, reliability, and performance of their operation. Make sure that the pool provides a way for you to
+            have a public website that describes their operation. Look for evidence that the pool has considered the
+            security, reliability, and performance of their setup. Make sure that the pool provides a way for you to
             contact them in-case you have any questions or concerns. Ask for recommendations from other reputable
             members of the Cardano community.
           </reveal>
