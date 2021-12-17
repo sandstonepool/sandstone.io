@@ -273,7 +273,7 @@
           </reveal>
           <reveal summary="Do you pay government tax?">
             Yes! As an Australian registered company we are bound by local laws, including those regarding taxation. As
-            such, Sandstone pays company taxes in-line with requires requirements set by the Australian Tax Office (ATO)
+            such, Sandstone pays company taxes in-line with requirements set by the Australian Tax Office (ATO)
             and the Australian Securities & Investments Commission (ASIC).
           </reveal>
         </div>
