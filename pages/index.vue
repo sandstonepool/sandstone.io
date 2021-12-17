@@ -122,34 +122,30 @@
       <div>
         <h2>About Us</h2>
         <p>
-          The team behind Sandstone have over 14 years professional experience
-          in: designing, implementing, and delivering complex IT systems. We’ve
-          worked with some of the most sophisticated system architecture in
-          Australia, and have been involved in Cardano for over 4 years (since
-          2017) so we’re confided we’ll be able to provide maximum returns on
-          your $ADA.
+          The team behind Sandstone have over 14 years professional experience designing, implementing, and delivering
+          complex IT systems. We’ve worked on some of the most sophisticated system architectures across a number of
+          industries and have been involved with Cardano since 2017. We’re confident we’ll be able to provide maximum
+          returns on your staked tokens.
         </p>
         <p>
-          Sandstone is an exceptionally high performing Single Pool Operator
-          (SPO). Our commitment to supporting Cardano’s decentralisation has
-          awarded our community with a 4.8+ score. We are here for the long
-          term, our pool will be around for the next decade, and we’re excited
-          about the decentralise future of finance!
+          Sandstone is an exceptionally high performing Stake Pool Operator (SPO). We're committed to supporting
+          Cardano’s decentralisation and are actively building out solutions that run on the Cardano blockchain. We're
+          determined to be recognised globally as the most professionally run, reliable, and trustworthy pools on the
+          Cardano blockchain for years to come.
         </p>
       </div>
       <div>
         <h2>Mission</h2>
         <p>
-          Our mission is: To provide a reliable node in the ecosystem,
-          consistently make blocks every epoch and deliver a staking rewards for
-          our community. We maintain a top rate of return (over 4.8%) with
-          institutional-grade hardware, bank-level security and human honesty.
+          Our mission is to provide the most reliable stake pool on the Cardano blockchain that consistently make blocks
+          every epoch and delivers the best staking rewards possible for our delegators. Sandstone's architecture is
+          incredibly sophisticated with no expense spared when it comes to ensuring the best security and reliability
+          possible.
         </p>
         <p>
-          We’re committed to being a force for good in the world, pledging
-          support to the causes we believe in, while providing our knowledge to
-          enhance the wider Cardano ecosystem. We stand for a professional,
-          reliable service, delivered with integrity.
+          We’re committed to being a force for good in the world, pledging support to the causes we believe in, while
+          providing our knowledge to enhance the wider Cardano ecosystem. We stand for a professional, reliable service,
+          delivered with integrity.
         </p>
       </div>
     </section>
