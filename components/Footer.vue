@@ -73,7 +73,7 @@ footer h3 {
       <div class="footer-section">
         <h3>
           <a href="/#">
-            <img alt="Sandstone Logo" class="filter-white" src="~/assets/images/sandstone-logo.svg" width="220px"/>
+            <img alt="Sandstone Logo" class="filter-white" src="~/assets/images/sandstone-logo.svg" width="220" height="26"/>
           </a>
         </h3>
         Sandstone Ventures Pty Ltd<br>
@@ -95,15 +95,15 @@ footer h3 {
       <div id="socials" class="footer-section">
         <h3>Social Links</h3>
         <a href="https://twitter.com/sandstonepool" role="button" rel="noopener" target="_blank">
-          <img alt="twitter" src="~/assets/images/twitter_white.svg" width="30px"/>
+          <img alt="twitter" src="~/assets/images/twitter_white.svg" width="30" height="30"/>
           Twitter
         </a>
         <a href="https://t.me/sandstonepool" role="button" rel="noopener" target="_blank">
-          <img alt="telegram" src="~/assets/images/telegram_white.svg" width="30px"/>
+          <img alt="telegram" src="~/assets/images/telegram_white.svg" width="30" height="30"/>
           Telegram
         </a>
         <a href="https://github.com/sandstonepool" role="button" rel="noopener" target="_blank">
-          <img alt="github" src="~/assets/images/github_white.svg" width="30px"/>
+          <img alt="github" src="~/assets/images/github_white.svg" width="30" height="30"/>
           GitHub
         </a>
       </div>
