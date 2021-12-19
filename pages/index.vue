@@ -227,7 +227,7 @@
             recovered to another region (even internationally) within one hour.
           </reveal>
           <reveal summary="When will I receive rewards?">
-            Time on the Cardano blockchain is measured in epochs (120hrs or 5 days). While there is no lock up period
+            Time on the Cardano blockchain is measured in epochs (120 hours or 5 days). While there is no lock up period
             for staking, you won’t see your first rewards for 2 epochs. This is because rewards are calculated
             retrospectively about 2 epoch in the past.
           </reveal>
@@ -239,7 +239,7 @@
           <reveal summary="What should I look for when choosing a stake pool to delegate to?">
             Here are a few things to look out for, assuming your objective is to maximise rewards earning
             potential. Select a for pool that consistently mints blocks every epoch, has a low tax rate, and also has a
-            reasonable amount if their own funds delegated to their pool (i.e. pool pledge). Avoid pools that do not
+            reasonable amount of their own funds delegated to their pool (i.e. pool pledge). Avoid pools that do not
             have a public website that describes their operation. Look for evidence that the pool has considered the
             security, reliability, and performance of their setup. Make sure that the pool provides a way for you to
             contact them in-case you have any questions or concerns. Ask for recommendations from other reputable
