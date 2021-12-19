@@ -30,7 +30,7 @@
       </box>
       <div class="grid sm:grid-rows-1 sm:grid-cols-1 md:grid-rows-2 md:grid-cols-2 gap-6">
         <div class="flex items-start gap-6">
-          <img alt="" class="relative" src="~/assets/images/grid-security.svg"/>
+          <img alt="" class="relative" src="~/assets/images/grid-security.svg" width="80" height="80"/>
           <div>
             <h3>Security</h3>
             <div>
@@ -42,7 +42,7 @@
           </div>
         </div>
         <div class="flex items-start gap-6">
-          <img alt="" src="~/assets/images/grid-community.svg"/>
+          <img alt="" src="~/assets/images/grid-community.svg" width="80" height="80"/>
           <div>
             <h3>Community</h3>
             <div>
@@ -54,7 +54,7 @@
           </div>
         </div>
         <div class="flex items-start gap-6">
-          <img alt="" src="~/assets/images/grid-skin-in-the-game.svg"/>
+          <img alt="" src="~/assets/images/grid-skin-in-the-game.svg" width="80" height="80"/>
           <div>
             <h3>Skin in the Game</h3>
             <div>
@@ -66,7 +66,7 @@
           </div>
         </div>
         <div class="flex items-start gap-6">
-          <img alt="" src="~/assets/images/grid-fees.svg"/>
+          <img alt="" src="~/assets/images/grid-fees.svg" width="80" height="80"/>
           <div>
             <h3>Fees</h3>
             <div>
@@ -281,7 +281,7 @@
         </div>
 
         <div class="sticky w-full top-14 sm:h-18 sm:block sm:top-14 md:h-0">
-          <img class="hidden md:block md:block w-1/2" src="~/assets/images/sandstone-element-large.svg" alt=""/>
+          <img class="hidden md:block md:block w-1/2" src="~/assets/images/sandstone-element-large.svg" alt="" width="180" height="180"/>
           <p>The most common questions should be in this list. If you have any others, drop us a line.</p>
           <a class="btn mt-10" href="mailto:info@sandstone.io?subject=General Enquiry">
             Contact Us

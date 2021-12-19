@@ -14,7 +14,7 @@
           <div class="flex-1 flex items-center justify-center md:items-stretch md:justify-between">
             <div class="flex-shrink-0 flex items-center">
               <a href="/">
-                <img class="h-6 w-auto sm:h-6" src="~/assets/images/sandstone-logo.svg" alt="Sandstone Home Page"/>
+                <img class="h-6 w-auto sm:h-6" src="~/assets/images/sandstone-logo.svg" alt="Sandstone Home Page" width="205" height="25"/>
               </a>
             </div>
             <div class="hidden md:block sm:ml-6">
