@@ -18,7 +18,7 @@ main {
 <template>
   <main id="intro" class="max-w-7xl">
     <div class="text-left">
-      <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 text-center sm:text-5xl md:text-6xl md:text-left whitespace-nowrap">
+      <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 text-center sm:text-5xl md:text-6xl md:text-left">
         <span>Professional Staking</span><br/>
         {{ ' ' }}
         <span class="text-blue-dark">Maximum Rewards</span>
