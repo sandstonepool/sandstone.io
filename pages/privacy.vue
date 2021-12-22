@@ -247,9 +247,8 @@
           <dd>
             <address>
               Privacy Officer, Sandstone Ventures Pty Ltd<br>
-              C/O Palermo Chartered Accountants<br>
-              Level 1, 284 Oxford Street<br>
-              LEEDERVILLE, WA 6007
+              PO Box 2011<br>
+              SUBIACO, WA 6904<br>
             </address>
           </dd>
         </dl>
