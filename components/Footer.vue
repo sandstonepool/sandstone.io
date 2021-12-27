@@ -84,8 +84,8 @@ footer h3 {
         <a href="https://cardanoscan.io/pool/40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318" rel="noopener" target="_blank">Cardanoscan</a>
         <a href="https://yoroi-wallet.com/#/" rel="noopener" target="_blank">Yoroi Wallet</a>
         <a href="https://adapools.org/pool/40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318" rel="noopener" target="_blank">ADAPools</a>
-        <a href="https://pooltool.io/pool/40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318/awards"
-           rel="noopener" target="_blank">PoolTool</a>
+        <a href="https://pooltool.io/pool/40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318/awards" rel="noopener" target="_blank">PoolTool</a>
+        <a href="https://adatools.io/pools/40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318" rel="noopener" target="_blank">ADATools.io</a>
       </div>
       <div id="information" class="footer-section">
         <h3>Information</h3>

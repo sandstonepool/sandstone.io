@@ -200,8 +200,8 @@
                    rel="noopener" target="_blank">Yoroi</a> |
                 <a class="underline decoration-2 decoration-blue-dark cursor-pointer" href="https://adalite.io/"
                    rel="noopener" target="_blank">ADA Lite</a> |
-                <a class="underline decoration-2 decoration-blue-dark cursor-pointer" href="https://atomicwallet.io/"
-                   rel="noopener" target="_blank">Atomic</a>
+                <a class="underline decoration-2 decoration-blue-dark cursor-pointer" href="https://ccvault.io/"
+                   rel="noopener" target="_blank">ccvault.io</a>
               </p>
             </div>
           </box>
