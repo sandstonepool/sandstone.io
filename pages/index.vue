@@ -59,7 +59,7 @@
             <h3>Skin in the Game</h3>
             <div>
               We pride ourselves on running a highly rewarding pool dedicated to
-              supporting the decentralisation of Cardano. We’ve maintained a
+              supporting the decentralisation of Cardano. We've maintained a
               very high pledge as proof of our long term investment in our pool
               and the community.
             </div>
@@ -70,10 +70,8 @@
           <div>
             <h3>Fees</h3>
             <div>
-              To support the community, we keep our fees very low at Sandstone,
-              less than <strong class="underline decoration-2 decoration-blue-dark">2%</strong> in fact. This ensures
-              <strong class="underline decoration-2 decoration-blue-dark">98%</strong> of all rewards go to you,
-              the delegator.
+              Sandstone is committed to keeping fees low. We currently operate on a <strong class="underline decoration-2 decoration-blue-dark">2%</strong> tax rate,
+              which is in addition to the protocol-enforced fixed minimum of 340 ₳ per epoch.
             </div>
           </div>
         </div>
@@ -276,7 +274,7 @@
           <reveal summary="Do you pay government tax?">
             Yes! As an Australian registered company we are bound by local laws, including those regarding taxation. As
             such, Sandstone pays company taxes in-line with requirements set by the Australian Tax Office (ATO)
-            and the Australian Securities & Investments Commission (ASIC).
+            and the Australian Securities and Investments Commission (ASIC).
           </reveal>
         </div>
 
