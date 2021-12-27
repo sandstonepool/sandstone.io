@@ -128,12 +128,12 @@
         <h2>About Us</h2>
         <p>
           The team behind Sandstone have over 14 years professional experience designing, implementing, and delivering
-          complex IT systems. We’ve worked on some of the most sophisticated system architectures across a number of
-          industries and have been involved with Cardano since 2017. We’re confident we’ll be able to provide maximum
+          complex IT systems. We've worked on some of the most sophisticated system architectures across a number of
+          industries and have been involved with Cardano since 2017. We're confident we'll be able to provide maximum
           returns on your staked tokens.
         </p>
         <p>
-          Sandstone is an exceptionally operated Stake Pool. We're committed to supporting Cardano’s decentralisation
+          Sandstone is an exceptionally operated Stake Pool. We're committed to supporting Cardano's decentralisation
           and are actively building out solutions that run on the Cardano blockchain. We're determined to be recognised
           globally as the most professionally run, reliable, and trustworthy pools on the Cardano blockchain.
         </p>
@@ -147,7 +147,7 @@
           possible.
         </p>
         <p>
-          We’re committed to being a force for good in the world, pledging support to the causes we believe in, while
+          We're committed to being a force for good in the world, pledging support to the causes we believe in, while
           providing our knowledge to enhance the wider Cardano ecosystem. We stand for a professional, reliable service,
           delivered with integrity.
         </p>
@@ -166,7 +166,7 @@
             <div class="text-center p-6">
               <h3 class="text-blue-dark text-6xl">1</h3>
               <p>
-                Never give out your wallet seed phrase, ever. You don’t need to
+                Never give out your wallet seed phrase, ever. You don't need to
                 share it for staking.
               </p>
             </div>
@@ -213,7 +213,7 @@
         <div class="grid gap-6 md:col-span-2">
           <reveal summary="Is staking safe?">
             Yes. Staking ADA tokens is very safe. Cardano is one of the few Proof of Stake blockchains that allows you
-            to keep total custody of your tokens while staking them. They’re yours and you can access them whenever you
+            to keep total custody of your tokens while staking them. They're yours and you can access them whenever you
             need to. There is no lock up period when you stake on the network.
           </reveal>
           <reveal summary="What kind of infrastructure do you run on?">
@@ -226,8 +226,9 @@
           </reveal>
           <reveal summary="When will I receive rewards?">
             Time on the Cardano blockchain is measured in epochs (120 hours or 5 days). While there is no lock up period
-            for staking, you won’t see your first rewards for 2 epochs. This is because rewards are calculated
-            retrospectively about 2 epoch in the past.
+            for staking, you won't see your first rewards for at least 3 epochs. This is because rewards are calculated
+            retrospectively at 2 epoch in the past. So, from the time you begin staking with Sandstone to the time you
+            will start to receive rewards will be approximately 16-20 days.
           </reveal>
           <reveal summary="Do I need to claim rewards each time they're awarded?">
             No, your rewards are compounded automatically in your total delegation, and included in the calculation of
