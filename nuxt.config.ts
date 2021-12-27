@@ -12,6 +12,19 @@ export default defineNuxtConfig({
       },
     }]
   ],
+  modules: [
+    ['@nuxtjs/sitemap', {
+      hostname: 'https://sandstone.io',
+      gzip: true,
+      routes: [
+        '/#why-sandstone',
+        '/#getting-started',
+        '/#about-us',
+        '/#security',
+        '/#faq'
+      ]
+    }]
+  ],
   build: {
     aggressiveCodeRemoval: true,
     optimizeCSS: true,
