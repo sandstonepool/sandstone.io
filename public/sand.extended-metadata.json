@@ -3,6 +3,7 @@
     "owner": "ed25519_pk120uk3rugx3fl2jrl2rfzmara6654klpywgwmwweu2n0z7mg7zc2s03jqsk",
     "witness": "ed25519_sig18yvg26js9mayutavwrs9eatfprwd4hrdenj8y7s2sfv62sv6pkej39mq6zv0tgyfzmqn3ke5p48ytlnv9fng89rqcscyas9fd6cegpqe0ksl3"
   },
+  "verification": "401f53e57dc5050b02",
   "info": {
     "url_png_icon_64x64": "https://www.sandstone.io/images/sandstone-64x64.png",
     "url_png_logo": "https://www.sandstone.io/images/sandstone-64x64.png",
