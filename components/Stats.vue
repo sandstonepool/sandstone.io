@@ -31,7 +31,7 @@
           <animated-number v-resize-text="resizeLarge" :duration="duration"
                            :easing="easing"
                            :fmt="formatTotalStake"
-                           :value="[1000000000, poolStats?.total_stake]"/>
+                           :value="[1000000000, poolStats?.stake_active]"/>
           <div v-resize-text="resizeSmall">Stake</div>
         </div>
         <div class="stat">
@@ -75,7 +75,7 @@ const resizeSmall = {ratio: 1.2}
 const duration = 3000
 const easing = 'easeOutCubic'
 
-const formatTax = (value) => numeral(value).format('0.00%')
+const formatTax = (value) => numeral(value / 100).format('0.00%')
 const formatTotalStake = (value) => `${numeral(value).divide(1000000).format('0.00a').toUpperCase()} ₳`
 const formatPledge = (value) => `${numeral(value).divide(1000000).format('0a').toUpperCase()} ₳`
 
@@ -91,7 +91,7 @@ const props = defineProps({
   }
 })
 
-const response = await fetch(`https://js.adapools.org/pools/${props.poolId}/summary.json`)
+const response = await fetch(`https://js.cexplorer.io/api-static/pool/${props.poolId}.json`)
 const poolStats = ref((await response.json()).data)
 
 const refreshKey = ref(0)

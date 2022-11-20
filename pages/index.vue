@@ -26,7 +26,7 @@
         </div>
       </div>
       <box class="mt-20 mb-24">
-        <stats :confetti="false" :poolId="poolId"/>
+        <stats :confetti="false" :poolId="poolIdBech"/>
       </box>
       <div class="grid sm:grid-rows-1 sm:grid-cols-1 md:grid-rows-2 md:grid-cols-2 gap-6">
         <div class="flex items-start gap-6">
@@ -310,6 +310,7 @@ navigation.value = [
   {name: 'F.A.Q', anchor: '#faq'},
 ]
 
+const poolIdBech = 'pool1gqvrgg7zycvf65ydkjeph72t0yx0f5ykzd9f477zh4f3smwk997'
 const poolId = '40183423c226189d508db4b21bf94b790cf4d096134a9afbc2bd5318'
 
 const toClipboard = (event) => {
