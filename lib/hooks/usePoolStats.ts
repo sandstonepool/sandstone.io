@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { fetchPoolStats } from '../api/cardano'
 import { PoolStats } from '../types/cardano'
 
 export function usePoolStats(poolId: string) {
@@ -16,7 +15,11 @@ export function usePoolStats(poolId: string) {
       try {
         setLoading(true)
         setError(null)
-        const stats = await fetchPoolStats(poolId)
+        const response = await fetch(`/api/pool-stats?poolId=${poolId}`)
+        if (!response.ok) {
+          throw new Error(`Failed to fetch pool stats: ${response.statusText}`)
+        }
+        const stats: PoolStats = await response.json()
         if (mounted) {
           setData(stats)
         }
