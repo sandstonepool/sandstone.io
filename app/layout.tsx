@@ -1,0 +1,77 @@
+import type { Metadata, Viewport } from "next";
+import "./globals.css";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import { StructuredData } from "@/components/StructuredData";
+import { ClientProviders } from "@/components/ClientProviders";
+
+export const metadata: Metadata = {
+  title: "Sandstone Stake Pool - Earn More ADA with Confidence",
+  description: "A pioneer Cardano stake pool delivering consistent rewards since the early days of the network. Low fees, high pledge, and 24/7 monitored infrastructure.",
+  keywords: ["Cardano", "ADA", "Stake Pool", "Staking", "Cryptocurrency", "Blockchain", "SAND", "Cardano Staking", "ADA Rewards"],
+  authors: [{ name: "Sandstone Ventures Pty Ltd" }],
+  creator: "Sandstone Ventures Pty Ltd",
+  publisher: "Sandstone Ventures Pty Ltd",
+  applicationName: "Sandstone Stake Pool",
+  icons: {
+    icon: "/images/favicon.png",
+    apple: "/images/webclip.jpg",
+  },
+  openGraph: {
+    type: "website",
+    title: "Sandstone Stake Pool - Earn More ADA with Confidence",
+    description: "A pioneer Cardano stake pool delivering consistent rewards since the early days of the network. Low fees, high pledge, and 24/7 monitored infrastructure.",
+    siteName: "Sandstone Stake Pool",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sandstone Stake Pool - Earn More ADA",
+    description: "A pioneer Cardano stake pool delivering consistent rewards since the early days of the network.",
+    creator: "@sandstonepool",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0437ff",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <head>
+        <StructuredData />
+      </head>
+      <body className="antialiased font-body">
+        <ClientProviders>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-lg focus:shadow-lg"
+          >
+            Skip to main content
+          </a>
+          <Navbar />
+          <main id="main-content">
+            {children}
+          </main>
+          <Footer />
+        </ClientProviders>
+      </body>
+    </html>
+  );
+}

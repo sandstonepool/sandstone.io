@@ -1,0 +1,128 @@
+'use client'
+
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import { ClipboardDocumentIcon } from '@heroicons/react/24/outline'
+import * as Tooltip from '@radix-ui/react-tooltip'
+import { Container } from '@/components/ui/Container'
+import { POOL_ID_HEX } from '@/lib/utils/constants'
+import { useTranslation } from '@/lib/i18n'
+
+function PoolIdCopy() {
+  const { t } = useTranslation()
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(POOL_ID_HEX)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  return (
+    <Tooltip.Provider>
+      <Tooltip.Root open={copied}>
+        <Tooltip.Trigger asChild>
+          <strong
+            onClick={handleCopy}
+            className="inline-flex items-center gap-2 backdrop-blur-md bg-linear-to-r from-blue-500/20 to-purple-500/20 border border-blue-300/50 rounded-lg px-3 py-1 cursor-pointer hover:from-blue-500/30 hover:to-purple-500/30 hover:scale-105 transition-all"
+          >
+            <span className="bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-bold">{t.gettingStarted.poolId}</span>
+            <ClipboardDocumentIcon className="w-5 h-5 text-blue-600" />
+          </strong>
+        </Tooltip.Trigger>
+        <Tooltip.Portal>
+          <Tooltip.Content
+            className="backdrop-blur-md bg-white/90 px-3 py-2 rounded-lg shadow-xl text-sm border border-white/60"
+            sideOffset={5}
+          >
+            {t.gettingStarted.copied}
+            <Tooltip.Arrow className="fill-white/90" />
+          </Tooltip.Content>
+        </Tooltip.Portal>
+      </Tooltip.Root>
+    </Tooltip.Provider>
+  )
+}
+
+export function GettingStarted() {
+  const { t } = useTranslation()
+
+  const steps = [
+    {
+      number: 1,
+      content: (
+        <>
+          {t.gettingStarted.steps.step1.split('{lace}')[0]}
+          <a className="font-semibold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:from-blue-700 hover:to-purple-700 transition-all" href="https://www.lace.io/" target="_blank" rel="noopener">
+            Lace
+          </a>
+          {t.gettingStarted.steps.step1.split('{lace}')[1]}
+        </>
+      )
+    },
+    {
+      number: 2,
+      content: (
+        <>
+          {t.gettingStarted.steps.step2.split('{ticker}')[0]}
+          <strong className="bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">SAND</strong>
+          {t.gettingStarted.steps.step2.split('{ticker}')[1].split('{poolId}')[0]}
+          <PoolIdCopy />
+          {t.gettingStarted.steps.step2.split('{poolId}')[1]}
+        </>
+      )
+    },
+    {
+      number: 3,
+      content: t.gettingStarted.steps.step3
+    },
+    {
+      number: 4,
+      content: t.gettingStarted.steps.step4
+    }
+  ]
+
+  return (
+    <section id="getting-started" className="relative mx-auto max-w-7xl mt-20 mb-20 px-8 py-16">
+      {/* Gradient background */}
+      <div className="absolute inset-0 bg-linear-to-br from-green-50/50 via-teal-50/50 to-cyan-50/50 rounded-3xl -z-10" />
+
+      <Container>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-4xl sm:text-5xl font-extrabold mb-8">
+            <span className="bg-linear-to-r from-green-600 via-teal-600 to-cyan-600 bg-clip-text text-transparent">
+              {t.gettingStarted.title}
+            </span>
+          </h2>
+
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+            {steps.map((step, index) => (
+              <motion.div
+                key={step.number}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="backdrop-blur-md bg-white/40 border border-white/60 rounded-xl p-6 hover:bg-white/50 hover:scale-105 hover:shadow-xl transition-all flex items-start gap-6"
+              >
+                <div className="w-16 h-16 shrink-0 rounded-full bg-linear-to-br from-green-500 to-teal-500 flex items-center justify-center shadow-lg">
+                  <span className="text-3xl font-bold text-white">{step.number}</span>
+                </div>
+                <div className="pt-2">
+                  <p className="text-gray-700 leading-relaxed">
+                    {step.content}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </Container>
+    </section>
+  )
+}

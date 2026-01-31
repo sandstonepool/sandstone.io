@@ -1,32 +1,36 @@
-# Sandstone Stake Pool Public Site
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-This site is built using the [Nuxt 3](https://v3.nuxtjs.org) framework and is built and deployed
-with [Netlify](https://www.netlify.com/).
+## Getting Started
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/74b0be38-d83b-4439-b98a-3f5f3fc45092/deploy-status)](https://app.netlify.com/sites/determined-mclean-dfdf5e/deploys)
-
-## Setup
-
-Make sure to install the dependencies
+First, run the development server:
 
 ```bash
-yarn install
-```
-
-## Development
-
-Start the development server on http://localhost:3000
-
-```bash
+npm run dev
+# or
 yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-## Production
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Build the application for production:
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-```bash
-yarn build
-```
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-Checkout the [deployment documentation](https://v3.nuxtjs.org/docs/deployment).
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

@@ -1,0 +1,131 @@
+#privacy {
+  counter-reset: section;
+}
+
+#privacy p {
+  margin-top: 1em;
+}
+
+#privacy h2 {
+  margin-top: 1.5em;
+  margin-bottom: 0.75em;
+  counter-reset: sub-section;
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+
+#privacy h3 {
+  margin-top: 1.25em;
+  margin-bottom: 0.5em;
+  counter-reset: composite;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+#privacy h4 {
+  margin-top: 1.25em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+  counter-reset: detail;
+  font-size: 1.25rem;
+}
+
+#privacy h2:before {
+  counter-increment: section;
+  content: counter(section) ". ";
+  background: linear-gradient(135deg, #2563eb, #4f46e5, #9333ea);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+#privacy h3:before {
+  counter-increment: sub-section;
+  content: counter(section) "." counter(sub-section) " ";
+  background: linear-gradient(135deg, #2563eb, #4f46e5, #9333ea);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+#privacy h4:before {
+  counter-increment: composite;
+  content: counter(section) "." counter(sub-section) "." counter(composite) " ";
+  background: linear-gradient(135deg, #2563eb, #4f46e5, #9333ea);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+#privacy h5:before {
+  counter-increment: detail;
+  content: counter(section) "." counter(sub-section) "." counter(composite) "." counter(detail) " ";
+  background: linear-gradient(135deg, #2563eb, #4f46e5, #9333ea);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+#privacy ol,
+#privacy ul {
+  margin-top: 1em;
+  counter-reset: list;
+}
+
+#privacy ol > li {
+  padding-left: 4rem;
+  list-style: none;
+  position: relative;
+  margin-bottom: 0.75em;
+}
+
+#privacy ol > li:before {
+  counter-increment: list;
+  content: "(" counter(list, lower-alpha) ")";
+  position: absolute;
+  left: 0.1em;
+  font-weight: 600;
+  background: linear-gradient(135deg, #2563eb, #4f46e5, #9333ea);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+#privacy ul > li {
+  padding-left: 2em;
+  list-style: none;
+  position: relative;
+  margin-bottom: 0.75em;
+}
+
+#privacy ul > li:before {
+  content: "•";
+  position: absolute;
+  left: 0.5em;
+  font-weight: 600;
+  background: linear-gradient(135deg, #2563eb, #4f46e5, #9333ea);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+#privacy dl {
+  margin-top: 1em;
+  text-indent: 0;
+}
+
+#privacy dl > dt {
+  font-weight: 600;
+  padding-bottom: 0.5em;
+  padding-top: 0.75em;
+}
+
+#privacy dl > dt:after {
+  content: ":";
+}
+
+#privacy dl > dd {
+  padding-bottom: 0.5em;
+  text-indent: 0;
+  padding-left: 1.5em;
+}
