@@ -99,12 +99,28 @@ export function Navbar() {
                       {item.name}
                     </a>
                   ))}
+                  <Link
+                    href="/blog"
+                    className="px-4 py-2 rounded-lg text-sm font-semibold transition-all text-gray-700 border border-transparent hover:backdrop-blur-md hover:bg-white/40 hover:border-white/60 hover:shadow-sm"
+                  >
+                    Blog
+                  </Link>
                 </div>
                 <LanguageSwitcher />
               </div>
             )}
             {!isHomePage && (
-              <div className="hidden md:flex">
+              <div className="hidden md:flex items-center gap-4">
+                <Link
+                  href="/blog"
+                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+                    pathname.startsWith('/blog')
+                      ? 'backdrop-blur-md bg-white/60 border border-white/80 shadow-md bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent'
+                      : 'text-gray-700 border border-transparent hover:backdrop-blur-md hover:bg-white/40 hover:border-white/60 hover:shadow-sm'
+                  }`}
+                >
+                  Blog
+                </Link>
                 <LanguageSwitcher />
               </div>
             )}
@@ -138,6 +154,12 @@ export function Navbar() {
                     {item.name}
                   </a>
                 ))}
+                <Link
+                  href="/blog"
+                  className="block px-4 py-2 rounded-lg text-base font-semibold cursor-pointer transition-all text-gray-700 border border-transparent hover:backdrop-blur-md hover:bg-white/50 hover:border-white/60"
+                >
+                  Blog
+                </Link>
               </div>
             </motion.div>
           )}

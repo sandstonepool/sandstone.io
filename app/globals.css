@@ -177,6 +177,127 @@ h3 {
   }
 }
 
+/* Blog post styles */
+@layer utilities {
+  .prose-blog a {
+    font-weight: 600;
+    background: linear-gradient(to right, #2563eb, #9333ea);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .prose-blog a:hover {
+    background: linear-gradient(to right, #1d4ed8, #7e22ce);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  .prose-blog h2 {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 800;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(to right, #2563eb, #4f46e5, #9333ea);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .prose-blog h3 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, #2563eb, #4f46e5, #9333ea);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .prose-blog h4 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    background: linear-gradient(to right, #2563eb, #4f46e5, #9333ea);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .prose-blog ul,
+  .prose-blog ol {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .prose-blog li {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    padding-left: 0.5rem;
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #374151;
+  }
+
+  .prose-blog li::marker {
+    color: #4f46e5;
+  }
+
+  .prose-blog ul > li {
+    list-style-type: disc;
+  }
+
+  .prose-blog ol > li {
+    list-style-type: decimal;
+  }
+
+  .prose-blog li p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .prose-blog p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+    color: #374151;
+    margin-bottom: 1.5rem;
+  }
+
+  .prose-blog h2 + p,
+  .prose-blog h3 + p,
+  .prose-blog h4 + p {
+    margin-top: 0;
+  }
+
+  .prose-blog p strong {
+    color: #111827;
+    font-weight: 600;
+  }
+}
+
+@media (min-width: 640px) {
+  @layer utilities {
+    .prose-blog h2 {
+      font-size: 3rem;
+      line-height: 3.5rem;
+    }
+
+    .prose-blog h3 {
+      font-size: 1.875rem;
+      line-height: 2.25rem;
+    }
+  }
+}
+
 /* Screen reader only utility */
 .sr-only {
   position: absolute;
