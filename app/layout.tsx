@@ -6,6 +6,7 @@ import { StructuredData } from "@/components/StructuredData";
 import { ClientProviders } from "@/components/ClientProviders";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://sandstone.io'),
   title: "Sandstone Stake Pool - Earn More ADA with Confidence",
   description: "A pioneer Cardano stake pool delivering consistent rewards since the early days of the network. Low fees, high pledge, and 24/7 monitored infrastructure.",
   keywords: ["Cardano", "ADA", "Stake Pool", "Staking", "Cryptocurrency", "Blockchain", "SAND", "Cardano Staking", "ADA Rewards"],
