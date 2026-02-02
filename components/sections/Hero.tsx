@@ -2,18 +2,32 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { CubeIcon, BanknotesIcon, ShieldCheckIcon, ChartBarIcon, CurrencyDollarIcon } from "@heroicons/react/24/solid";
-import { ParticleBackground } from "@/components/effects/ParticleBackground";
 import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
-import { BlockchainVisualization } from "@/components/effects/BlockchainVisualization";
-import { useRef } from "react";
+import { useRef, useState, useEffect, lazy, Suspense } from "react";
 import { usePoolStats } from "@/lib/hooks/usePoolStats";
 import { POOL_ID_HEX } from "@/lib/utils/constants";
 import { useTranslation } from "@/lib/i18n";
+
+// Lazy load heavy visual effects to prevent FCP blocking
+const ParticleBackground = lazy(() => import("@/components/effects/ParticleBackground").then(m => ({ default: m.ParticleBackground })));
+const BlockchainVisualization = lazy(() => import("@/components/effects/BlockchainVisualization").then(m => ({ default: m.BlockchainVisualization })));
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { data: poolStats, loading } = usePoolStats(POOL_ID_HEX);
   const { t } = useTranslation();
+
+  // Defer heavy effects until after first paint
+  const [showEffects, setShowEffects] = useState(false);
+
+  useEffect(() => {
+    // Use double requestAnimationFrame to ensure we're past first paint
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        setShowEffects(true);
+      });
+    });
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -32,71 +46,59 @@ export function Hero() {
       {/* Animated Gradient Background */}
       <div className="absolute inset-0 bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 animate-gradient-shift" />
 
-      {/* Particle Background */}
-      <ParticleBackground />
+      {/* Particle Background - deferred loading */}
+      {showEffects && (
+        <Suspense fallback={null}>
+          <ParticleBackground />
+        </Suspense>
+      )}
 
       {/* Main Content */}
       <motion.div
         style={{ y, opacity }}
         className="relative z-20 mx-auto px-6 sm:px-10 max-w-7xl w-full"
       >
-        {/* Background Blockchain Visualization */}
+        {/* Background Blockchain Visualization - deferred loading */}
         <div className="hidden lg:block absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/4 scale-150 opacity-60 z-0">
-          <BlockchainVisualization />
+          {showEffects && (
+            <Suspense fallback={null}>
+              <BlockchainVisualization />
+            </Suspense>
+          )}
         </div>
 
         <div className="relative pt-12 sm:pt-24 pb-12">
-          {/* Main Content */}
-          <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex flex-col items-start justify-start space-y-6 max-w-4xl"
-            >
-              {/* Glassmorphic Badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="px-4 py-2 rounded-full backdrop-blur-md bg-white/40 border border-white/60 shadow-lg"
-              >
+          {/* Main Content - NO animation delays for critical above-the-fold content */}
+          <div className="flex flex-col items-start justify-start space-y-6 max-w-4xl">
+              {/* Glassmorphic Badge - render immediately */}
+              <div className="px-4 py-2 rounded-full backdrop-blur-md bg-white/40 border border-white/60 shadow-lg">
                 <span className="text-sm font-semibold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   {t.hero.badge}
                 </span>
-              </motion.div>
+              </div>
 
-              {/* Main Heading with Gradient Text */}
+              {/* Main Heading with Gradient Text - render immediately for FCP */}
               <div className="text-left">
-                <motion.h1
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight font-extrabold text-gray-900"
-                >
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight font-extrabold text-gray-900">
                   <span className="block">{t.hero.title}</span>
                   <span className="block mt-2 pb-2 bg-linear-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent animate-gradient-text">
                     {t.hero.subtitle}
                   </span>
-                </motion.h1>
+                </h1>
               </div>
 
-              {/* Description with Glassmorphism */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                className="max-w-xl"
-              >
+              {/* Description - render immediately */}
+              <div className="max-w-xl">
                 <p className="text-lg sm:text-xl text-gray-700 leading-relaxed">
                   {t.hero.description}
                 </p>
-              </motion.div>
+              </div>
 
-              {/* Stats Grid */}
+              {/* Stats Grid - animate after content is visible */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0.8, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
+                transition={{ duration: 0.3, delay: 0 }}
                 className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 w-full relative z-10"
                 role="region"
                 aria-label="Pool statistics"
@@ -229,24 +231,20 @@ export function Hero() {
               </motion.div>
 
               {/* CTA Buttons */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1 }}
-                className="flex flex-wrap gap-4 mt-4"
-              >
-              </motion.div>
-            </motion.div>
+              <div className="flex flex-wrap gap-4 mt-4">
+              </div>
+            </div>
         </div>
       </motion.div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
-      >
+      {/* Scroll Indicator - deferred animation */}
+      {showEffects && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
+        >
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{
@@ -270,6 +268,7 @@ export function Hero() {
           </div>
         </motion.div>
       </motion.div>
+      )}
     </section>
   );
 }

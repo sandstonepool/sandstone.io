@@ -5,6 +5,13 @@ import { Footer } from "@/components/layout/Footer";
 import { StructuredData } from "@/components/StructuredData";
 import { ClientProviders } from "@/components/ClientProviders";
 
+// Preconnect to external domains for faster resource loading
+const preconnectUrls = [
+  "https://fonts.googleapis.com",
+  "https://fonts.gstatic.com",
+  "https://api.cardanoscan.io",
+];
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://sandstone.io'),
   title: "Sandstone Stake Pool - Earn More ADA with Confidence",
@@ -56,6 +63,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Preconnect to external domains for faster loading */}
+        {preconnectUrls.map((url) => (
+          <link key={url} rel="preconnect" href={url} crossOrigin="anonymous" />
+        ))}
+        {/* DNS prefetch as fallback for browsers that don't support preconnect */}
+        <link rel="dns-prefetch" href="https://api.cardanoscan.io" />
         <StructuredData />
       </head>
       <body className="antialiased font-body">

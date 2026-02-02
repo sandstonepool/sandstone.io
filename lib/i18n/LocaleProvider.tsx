@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import { createContext, useContext, useState, useEffect, ReactNode, useMemo } from 'react'
 import { defaultLocale, locales, type Locale } from './config'
 
 interface LocaleContextType {
@@ -35,15 +35,18 @@ function detectBrowserLocale(): Locale {
 }
 
 export function LocaleProvider({ children }: { children: ReactNode }) {
+  // Initialize with default locale immediately - no blocking render
   const [locale, setLocaleState] = useState<Locale>(defaultLocale)
-  const [mounted, setMounted] = useState(false)
 
+  // Detect and update locale asynchronously after mount (non-blocking)
   useEffect(() => {
-    // Detect locale on mount
     const detected = detectBrowserLocale()
-    setLocaleState(detected)
-    setMounted(true)
-  }, [])
+    if (detected !== locale) {
+      setLocaleState(detected)
+    }
+    // Update HTML lang attribute
+    document.documentElement.lang = detected
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale)
@@ -54,15 +57,19 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  // Update HTML lang attribute when locale changes
+  // Update HTML lang attribute when locale changes after initial mount
   useEffect(() => {
-    if (mounted && typeof window !== 'undefined') {
+    if (typeof window !== 'undefined') {
       document.documentElement.lang = locale
     }
-  }, [locale, mounted])
+  }, [locale])
 
+  // Memoize context value to prevent unnecessary re-renders
+  const contextValue = useMemo(() => ({ locale, setLocale }), [locale])
+
+  // Render children immediately - no conditional rendering based on mounted state
   return (
-    <LocaleContext.Provider value={{ locale, setLocale }}>
+    <LocaleContext.Provider value={contextValue}>
       {children}
     </LocaleContext.Provider>
   )
