@@ -117,13 +117,13 @@ export function Hero() {
                 initial={{ opacity: 0.8, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0 }}
-                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 w-full relative z-10 mt-14 sm:mt-16"
+                className="flex flex-col items-center justify-center sm:flex-row sm:flex-wrap gap-2.5 relative z-10 mt-14 sm:mt-16"
                 role="region"
                 aria-label="Pool statistics"
               >
                 {/* Margin Fee */}
                 <div
-                  className="bg-white/30 border border-gray-300/70 rounded-xl px-3.5 py-5 sm:px-4 sm:py-6 text-center"
+                  className="bg-white/30 border border-gray-300/70 rounded-xl p-3 text-center aspect-4/3 flex flex-col items-center justify-center w-44"
                   role="article"
                   aria-label="Margin fee statistic"
                 >
@@ -149,7 +149,7 @@ export function Hero() {
 
                 {/* Total Stake */}
                 <div
-                  className="bg-white/30 border border-gray-300/70 rounded-xl px-3.5 py-5 sm:px-4 sm:py-6 text-center"
+                  className="bg-white/30 border border-gray-300/70 rounded-xl p-3 text-center aspect-4/3 flex flex-col items-center justify-center w-44"
                   role="article"
                   aria-label="Total stake statistic"
                 >
@@ -174,7 +174,7 @@ export function Hero() {
 
                 {/* Pledge */}
                 <div
-                  className="bg-white/30 border border-gray-300/70 rounded-xl px-3.5 py-5 sm:px-4 sm:py-6 text-center"
+                  className="bg-white/30 border border-gray-300/70 rounded-xl p-3 text-center aspect-4/3 flex flex-col items-center justify-center w-44"
                   role="article"
                   aria-label="Pool pledge statistic"
                 >
@@ -199,7 +199,7 @@ export function Hero() {
 
                 {/* Lifetime Blocks */}
                 <div
-                  className="bg-white/30 border border-gray-300/70 rounded-xl px-3.5 py-5 sm:px-4 sm:py-6 text-center"
+                  className="bg-white/30 border border-gray-300/70 rounded-xl p-3 text-center aspect-4/3 flex flex-col items-center justify-center w-44"
                   role="article"
                   aria-label="Lifetime blocks produced statistic"
                 >
@@ -224,7 +224,7 @@ export function Hero() {
 
                 {/* Lifetime Rewards */}
                 <div
-                  className="bg-white/30 border border-gray-300/70 rounded-xl px-3.5 py-5 sm:px-4 sm:py-6 text-center"
+                  className="bg-white/30 border border-gray-300/70 rounded-xl p-3 text-center aspect-4/3 flex flex-col items-center justify-center w-44"
                   role="article"
                   aria-label="Lifetime rewards distributed statistic"
                 >
