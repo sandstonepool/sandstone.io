@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'motion/react'
 import { GlobeAltIcon } from '@heroicons/react/24/outline'
 import { locales, localeNames, useLocale } from '@/lib/i18n'
 

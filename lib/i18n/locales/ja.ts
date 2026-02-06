@@ -7,6 +7,7 @@ export const ja = {
     gettingStarted: "始め方",
     security: "セキュリティ",
     faq: "よくある質問",
+    blog: "ブログ",
   },
   hero: {
     badge: "✨ デリゲーターに信頼されています",
@@ -54,7 +55,6 @@ export const ja = {
       step3: "ADAを委任。ステークする量を選択して確認してください。ADAはウォレットから離れません。",
       step4: "報酬を獲得開始。報酬は各エポック（約5日ごと）に自動的に到着します。",
     },
-    poolId: "",
     copied: "クリップボードにコピーしました",
   },
   security: {

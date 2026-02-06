@@ -7,6 +7,7 @@ export const en = {
     gettingStarted: "Getting Started",
     security: "Security",
     faq: "FAQ",
+    blog: "Blog",
   },
   hero: {
     badge: "✨ Trusted by Delegators",
@@ -54,7 +55,6 @@ export const en = {
       step3: "Delegate your ADA. Choose how much to stake and confirm—your ADA never leaves your wallet.",
       step4: "Start earning. Rewards arrive automatically every epoch (approximately every 5 days).",
     },
-    poolId: "",
     copied: "Copied to Clipboard",
   },
   security: {

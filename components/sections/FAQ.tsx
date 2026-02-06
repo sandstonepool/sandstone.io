@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { Reveal } from '@/components/ui/Reveal'
 import { Container } from '@/components/ui/Container'
 import { CONTACT_EMAIL, COMPANY_ACN } from '@/lib/utils/constants'

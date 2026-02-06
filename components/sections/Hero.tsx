@@ -1,12 +1,14 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from 'motion/react';
 import { CubeIcon, BanknotesIcon, ShieldCheckIcon, ChartBarIcon, CurrencyDollarIcon } from "@heroicons/react/24/solid";
 import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 import { useRef, useState, useEffect, lazy, Suspense } from "react";
 import { usePoolStats } from "@/lib/hooks/usePoolStats";
-import { POOL_ID_HEX } from "@/lib/utils/constants";
+import { POOL_ID_HEX, POOL_ID_BECH } from "@/lib/utils/constants";
 import { useTranslation } from "@/lib/i18n";
+
+const CARDANOSCAN_POOL_URL = `https://cardanoscan.io/pool/${POOL_ID_BECH}`;
 
 // Lazy load heavy visual effects to prevent FCP blocking
 const ParticleBackground = lazy(() => import("@/components/effects/ParticleBackground").then(m => ({ default: m.ParticleBackground })));
@@ -36,6 +38,7 @@ export function Hero() {
 
   const y = useTransform(scrollYProgress, [0, 1], [0, 100]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const scrollIndicatorOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
 
   return (
     <section
@@ -123,7 +126,7 @@ export function Hero() {
                         duration={2}
                       />
                     ) : (
-                      '—'
+                      <a href={CARDANOSCAN_POOL_URL} target="_blank" rel="noopener" className="text-gray-400 hover:text-blue-600 transition-colors">—</a>
                     )}
                   </div>
                   <div className="text-sm text-gray-600 mt-1">{t.hero.stats.marginFee}</div>
@@ -148,7 +151,7 @@ export function Hero() {
                         duration={2}
                       />
                     ) : (
-                      '—'
+                      <a href={CARDANOSCAN_POOL_URL} target="_blank" rel="noopener" className="text-gray-400 hover:text-blue-600 transition-colors">—</a>
                     )}
                   </div>
                   <div className="text-sm text-gray-600 mt-1">{t.hero.stats.stake}</div>
@@ -173,7 +176,7 @@ export function Hero() {
                         duration={2}
                       />
                     ) : (
-                      '—'
+                      <a href={CARDANOSCAN_POOL_URL} target="_blank" rel="noopener" className="text-gray-400 hover:text-blue-600 transition-colors">—</a>
                     )}
                   </div>
                   <div className="text-sm text-gray-600 mt-1">{t.hero.stats.pledge}</div>
@@ -198,7 +201,7 @@ export function Hero() {
                         duration={2}
                       />
                     ) : (
-                      '—'
+                      <a href={CARDANOSCAN_POOL_URL} target="_blank" rel="noopener" className="text-gray-400 hover:text-blue-600 transition-colors">—</a>
                     )}
                   </div>
                   <div className="text-sm text-gray-600 mt-1">{t.hero.stats.lifetimeBlocks}</div>
@@ -223,7 +226,7 @@ export function Hero() {
                         duration={2}
                       />
                     ) : (
-                      '—'
+                      <a href={CARDANOSCAN_POOL_URL} target="_blank" rel="noopener" className="text-gray-400 hover:text-blue-600 transition-colors">—</a>
                     )}
                   </div>
                   <div className="text-sm text-gray-600 mt-1">{t.hero.stats.lifetimeRewards}</div>
@@ -237,13 +240,11 @@ export function Hero() {
         </div>
       </motion.div>
 
-      {/* Scroll Indicator - deferred animation */}
+      {/* Scroll Indicator - auto-hides on scroll */}
       {showEffects && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
+          style={{ opacity: scrollIndicatorOpacity }}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none"
         >
         <motion.div
           animate={{ y: [0, 10, 0] }}

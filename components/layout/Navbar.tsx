@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { usePathname } from 'next/navigation'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'motion/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -103,7 +103,7 @@ export function Navbar() {
                     href="/blog"
                     className="px-4 py-2 rounded-lg text-sm font-semibold transition-all text-gray-700 border border-transparent hover:backdrop-blur-md hover:bg-white/40 hover:border-white/60 hover:shadow-sm"
                   >
-                    Blog
+                    {t.nav.blog}
                   </Link>
                 </div>
                 <LanguageSwitcher />
@@ -119,7 +119,7 @@ export function Navbar() {
                       : 'text-gray-700 border border-transparent hover:backdrop-blur-md hover:bg-white/40 hover:border-white/60 hover:shadow-sm'
                   }`}
                 >
-                  Blog
+                  {t.nav.blog}
                 </Link>
                 <LanguageSwitcher />
               </div>
@@ -158,7 +158,7 @@ export function Navbar() {
                   href="/blog"
                   className="block px-4 py-2 rounded-lg text-base font-semibold cursor-pointer transition-all text-gray-700 border border-transparent hover:backdrop-blur-md hover:bg-white/50 hover:border-white/60"
                 >
-                  Blog
+                  {t.nav.blog}
                 </Link>
               </div>
             </motion.div>

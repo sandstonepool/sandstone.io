@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { ClipboardDocumentIcon } from '@heroicons/react/24/outline'
 import * as Tooltip from '@radix-ui/react-tooltip'
 import { Container } from '@/components/ui/Container'
@@ -24,10 +24,10 @@ function PoolIdCopy() {
         <Tooltip.Trigger asChild>
           <strong
             onClick={handleCopy}
-            className="inline-flex items-center gap-1 backdrop-blur-md bg-linear-to-r from-blue-500/20 to-purple-500/20 border border-blue-300/50 rounded-lg px-2 py-0.5 cursor-pointer hover:from-blue-500/30 hover:to-purple-500/30 hover:scale-105 transition-all max-w-full"
+            className="inline-flex items-center gap-1 backdrop-blur-md bg-linear-to-r from-blue-500/20 to-purple-500/20 border border-blue-300/50 rounded-lg px-2 py-0.5 cursor-pointer hover:from-blue-500/30 hover:to-purple-500/30 hover:scale-105 transition-all max-w-full overflow-hidden"
           >
-            <span className="bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-bold text-xs truncate">{POOL_ID_BECH}</span>
-            <ClipboardDocumentIcon className="w-4 h-4 shrink-0 text-blue-600" />
+            <span className="bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-bold text-[10px] whitespace-nowrap overflow-hidden text-ellipsis">{POOL_ID_BECH}</span>
+            <ClipboardDocumentIcon className="w-3.5 h-3.5 shrink-0 text-blue-600" />
           </strong>
         </Tooltip.Trigger>
         <Tooltip.Portal>
@@ -114,7 +114,7 @@ export function GettingStarted() {
                 <div className="w-16 h-16 shrink-0 rounded-full bg-linear-to-br from-green-500 to-teal-500 flex items-center justify-center shadow-lg">
                   <span className="text-3xl font-bold text-white">{step.number}</span>
                 </div>
-                <div className="pt-2">
+                <div className="pt-2 min-w-0">
                   <p className="text-gray-700 leading-relaxed">
                     {step.content}
                   </p>

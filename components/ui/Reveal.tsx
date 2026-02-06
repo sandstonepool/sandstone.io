@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'motion/react'
 import { PlusIcon, MinusIcon } from '@heroicons/react/24/outline'
 import { Box } from './Box'
 

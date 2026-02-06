@@ -7,6 +7,7 @@ export const de = {
     gettingStarted: "Erste Schritte",
     security: "Sicherheit",
     faq: "Häufige Fragen",
+    blog: "Blog",
   },
   hero: {
     badge: "✨ Vertraut von Delegatoren",
@@ -54,7 +55,6 @@ export const de = {
       step3: "Delegieren Sie Ihr ADA. Wählen Sie, wie viel Sie staken möchten und bestätigen Sie: Ihr ADA verlässt nie Ihre Wallet.",
       step4: "Beginnen Sie zu verdienen. Belohnungen kommen automatisch jede Epoche (ungefähr alle 5 Tage).",
     },
-    poolId: "",
     copied: "In Zwischenablage kopiert",
   },
   security: {

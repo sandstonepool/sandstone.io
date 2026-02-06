@@ -7,6 +7,7 @@ export const fr = {
     gettingStarted: "Commencer",
     security: "Sécurité",
     faq: "FAQ",
+    blog: "Blog",
   },
   hero: {
     badge: "✨ Approuvé par les Délégateurs",
@@ -54,7 +55,6 @@ export const fr = {
       step3: "Déléguez votre ADA. Choisissez combien déléguer et confirmez : votre ADA ne quitte jamais votre portefeuille.",
       step4: "Commencez à gagner. Les récompenses arrivent automatiquement à chaque époque (environ tous les 5 jours).",
     },
-    poolId: "",
     copied: "Copié dans le Presse-papiers",
   },
   security: {

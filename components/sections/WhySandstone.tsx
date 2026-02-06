@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { Container } from '@/components/ui/Container'
 import { useIntersectionObserver } from '@/lib/hooks/useIntersectionObserver'
 import { ShieldCheckIcon, UserGroupIcon, TrophyIcon, ReceiptPercentIcon } from '@heroicons/react/24/outline'

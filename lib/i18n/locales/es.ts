@@ -7,6 +7,7 @@ export const es = {
     gettingStarted: "Comenzar",
     security: "Seguridad",
     faq: "Preguntas Frecuentes",
+    blog: "Blog",
   },
   hero: {
     badge: "✨ Confiado por Delegadores",
@@ -54,7 +55,6 @@ export const es = {
       step3: "Delega tu ADA. Elige cuánto delegar y confirma: tu ADA nunca sale de tu billetera.",
       step4: "Comienza a ganar. Las recompensas llegan automáticamente cada época (aproximadamente cada 5 días).",
     },
-    poolId: "",
     copied: "Copiado al Portapapeles",
   },
   security: {
