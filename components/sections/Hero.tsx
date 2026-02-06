@@ -130,9 +130,9 @@ export function Hero() {
                   <div className="flex justify-center mb-2" aria-hidden="true">
                     <ChartBarIcon className="h-5 w-5 text-blue-600" />
                   </div>
-                  <div className="text-xl sm:text-2xl font-bold text-gray-900" aria-live="polite">
+                  <div className="text-xl sm:text-2xl font-bold text-gray-900 h-7 sm:h-8 flex items-center justify-center" aria-live="polite">
                     {loading ? (
-                      <div className="h-7 w-20 bg-gray-200 rounded animate-pulse mx-auto" aria-label="Loading margin fee" />
+                      <div className="h-7 w-16 sm:w-20 bg-gray-200/70 rounded-md animate-pulse mx-auto" aria-label="Loading margin fee" />
                     ) : poolStats ? (
                       <AnimatedNumber
                         // value={poolStats.interest * 100}
@@ -156,9 +156,9 @@ export function Hero() {
                   <div className="flex justify-center mb-2" aria-hidden="true">
                     <BanknotesIcon className="h-5 w-5 text-green-600" />
                   </div>
-                  <div className="text-xl sm:text-2xl font-bold text-gray-900" aria-live="polite">
+                  <div className="text-xl sm:text-2xl font-bold text-gray-900 h-7 sm:h-8 flex items-center justify-center" aria-live="polite">
                     {loading ? (
-                      <div className="h-7 w-20 bg-gray-200 rounded animate-pulse mx-auto" aria-label={t.hero.stats.loading} />
+                      <div className="h-7 w-16 sm:w-20 bg-gray-200/70 rounded-md animate-pulse mx-auto" aria-label={t.hero.stats.loading} />
                     ) : poolStats ? (
                       <AnimatedNumber
                         value={parseFloat(poolStats.liveStake) / 1_000_000_000}
@@ -181,9 +181,9 @@ export function Hero() {
                   <div className="flex justify-center mb-2" aria-hidden="true">
                     <ShieldCheckIcon className="h-5 w-5 text-purple-600" />
                   </div>
-                  <div className="text-xl sm:text-2xl font-bold text-gray-900" aria-live="polite">
+                  <div className="text-xl sm:text-2xl font-bold text-gray-900 h-7 sm:h-8 flex items-center justify-center" aria-live="polite">
                     {loading ? (
-                      <div className="h-7 w-20 bg-gray-200 rounded animate-pulse mx-auto" aria-label={t.hero.stats.loading} />
+                      <div className="h-7 w-16 sm:w-20 bg-gray-200/70 rounded-md animate-pulse mx-auto" aria-label={t.hero.stats.loading} />
                     ) : poolStats ? (
                       <AnimatedNumber
                         value={parseFloat(poolStats.activePledge) / 1_000_000}
@@ -206,9 +206,9 @@ export function Hero() {
                   <div className="flex justify-center mb-2" aria-hidden="true">
                     <CubeIcon className="h-5 w-5 text-rose-600" />
                   </div>
-                  <div className="text-xl sm:text-2xl font-bold text-gray-900" aria-live="polite">
+                  <div className="text-xl sm:text-2xl font-bold text-gray-900 h-7 sm:h-8 flex items-center justify-center" aria-live="polite">
                     {loading ? (
-                      <div className="h-7 w-20 bg-gray-200 rounded animate-pulse mx-auto" aria-label={t.hero.stats.loading} />
+                      <div className="h-7 w-16 sm:w-20 bg-gray-200/70 rounded-md animate-pulse mx-auto" aria-label={t.hero.stats.loading} />
                     ) : poolStats ? (
                       <AnimatedNumber
                         value={poolStats.lifetimeBlocks}
@@ -231,9 +231,9 @@ export function Hero() {
                   <div className="flex justify-center mb-2" aria-hidden="true">
                     <CurrencyDollarIcon className="h-5 w-5 text-amber-600" />
                   </div>
-                  <div className="text-xl sm:text-2xl font-bold text-gray-900" aria-live="polite">
+                  <div className="text-xl sm:text-2xl font-bold text-gray-900 h-7 sm:h-8 flex items-center justify-center" aria-live="polite">
                     {loading ? (
-                      <div className="h-7 w-20 bg-gray-200 rounded animate-pulse mx-auto" aria-label={t.hero.stats.loading} />
+                      <div className="h-7 w-16 sm:w-20 bg-gray-200/70 rounded-md animate-pulse mx-auto" aria-label={t.hero.stats.loading} />
                     ) : poolStats ? (
                       <AnimatedNumber
                         value={parseFloat(poolStats.lifetimeRewards) / 1_000_000}
