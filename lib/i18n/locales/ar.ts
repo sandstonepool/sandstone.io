@@ -11,8 +11,8 @@ export const ar = {
   },
   hero: {
     badge: "✨ موثوق به من قبل المفوضين",
-    title: "اكسب المزيد من ADA",
-    subtitle: "فوض بثقة",
+    rotatingPhrases: ["اكسب المزيد من ADA", "فوض بثقة", "فوض واكسب"],
+    staticLine: "مع Sandstone",
     description: "مجمع رائد لرهان كاردانو يقدم مكافآت ثابتة منذ الأيام الأولى للشبكة.",
     stats: {
       marginFee: "رسوم الهامش",

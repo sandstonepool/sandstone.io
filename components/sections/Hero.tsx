@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { CubeIcon, BanknotesIcon, ShieldCheckIcon, ChartBarIcon, CurrencyDollarIcon } from "@heroicons/react/24/solid";
 import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 import { useRef, useState, useEffect, lazy, Suspense } from "react";
@@ -21,6 +21,17 @@ export function Hero() {
 
   // Defer heavy effects until after first paint
   const [showEffects, setShowEffects] = useState(false);
+
+  // Cycle between rotating hero phrases
+  const phrases = t.hero.rotatingPhrases;
+  const [phraseIndex, setPhraseIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPhraseIndex((prev) => (prev + 1) % phrases.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [phrases.length]);
 
   useEffect(() => {
     // Use double requestAnimationFrame to ensure we're past first paint
@@ -56,68 +67,72 @@ export function Hero() {
         </Suspense>
       )}
 
+      {/* Blockchain Visualization - full bleed background */}
+      {showEffects && (
+        <div className="hidden lg:block absolute inset-0 translate-x-[10%] z-10 opacity-70 pointer-events-none">
+          <Suspense fallback={null}>
+            <BlockchainVisualization />
+          </Suspense>
+        </div>
+      )}
+
       {/* Main Content */}
       <motion.div
         style={{ y, opacity }}
         className="relative z-20 mx-auto px-6 sm:px-10 max-w-7xl w-full"
       >
-        {/* Background Blockchain Visualization - deferred loading */}
-        <div className="hidden lg:block absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/4 scale-150 opacity-60 z-0">
-          {showEffects && (
-            <Suspense fallback={null}>
-              <BlockchainVisualization />
-            </Suspense>
-          )}
-        </div>
-
-        <div className="relative pt-12 sm:pt-24 pb-12">
+        <div className="relative pb-12">
           {/* Main Content - NO animation delays for critical above-the-fold content */}
-          <div className="flex flex-col items-start justify-start space-y-6 max-w-4xl">
-              {/* Glassmorphic Badge - render immediately */}
-              <div className="px-4 py-2 rounded-full backdrop-blur-md bg-white/40 border border-white/60 shadow-lg">
-                <span className="text-sm font-semibold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  {t.hero.badge}
-                </span>
-              </div>
-
-              {/* Main Heading with Gradient Text - render immediately for FCP */}
+          <div className="flex flex-col items-start justify-start">
+              {/* Main Heading - rotating top line, static bottom line */}
               <div className="text-left">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight font-extrabold text-gray-900">
-                  <span className="block">{t.hero.title}</span>
-                  <span className="block mt-2 pb-2 bg-linear-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent animate-gradient-text">
-                    {t.hero.subtitle}
+                <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[4.8rem] tracking-tighter font-bold text-gray-900 leading-[1.3]">
+                  <span className="block relative z-10 h-[1.3em] w-[calc(100%+0.5em)] overflow-hidden">
+                    <AnimatePresence mode="wait">
+                      <motion.span
+                        key={phraseIndex}
+                        initial={{ y: "100%" }}
+                        animate={{ y: 0 }}
+                        exit={{ y: "-100%" }}
+                        transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                        className="block bg-linear-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent"
+                      >
+                        {phrases[phraseIndex]}
+                      </motion.span>
+                    </AnimatePresence>
                   </span>
+                  <span className="block -mt-[0.2em]">{t.hero.staticLine}</span>
                 </h1>
               </div>
 
-              {/* Description - render immediately */}
-              <div className="max-w-xl">
-                <p className="text-lg sm:text-xl text-gray-700 leading-relaxed">
+              {/* Description */}
+              <div className="max-w-2xl mt-6 sm:mt-8">
+                <p className="text-xl sm:text-2xl text-gray-500 leading-relaxed">
                   {t.hero.description}
                 </p>
               </div>
 
-              {/* Stats Grid - animate after content is visible */}
+              {/* Stats Grid */}
               <motion.div
                 initial={{ opacity: 0.8, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0 }}
-                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 w-full relative z-10"
+                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 w-full relative z-10 mt-14 sm:mt-16"
                 role="region"
                 aria-label="Pool statistics"
               >
                 {/* Margin Fee */}
                 <div
-                  className="backdrop-blur-md bg-white/40 border border-white/60 rounded-xl p-4 lg:p-5 text-center hover:bg-white/50 transition-all hover:scale-105 hover:shadow-xl"
+                  className="bg-white/30 border border-gray-300/70 rounded-xl px-3.5 py-5 sm:px-4 sm:py-6 text-center"
                   role="article"
                   aria-label="Margin fee statistic"
                 >
                   <div className="flex justify-center mb-2" aria-hidden="true">
-                    <ChartBarIcon className="h-6 w-6 text-blue-600" />
+                    <ChartBarIcon className="h-5 w-5 text-blue-600" />
                   </div>
-                  <div className="text-2xl lg:text-2xl font-bold text-gray-900" aria-live="polite">
+                  <div className="text-xl sm:text-2xl font-bold text-gray-900" aria-live="polite">
                     {loading ? (
-                      <div className="h-8 w-20 bg-gray-200 rounded animate-pulse mx-auto" aria-label="Loading margin fee" />
+                      <div className="h-7 w-20 bg-gray-200 rounded animate-pulse mx-auto" aria-label="Loading margin fee" />
                     ) : poolStats ? (
                       <AnimatedNumber
                         // value={poolStats.interest * 100}
@@ -129,21 +144,21 @@ export function Hero() {
                       <a href={CARDANOSCAN_POOL_URL} target="_blank" rel="noopener" className="text-gray-400 hover:text-blue-600 transition-colors">—</a>
                     )}
                   </div>
-                  <div className="text-sm text-gray-600 mt-1">{t.hero.stats.marginFee}</div>
+                  <div className="text-xs sm:text-sm text-gray-500 mt-1.5">{t.hero.stats.marginFee}</div>
                 </div>
 
                 {/* Total Stake */}
                 <div
-                  className="backdrop-blur-md bg-white/40 border border-white/60 rounded-xl p-4 lg:p-5 text-center hover:bg-white/50 transition-all hover:scale-105 hover:shadow-xl"
+                  className="bg-white/30 border border-gray-300/70 rounded-xl px-3.5 py-5 sm:px-4 sm:py-6 text-center"
                   role="article"
                   aria-label="Total stake statistic"
                 >
                   <div className="flex justify-center mb-2" aria-hidden="true">
-                    <BanknotesIcon className="h-6 w-6 text-indigo-600" />
+                    <BanknotesIcon className="h-5 w-5 text-green-600" />
                   </div>
-                  <div className="text-2xl lg:text-2xl font-bold text-gray-900" aria-live="polite">
+                  <div className="text-xl sm:text-2xl font-bold text-gray-900" aria-live="polite">
                     {loading ? (
-                      <div className="h-8 w-20 bg-gray-200 rounded animate-pulse mx-auto" aria-label={t.hero.stats.loading} />
+                      <div className="h-7 w-20 bg-gray-200 rounded animate-pulse mx-auto" aria-label={t.hero.stats.loading} />
                     ) : poolStats ? (
                       <AnimatedNumber
                         value={parseFloat(poolStats.liveStake) / 1_000_000_000}
@@ -154,21 +169,21 @@ export function Hero() {
                       <a href={CARDANOSCAN_POOL_URL} target="_blank" rel="noopener" className="text-gray-400 hover:text-blue-600 transition-colors">—</a>
                     )}
                   </div>
-                  <div className="text-sm text-gray-600 mt-1">{t.hero.stats.stake}</div>
+                  <div className="text-xs sm:text-sm text-gray-500 mt-1.5">{t.hero.stats.stake}</div>
                 </div>
 
                 {/* Pledge */}
                 <div
-                  className="backdrop-blur-md bg-white/40 border border-white/60 rounded-xl p-4 lg:p-5 text-center hover:bg-white/50 transition-all hover:scale-105 hover:shadow-xl"
+                  className="bg-white/30 border border-gray-300/70 rounded-xl px-3.5 py-5 sm:px-4 sm:py-6 text-center"
                   role="article"
                   aria-label="Pool pledge statistic"
                 >
                   <div className="flex justify-center mb-2" aria-hidden="true">
-                    <ShieldCheckIcon className="h-6 w-6 text-purple-600" />
+                    <ShieldCheckIcon className="h-5 w-5 text-purple-600" />
                   </div>
-                  <div className="text-2xl lg:text-2xl font-bold text-gray-900" aria-live="polite">
+                  <div className="text-xl sm:text-2xl font-bold text-gray-900" aria-live="polite">
                     {loading ? (
-                      <div className="h-8 w-20 bg-gray-200 rounded animate-pulse mx-auto" aria-label={t.hero.stats.loading} />
+                      <div className="h-7 w-20 bg-gray-200 rounded animate-pulse mx-auto" aria-label={t.hero.stats.loading} />
                     ) : poolStats ? (
                       <AnimatedNumber
                         value={parseFloat(poolStats.activePledge) / 1_000_000}
@@ -179,21 +194,21 @@ export function Hero() {
                       <a href={CARDANOSCAN_POOL_URL} target="_blank" rel="noopener" className="text-gray-400 hover:text-blue-600 transition-colors">—</a>
                     )}
                   </div>
-                  <div className="text-sm text-gray-600 mt-1">{t.hero.stats.pledge}</div>
+                  <div className="text-xs sm:text-sm text-gray-500 mt-1.5">{t.hero.stats.pledge}</div>
                 </div>
 
                 {/* Lifetime Blocks */}
                 <div
-                  className="backdrop-blur-md bg-white/40 border border-white/60 rounded-xl p-4 lg:p-5 text-center hover:bg-white/50 transition-all hover:scale-105 hover:shadow-xl"
+                  className="bg-white/30 border border-gray-300/70 rounded-xl px-3.5 py-5 sm:px-4 sm:py-6 text-center"
                   role="article"
                   aria-label="Lifetime blocks produced statistic"
                 >
                   <div className="flex justify-center mb-2" aria-hidden="true">
-                    <CubeIcon className="h-6 w-6 text-green-600" />
+                    <CubeIcon className="h-5 w-5 text-rose-600" />
                   </div>
-                  <div className="text-2xl lg:text-2xl font-bold text-gray-900" aria-live="polite">
+                  <div className="text-xl sm:text-2xl font-bold text-gray-900" aria-live="polite">
                     {loading ? (
-                      <div className="h-8 w-20 bg-gray-200 rounded animate-pulse mx-auto" aria-label={t.hero.stats.loading} />
+                      <div className="h-7 w-20 bg-gray-200 rounded animate-pulse mx-auto" aria-label={t.hero.stats.loading} />
                     ) : poolStats ? (
                       <AnimatedNumber
                         value={poolStats.lifetimeBlocks}
@@ -204,21 +219,21 @@ export function Hero() {
                       <a href={CARDANOSCAN_POOL_URL} target="_blank" rel="noopener" className="text-gray-400 hover:text-blue-600 transition-colors">—</a>
                     )}
                   </div>
-                  <div className="text-sm text-gray-600 mt-1">{t.hero.stats.lifetimeBlocks}</div>
+                  <div className="text-xs sm:text-sm text-gray-500 mt-1.5">{t.hero.stats.lifetimeBlocks}</div>
                 </div>
 
                 {/* Lifetime Rewards */}
                 <div
-                  className="backdrop-blur-md bg-white/40 border border-white/60 rounded-xl p-4 lg:p-5 text-center hover:bg-white/50 transition-all hover:scale-105 hover:shadow-xl"
+                  className="bg-white/30 border border-gray-300/70 rounded-xl px-3.5 py-5 sm:px-4 sm:py-6 text-center"
                   role="article"
                   aria-label="Lifetime rewards distributed statistic"
                 >
                   <div className="flex justify-center mb-2" aria-hidden="true">
-                    <CurrencyDollarIcon className="h-6 w-6 text-amber-600" />
+                    <CurrencyDollarIcon className="h-5 w-5 text-amber-600" />
                   </div>
-                  <div className="text-2xl lg:text-2xl font-bold text-gray-900" aria-live="polite">
+                  <div className="text-xl sm:text-2xl font-bold text-gray-900" aria-live="polite">
                     {loading ? (
-                      <div className="h-8 w-20 bg-gray-200 rounded animate-pulse mx-auto" aria-label={t.hero.stats.loading} />
+                      <div className="h-7 w-20 bg-gray-200 rounded animate-pulse mx-auto" aria-label={t.hero.stats.loading} />
                     ) : poolStats ? (
                       <AnimatedNumber
                         value={parseFloat(poolStats.lifetimeRewards) / 1_000_000}
@@ -229,7 +244,7 @@ export function Hero() {
                       <a href={CARDANOSCAN_POOL_URL} target="_blank" rel="noopener" className="text-gray-400 hover:text-blue-600 transition-colors">—</a>
                     )}
                   </div>
-                  <div className="text-sm text-gray-600 mt-1">{t.hero.stats.lifetimeRewards}</div>
+                  <div className="text-xs sm:text-sm text-gray-500 mt-1.5">{t.hero.stats.lifetimeRewards}</div>
                 </div>
               </motion.div>
 

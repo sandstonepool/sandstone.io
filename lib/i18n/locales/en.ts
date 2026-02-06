@@ -11,8 +11,8 @@ export const en = {
   },
   hero: {
     badge: "✨ Trusted by Delegators",
-    title: "Earn More ADA",
-    subtitle: "Stake with Confidence",
+    rotatingPhrases: ["Earn More ADA", "Stake with Confidence", "Delegate & Earn"],
+    staticLine: "with Sandstone",
     description: "A pioneer Cardano stake pool delivering consistent rewards since the early days of the network.",
     stats: {
       marginFee: "Margin Fee",

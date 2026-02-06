@@ -11,8 +11,8 @@ export const de = {
   },
   hero: {
     badge: "✨ Vertraut von Delegatoren",
-    title: "Mehr ADA Verdienen",
-    subtitle: "Mit Vertrauen Staken",
+    rotatingPhrases: ["Mehr ADA Verdienen", "Mit Vertrauen Staken", "Delegieren & Verdienen"],
+    staticLine: "mit Sandstone",
     description: "Ein Pionier-Cardano-Stakepool, der seit den Anfängen des Netzwerks konsistente Belohnungen bietet.",
     stats: {
       marginFee: "Margengebühr",

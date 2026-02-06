@@ -55,24 +55,26 @@ body {
   font-family: inherit;
 }
 
-h1 {
-  font-weight: 800;
-  font-size: 45px;
-  line-height: 50px;
-  margin-bottom: 20px;
-}
+@layer base {
+  h1 {
+    font-weight: 800;
+    font-size: 45px;
+    line-height: 50px;
+    margin-bottom: 20px;
+  }
 
-h2 {
-  font-size: 35px;
-  line-height: 50px;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
+  h2 {
+    font-size: 35px;
+    line-height: 50px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
 
-h3 {
-  font-size: 25px;
-  font-weight: 600;
-  margin-bottom: 20px;
+  h3 {
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
 }
 
 /* Button styles */

@@ -11,8 +11,8 @@ export const ja = {
   },
   hero: {
     badge: "✨ デリゲーターに信頼されています",
-    title: "より多くのADAを獲得",
-    subtitle: "安心してステーキング",
+    rotatingPhrases: ["より多くのADAを獲得", "安心してステーキング", "委任して稼ぐ"],
+    staticLine: "Sandstoneで",
     description: "ネットワークの初期から一貫した報酬を提供する、パイオニアCardanoステークプール。",
     stats: {
       marginFee: "マージン手数料",
