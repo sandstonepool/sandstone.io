@@ -1,0 +1,101 @@
+---
+title: "Midnight Protocol: What It Means for Cardano and Sandstone"
+date: "2026-02-07"
+description: "An overview of Midnight, Cardano's first partner chain bringing programmable privacy to blockchain - how the NIGHT token distribution works, and our plans to run a Midnight validator."
+tags:
+  - Midnight
+  - Cardano
+  - Privacy
+  - Announcements
+author:
+  name: "Sandstone Team"
+  url: "https://x.com/sandstonepool"
+---
+
+Midnight is one of the most significant developments in the Cardano ecosystem in recent memory. It's a privacy-focused blockchain designed as Cardano's first partner chain, and it introduces capabilities that Cardano doesn't natively provide - specifically, the ability to build applications that protect sensitive data using zero-knowledge proofs while still benefiting from Cardano's security and decentralisation.
+
+We've been following Midnight closely since its announcement, and we're excited to share what it means for the ecosystem, how its token distribution works, and what Sandstone's plans are as the network moves toward mainnet.
+
+## What is Midnight?
+
+Midnight is a blockchain built around the concept of "rational privacy." Rather than making everything public (like most blockchains) or everything private (like privacy coins), Midnight allows developers to choose exactly what data is disclosed and what remains confidential. It achieves this through [ZK-SNARKs](https://en.wikipedia.org/wiki/Non-interactive_zero-knowledge_proof) - a form of zero-knowledge cryptography that can prove a statement is true without revealing the underlying data.
+
+The practical implications are significant. Think about use cases that have traditionally been incompatible with public blockchains: healthcare records, financial compliance, identity verification, supply chain data. These all require some degree of data protection. Midnight makes it possible to build decentralised applications in these spaces while keeping sensitive information private.
+
+Midnight's smart contract language is called [Compact](https://docs.midnight.network/), and it's based on TypeScript. This is a deliberate choice - by building on a language that millions of web developers already know, Midnight dramatically lowers the barrier to entry for building privacy-preserving applications.
+
+## How Midnight Relates to Cardano
+
+Midnight is a partner chain to Cardano, not a competitor. It's designed to complement Cardano's main chain by providing a specialised privacy layer. The relationship works in both directions:
+
+- **Midnight benefits from Cardano** by leveraging its robust, decentralised security infrastructure and established ecosystem of stake pool operators
+- **Cardano benefits from Midnight** by gaining a powerful privacy layer that expands its use cases into regulated industries like finance, healthcare, and digital identity
+
+The connection between the two networks runs deep. Cardano stake pool operators are being invited to become Midnight validators, and the initial NIGHT token distribution was designed to reward existing ADA holders and participants in the Cardano ecosystem.
+
+## The NIGHT Token and DUST
+
+Midnight uses a dual-token model that's quite different from what you might be used to in other blockchain ecosystems.
+
+**NIGHT** is the network's primary token. It's used for staking, governance, and - importantly - it generates DUST. NIGHT is never consumed when you use the network. Instead, simply holding NIGHT in your wallet automatically generates DUST over time, with no staking or locking required.
+
+**DUST** is a shielded, non-transferable resource used to pay for transactions and execute smart contracts on Midnight. Because DUST is generated passively from NIGHT holdings, transaction costs remain predictable regardless of NIGHT's market price. This is a clever design that avoids the gas price volatility that plagues other networks.
+
+The 1:1 generation ratio means that if you hold NIGHT, you always have DUST available to interact with the network. It's an elegant solution to the problem of making a privacy-focused blockchain accessible without introducing unpredictable costs.
+
+## Token Distribution: Glacier Drop, Scavenger Mine, and Thawing
+
+The NIGHT token distribution has been one of the more interesting token launches in recent crypto history. Rather than a simple airdrop or ICO, Midnight used a multi-phase approach.
+
+### Glacier Drop
+
+The Glacier Drop was the primary distribution mechanism, rewarding existing participants in the Cardano ecosystem. Over 4.5 billion NIGHT tokens were made available to the community through this phase. If you held ADA or were staking with a Cardano pool, you were likely eligible for a Glacier Drop allocation.
+
+### Scavenger Mine
+
+The Scavenger Mine was the second phase, designed to redistribute any unclaimed tokens from the Glacier Drop. What made this phase unique is that it was open to everyone - not just existing ADA holders. Participants used their web browsers to solve cryptographic challenges over 21 distinct 24-hour cycles. The token pool was divided equally across all cycles, and participants earned allocations based on the computational work their devices contributed.
+
+This approach broadened the distribution beyond the existing Cardano community, bringing in new participants while ensuring tokens didn't go unclaimed.
+
+### Thawing
+
+Here's where it gets interesting. Tokens claimed during both the Glacier Drop and Scavenger Mine don't unlock all at once. Instead, they follow a 360-day "thawing" schedule - hence the glacier metaphor.
+
+Each allocation thaws in four equal installments of 25%, spaced 90 days apart. The first thaw date is randomly assigned to each recipient within the first 90-day window (December 2025 to early March 2026), with subsequent installments following every 90 days after that.
+
+The entire thawing period runs until December 4, 2026, followed by a 90-day grace period for any final redemptions before the portal closes.
+
+### Redemption
+
+Once tokens have thawed, they need to be redeemed through the [NIGHT Redemption Portal](https://redeem.midnight.gd/). Redemption is the final step - it transfers your thawed tokens into your destination wallet. If you participated in either the Glacier Drop or Scavenger Mine, make sure you don't miss your redemption windows.
+
+## Midnight's Road to Mainnet
+
+Midnight's development is structured into four phases, each named with Hawaiian words:
+
+1. **Hilo** - Liquidity and airdrop (completed). The NIGHT token launched on Cardano on December 8, 2025.
+2. **Kukolu** (Q1 2026) - Federated mainnet launch with IOG and select partners running validator nodes. This is a production environment, but with a controlled set of operators.
+3. **Mohalu** (Q2 2026) - This is the big one for stake pool operators. The incentivised testnet launches, Cardano SPOs come online as validators, and the DUST Capacity Exchange activates.
+4. **Hua** (Q3 2026) - Cross-chain interoperability and ZSwap integration, moving toward full decentralisation.
+
+## Sandstone's Plans: Running a Midnight Validator
+
+We're planning to run a Midnight validator node once the network opens up to Cardano stake pool operators in the Mohalu phase (Q2 2026).
+
+As an existing Cardano stake pool, we already operate the infrastructure and have the operational experience needed to run reliable validator nodes. Adding Midnight validation is a natural extension of what we already do. Our goal is to support the Midnight network from day one of SPO integration, contributing to its decentralisation and security.
+
+Running a Midnight validator means:
+
+- **Supporting the network's privacy mission** by helping produce blocks and validate transactions on a chain purpose-built for data protection
+- **Earning NIGHT rewards** from block subsidies provided by the protocol's reserve, which benefits our delegators and sustains our operations
+- **Strengthening the Cardano ecosystem** by participating in its first partner chain and helping prove that the partner chain model works
+
+We'll share more details on our validator setup and performance as the Mohalu phase approaches. In the meantime, if you're a NIGHT token holder or are interested in the Midnight ecosystem, keep an eye on the [official Midnight blog](https://midnight.network/blog) for the latest updates on the roadmap.
+
+## Looking Ahead
+
+Midnight represents something genuinely new in the blockchain space. Privacy has been a persistent gap in the Cardano ecosystem, and Midnight fills it in a way that's thoughtful, technically sound, and designed for real-world use. The dual-token model, the partner chain architecture, and the focus on developer accessibility all point to a project that's been carefully designed rather than rushed to market.
+
+We're excited to be part of it. If you're staking with Sandstone, you're already supporting a pool that's committed to being there when Midnight opens its doors to validators. And if you participated in the Glacier Drop or Scavenger Mine, don't forget to check your thawing schedule and redeem your tokens when they unlock.
+
+Happy staking.
