@@ -50,11 +50,11 @@ export const fr = {
     title: "Commencer",
     steps: {
       step1: "Obtenez un portefeuille. Nous recommandons {lace} pour son interface épurée et ses fonctionnalités de staking.",
-      step2: "Trouvez-nous. Recherchez {ticker} dans la liste des pools de votre portefeuille, ou utilisez notre {poolId}.",
+      step2: "Trouvez-nous. Recherchez {ticker} dans la liste des pools de votre portefeuille, ou utilisez notre ID de Pool:{poolId}",
       step3: "Déléguez votre ADA. Choisissez combien déléguer et confirmez : votre ADA ne quitte jamais votre portefeuille.",
       step4: "Commencez à gagner. Les récompenses arrivent automatiquement à chaque époque (environ tous les 5 jours).",
     },
-    poolId: "ID de la Pool",
+    poolId: "",
     copied: "Copié dans le Presse-papiers",
   },
   security: {

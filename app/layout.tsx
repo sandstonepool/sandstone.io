@@ -1,14 +1,19 @@
 import type { Metadata, Viewport } from "next";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { StructuredData } from "@/components/StructuredData";
 import { ClientProviders } from "@/components/ClientProviders";
 
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
 // Preconnect to external domains for faster resource loading
 const preconnectUrls = [
-  "https://fonts.googleapis.com",
-  "https://fonts.gstatic.com",
   "https://api.cardanoscan.io",
 ];
 
@@ -67,11 +72,11 @@ export default function RootLayout({
         {preconnectUrls.map((url) => (
           <link key={url} rel="preconnect" href={url} crossOrigin="anonymous" />
         ))}
-        {/* DNS prefetch as fallback for browsers that don't support preconnect */}
+        {/* DNS prefetch for API used by pool stats */}
         <link rel="dns-prefetch" href="https://api.cardanoscan.io" />
         <StructuredData />
       </head>
-      <body className="antialiased font-body">
+      <body className={`${poppins.className} antialiased`}>
         <ClientProviders>
           <a
             href="#main-content"

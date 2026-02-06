@@ -1,14 +1,7 @@
-/* Font loading with display=swap for better FCP */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
 
-/* Fallback font-face declaration to ensure font-display: swap */
-@font-face {
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 400 800;
-  font-display: swap;
-  src: local('Poppins');
+html {
+  position: relative;
 }
 
 :root {
@@ -44,7 +37,7 @@
   --color-black-fogra: #020202ff;
 
   /* Typography */
-  --font-body: Poppins, sans-serif;
+  --font-body: inherit;
 
   /* Background images */
   --image-hero-lg: url("/images/hero-1080.png");
@@ -59,7 +52,7 @@
 body {
   background: #ffffff;
   color: #020202ff;
-  font-family: Poppins, sans-serif;
+  font-family: inherit;
 }
 
 h1 {

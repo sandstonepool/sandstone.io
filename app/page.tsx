@@ -6,12 +6,12 @@ import { FAQ } from '@/components/sections/FAQ'
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <div className="relative min-h-screen">
       <Hero />
       <WhySandstone />
       <GettingStarted />
       <Security />
       <FAQ />
-    </main>
+    </div>
   )
 }

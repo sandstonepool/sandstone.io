@@ -50,11 +50,11 @@ export const en = {
     title: "Getting Started",
     steps: {
       step1: "Get a wallet. We recommend {lace} for its clean interface and staking features.",
-      step2: "Find us. Search for {ticker} in your wallet's stake pool list, or use our {poolId}.",
+      step2: "Find us. Search for {ticker} in your wallet's stake pool list, or use our pool ID:{poolId}",
       step3: "Delegate your ADA. Choose how much to stake and confirm—your ADA never leaves your wallet.",
       step4: "Start earning. Rewards arrive automatically every epoch (approximately every 5 days).",
     },
-    poolId: "Pool ID",
+    poolId: "",
     copied: "Copied to Clipboard",
   },
   security: {

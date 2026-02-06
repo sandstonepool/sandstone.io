@@ -50,11 +50,11 @@ export const es = {
     title: "Comenzar",
     steps: {
       step1: "Obtén una billetera. Recomendamos {lace} por su interfaz limpia y características de participación.",
-      step2: "Encuéntranos. Busca {ticker} en la lista de pools de tu billetera, o usa nuestro {poolId}.",
+      step2: "Encuéntranos. Busca {ticker} en la lista de pools de tu billetera, o usa nuestro ID del Pool:{poolId}",
       step3: "Delega tu ADA. Elige cuánto delegar y confirma: tu ADA nunca sale de tu billetera.",
       step4: "Comienza a ganar. Las recompensas llegan automáticamente cada época (aproximadamente cada 5 días).",
     },
-    poolId: "ID del Pool",
+    poolId: "",
     copied: "Copiado al Portapapeles",
   },
   security: {

@@ -50,11 +50,11 @@ export const de = {
     title: "Erste Schritte",
     steps: {
       step1: "Holen Sie sich eine Wallet. Wir empfehlen {lace} für seine klare Benutzeroberfläche und Staking-Funktionen.",
-      step2: "Finden Sie uns. Suchen Sie nach {ticker} in der Stakepool-Liste Ihrer Wallet oder verwenden Sie unsere {poolId}.",
+      step2: "Finden Sie uns. Suchen Sie nach {ticker} in der Stakepool-Liste Ihrer Wallet oder verwenden Sie unsere Pool-ID:{poolId}",
       step3: "Delegieren Sie Ihr ADA. Wählen Sie, wie viel Sie staken möchten und bestätigen Sie: Ihr ADA verlässt nie Ihre Wallet.",
       step4: "Beginnen Sie zu verdienen. Belohnungen kommen automatisch jede Epoche (ungefähr alle 5 Tage).",
     },
-    poolId: "Pool-ID",
+    poolId: "",
     copied: "In Zwischenablage kopiert",
   },
   security: {

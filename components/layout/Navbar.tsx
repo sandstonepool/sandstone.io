@@ -65,7 +65,7 @@ export function Navbar() {
                     alt="Sandstone Home Page"
                     width={205}
                     height={25}
-                    className="h-6 w-auto sm:h-6"
+                    className="w-51.25 h-6.25"
                   />
                 </Link>
               ) : (
@@ -75,7 +75,7 @@ export function Navbar() {
                     alt="Sandstone Home Page"
                     width={205}
                     height={25}
-                    className="h-6 w-auto sm:h-6"
+                    className="w-51.25 h-6.25"
                   />
                 </Link>
               )}

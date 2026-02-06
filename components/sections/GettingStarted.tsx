@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { ClipboardDocumentIcon } from '@heroicons/react/24/outline'
 import * as Tooltip from '@radix-ui/react-tooltip'
 import { Container } from '@/components/ui/Container'
-import { POOL_ID_HEX } from '@/lib/utils/constants'
+import { POOL_ID_BECH } from '@/lib/utils/constants'
 import { useTranslation } from '@/lib/i18n'
 
 function PoolIdCopy() {
@@ -13,7 +13,7 @@ function PoolIdCopy() {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(POOL_ID_HEX)
+    await navigator.clipboard.writeText(POOL_ID_BECH)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
@@ -24,10 +24,10 @@ function PoolIdCopy() {
         <Tooltip.Trigger asChild>
           <strong
             onClick={handleCopy}
-            className="inline-flex items-center gap-2 backdrop-blur-md bg-linear-to-r from-blue-500/20 to-purple-500/20 border border-blue-300/50 rounded-lg px-3 py-1 cursor-pointer hover:from-blue-500/30 hover:to-purple-500/30 hover:scale-105 transition-all"
+            className="inline-flex items-center gap-1 backdrop-blur-md bg-linear-to-r from-blue-500/20 to-purple-500/20 border border-blue-300/50 rounded-lg px-2 py-0.5 cursor-pointer hover:from-blue-500/30 hover:to-purple-500/30 hover:scale-105 transition-all max-w-full"
           >
-            <span className="bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-bold">{t.gettingStarted.poolId}</span>
-            <ClipboardDocumentIcon className="w-5 h-5 text-blue-600" />
+            <span className="bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-bold text-xs truncate">{POOL_ID_BECH}</span>
+            <ClipboardDocumentIcon className="w-4 h-4 shrink-0 text-blue-600" />
           </strong>
         </Tooltip.Trigger>
         <Tooltip.Portal>
@@ -67,8 +67,9 @@ export function GettingStarted() {
           {t.gettingStarted.steps.step2.split('{ticker}')[0]}
           <strong className="bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">SAND</strong>
           {t.gettingStarted.steps.step2.split('{ticker}')[1].split('{poolId}')[0]}
-          <PoolIdCopy />
-          {t.gettingStarted.steps.step2.split('{poolId}')[1]}
+          <span className="flex justify-center mt-2">
+            <PoolIdCopy />
+          </span>
         </>
       )
     },
@@ -100,7 +101,7 @@ export function GettingStarted() {
             </span>
           </h2>
 
-          <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
             {steps.map((step, index) => (
               <motion.div
                 key={step.number}
