@@ -87,7 +87,7 @@ export default async function BlogPostPage({ params }: Props) {
 
       <BlogPostJsonLd post={post} url={`${BASE_URL}/blog/${slug}`} />
 
-      <div className="relative mx-auto max-w-7xl px-8 py-16">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-16">
         <Breadcrumbs items={breadcrumbs} />
         <BlogPost post={post} />
         {relatedPosts.length > 0 && <RelatedPosts posts={relatedPosts} />}

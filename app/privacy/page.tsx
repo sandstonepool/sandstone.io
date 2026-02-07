@@ -13,9 +13,9 @@ export default function PrivacyPage() {
       {/* Gradient background */}
       <div className="absolute inset-0 bg-linear-to-br from-blue-50/30 via-indigo-50/30 to-purple-50/30 -z-10" />
 
-      <div id="privacy" className="relative mx-auto max-w-5xl px-8 py-16">
+      <div id="privacy" className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-8 sm:py-16">
         <div className="backdrop-blur-md bg-white/40 border border-white/60 rounded-xl shadow-lg">
-          <section id="policy" className="p-8">
+          <section id="policy" className="p-4 sm:p-6 lg:p-8">
           <h1 className="text-4xl sm:text-5xl font-extrabold mb-6">
             <span className="bg-linear-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
               Privacy Policy
@@ -42,7 +42,7 @@ export default function PrivacyPage() {
           </ol>
           </section>
 
-          <section id="application" className="p-8 border-t border-white/30">
+          <section id="application" className="p-4 sm:p-6 lg:p-8 border-t border-white/30">
           <h2><span className="bg-linear-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Application of this Privacy Policy</span></h2>
           <p className="text-gray-700 leading-relaxed">
             SANDSTONE&apos;s Privacy Policy applies to personal information collected by SANDSTONE, whether we have asked for
@@ -52,7 +52,7 @@ export default function PrivacyPage() {
           </p>
           </section>
 
-          <section id="collection" className="p-8 border-t border-white/30">
+          <section id="collection" className="p-4 sm:p-6 lg:p-8 border-t border-white/30">
           <h2><span className="bg-linear-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Collection and use of personal information</span></h2>
           <h3><span className="bg-linear-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Why we collect personal information</span></h3>
           <p className="text-gray-700 leading-relaxed">
@@ -97,7 +97,7 @@ export default function PrivacyPage() {
           </ol>
           </section>
 
-          <section id="disclosure" className="p-8 border-t border-white/30">
+          <section id="disclosure" className="p-4 sm:p-6 lg:p-8 border-t border-white/30">
           <h2><span className="bg-linear-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Disclosure of Personal Information</span></h2>
           <h3><span className="bg-linear-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Disclosure of personal information to third parties</span></h3>
           <p className="text-gray-700 leading-relaxed">

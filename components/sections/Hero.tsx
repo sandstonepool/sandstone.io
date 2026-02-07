@@ -79,7 +79,7 @@ export function Hero() {
       {/* Main Content */}
       <motion.div
         style={{ y, opacity }}
-        className="relative z-20 mx-auto px-6 sm:px-10 max-w-7xl w-full"
+        className="relative z-20 mx-auto px-4 sm:px-6 lg:px-10 max-w-7xl w-full"
       >
         <div className="relative pb-12">
           {/* Main Content - NO animation delays for critical above-the-fold content */}
@@ -106,8 +106,8 @@ export function Hero() {
               </div>
 
               {/* Description */}
-              <div className="max-w-2xl mt-6 sm:mt-8">
-                <p className="text-xl sm:text-2xl text-gray-500 leading-relaxed">
+              <div className="max-w-2xl mt-4 sm:mt-8">
+                <p className="text-lg sm:text-xl md:text-2xl text-gray-500 leading-relaxed">
                   {t.hero.description}
                 </p>
               </div>
@@ -117,22 +117,22 @@ export function Hero() {
                 initial={{ opacity: 0.8, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0 }}
-                className="flex flex-col items-center justify-center sm:flex-row sm:flex-wrap gap-2.5 relative z-10 mt-14 sm:mt-16"
+                className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-2.5 relative z-10 mt-8 sm:mt-16 w-full max-w-3xl lg:max-w-none"
                 role="region"
                 aria-label="Pool statistics"
               >
                 {/* Margin Fee */}
                 <div
-                  className="bg-white/30 border border-gray-300/70 rounded-xl p-3 text-center aspect-4/3 flex flex-col items-center justify-center w-44"
+                  className="bg-white/30 border border-gray-300/70 rounded-xl p-2.5 sm:p-3 text-center flex flex-col items-center justify-center"
                   role="article"
                   aria-label="Margin fee statistic"
                 >
-                  <div className="flex justify-center mb-2" aria-hidden="true">
-                    <ChartBarIcon className="h-5 w-5 text-blue-600" />
+                  <div className="flex justify-center mb-1.5 sm:mb-2" aria-hidden="true">
+                    <ChartBarIcon className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
                   </div>
-                  <div className="text-xl sm:text-2xl font-bold text-gray-900 h-7 sm:h-8 flex items-center justify-center" aria-live="polite">
+                  <div className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 h-6 sm:h-8 flex items-center justify-center" aria-live="polite">
                     {loading ? (
-                      <div className="h-7 w-16 sm:w-20 bg-gray-200/70 rounded-md animate-pulse mx-auto" aria-label="Loading margin fee" />
+                      <div className="h-6 sm:h-7 w-14 sm:w-20 bg-gray-200/70 rounded-md animate-pulse mx-auto" aria-label="Loading margin fee" />
                     ) : poolStats ? (
                       <AnimatedNumber
                         // value={poolStats.interest * 100}
@@ -144,21 +144,21 @@ export function Hero() {
                       <a href={CARDANOSCAN_POOL_URL} target="_blank" rel="noopener" className="text-gray-400 hover:text-blue-600 transition-colors">—</a>
                     )}
                   </div>
-                  <div className="text-xs sm:text-sm text-gray-500 mt-1.5">{t.hero.stats.marginFee}</div>
+                  <div className="text-[10px] sm:text-xs md:text-sm text-gray-500 mt-1 sm:mt-1.5">{t.hero.stats.marginFee}</div>
                 </div>
 
                 {/* Total Stake */}
                 <div
-                  className="bg-white/30 border border-gray-300/70 rounded-xl p-3 text-center aspect-4/3 flex flex-col items-center justify-center w-44"
+                  className="bg-white/30 border border-gray-300/70 rounded-xl p-2.5 sm:p-3 text-center flex flex-col items-center justify-center"
                   role="article"
                   aria-label="Total stake statistic"
                 >
-                  <div className="flex justify-center mb-2" aria-hidden="true">
-                    <BanknotesIcon className="h-5 w-5 text-green-600" />
+                  <div className="flex justify-center mb-1.5 sm:mb-2" aria-hidden="true">
+                    <BanknotesIcon className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
                   </div>
-                  <div className="text-xl sm:text-2xl font-bold text-gray-900 h-7 sm:h-8 flex items-center justify-center" aria-live="polite">
+                  <div className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 h-6 sm:h-8 flex items-center justify-center" aria-live="polite">
                     {loading ? (
-                      <div className="h-7 w-16 sm:w-20 bg-gray-200/70 rounded-md animate-pulse mx-auto" aria-label={t.hero.stats.loading} />
+                      <div className="h-6 sm:h-7 w-14 sm:w-20 bg-gray-200/70 rounded-md animate-pulse mx-auto" aria-label={t.hero.stats.loading} />
                     ) : poolStats ? (
                       <AnimatedNumber
                         value={parseFloat(poolStats.liveStake) / 1_000_000_000}
@@ -169,21 +169,21 @@ export function Hero() {
                       <a href={CARDANOSCAN_POOL_URL} target="_blank" rel="noopener" className="text-gray-400 hover:text-blue-600 transition-colors">—</a>
                     )}
                   </div>
-                  <div className="text-xs sm:text-sm text-gray-500 mt-1.5">{t.hero.stats.stake}</div>
+                  <div className="text-[10px] sm:text-xs md:text-sm text-gray-500 mt-1 sm:mt-1.5">{t.hero.stats.stake}</div>
                 </div>
 
                 {/* Pledge */}
                 <div
-                  className="bg-white/30 border border-gray-300/70 rounded-xl p-3 text-center aspect-4/3 flex flex-col items-center justify-center w-44"
+                  className="bg-white/30 border border-gray-300/70 rounded-xl p-2.5 sm:p-3 text-center flex flex-col items-center justify-center"
                   role="article"
                   aria-label="Pool pledge statistic"
                 >
-                  <div className="flex justify-center mb-2" aria-hidden="true">
-                    <ShieldCheckIcon className="h-5 w-5 text-purple-600" />
+                  <div className="flex justify-center mb-1.5 sm:mb-2" aria-hidden="true">
+                    <ShieldCheckIcon className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600" />
                   </div>
-                  <div className="text-xl sm:text-2xl font-bold text-gray-900 h-7 sm:h-8 flex items-center justify-center" aria-live="polite">
+                  <div className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 h-6 sm:h-8 flex items-center justify-center" aria-live="polite">
                     {loading ? (
-                      <div className="h-7 w-16 sm:w-20 bg-gray-200/70 rounded-md animate-pulse mx-auto" aria-label={t.hero.stats.loading} />
+                      <div className="h-6 sm:h-7 w-14 sm:w-20 bg-gray-200/70 rounded-md animate-pulse mx-auto" aria-label={t.hero.stats.loading} />
                     ) : poolStats ? (
                       <AnimatedNumber
                         value={parseFloat(poolStats.activePledge) / 1_000_000}
@@ -194,21 +194,21 @@ export function Hero() {
                       <a href={CARDANOSCAN_POOL_URL} target="_blank" rel="noopener" className="text-gray-400 hover:text-blue-600 transition-colors">—</a>
                     )}
                   </div>
-                  <div className="text-xs sm:text-sm text-gray-500 mt-1.5">{t.hero.stats.pledge}</div>
+                  <div className="text-[10px] sm:text-xs md:text-sm text-gray-500 mt-1 sm:mt-1.5">{t.hero.stats.pledge}</div>
                 </div>
 
                 {/* Lifetime Blocks */}
                 <div
-                  className="bg-white/30 border border-gray-300/70 rounded-xl p-3 text-center aspect-4/3 flex flex-col items-center justify-center w-44"
+                  className="bg-white/30 border border-gray-300/70 rounded-xl p-2.5 sm:p-3 text-center flex flex-col items-center justify-center"
                   role="article"
                   aria-label="Lifetime blocks produced statistic"
                 >
-                  <div className="flex justify-center mb-2" aria-hidden="true">
-                    <CubeIcon className="h-5 w-5 text-rose-600" />
+                  <div className="flex justify-center mb-1.5 sm:mb-2" aria-hidden="true">
+                    <CubeIcon className="h-4 w-4 sm:h-5 sm:w-5 text-rose-600" />
                   </div>
-                  <div className="text-xl sm:text-2xl font-bold text-gray-900 h-7 sm:h-8 flex items-center justify-center" aria-live="polite">
+                  <div className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 h-6 sm:h-8 flex items-center justify-center" aria-live="polite">
                     {loading ? (
-                      <div className="h-7 w-16 sm:w-20 bg-gray-200/70 rounded-md animate-pulse mx-auto" aria-label={t.hero.stats.loading} />
+                      <div className="h-6 sm:h-7 w-14 sm:w-20 bg-gray-200/70 rounded-md animate-pulse mx-auto" aria-label={t.hero.stats.loading} />
                     ) : poolStats ? (
                       <AnimatedNumber
                         value={poolStats.lifetimeBlocks}
@@ -219,21 +219,21 @@ export function Hero() {
                       <a href={CARDANOSCAN_POOL_URL} target="_blank" rel="noopener" className="text-gray-400 hover:text-blue-600 transition-colors">—</a>
                     )}
                   </div>
-                  <div className="text-xs sm:text-sm text-gray-500 mt-1.5">{t.hero.stats.lifetimeBlocks}</div>
+                  <div className="text-[10px] sm:text-xs md:text-sm text-gray-500 mt-1 sm:mt-1.5">{t.hero.stats.lifetimeBlocks}</div>
                 </div>
 
                 {/* Lifetime Rewards */}
                 <div
-                  className="bg-white/30 border border-gray-300/70 rounded-xl p-3 text-center aspect-4/3 flex flex-col items-center justify-center w-44"
+                  className="bg-white/30 border border-gray-300/70 rounded-xl p-2.5 sm:p-3 text-center flex flex-col items-center justify-center col-span-2 sm:col-span-1"
                   role="article"
                   aria-label="Lifetime rewards distributed statistic"
                 >
-                  <div className="flex justify-center mb-2" aria-hidden="true">
-                    <CurrencyDollarIcon className="h-5 w-5 text-amber-600" />
+                  <div className="flex justify-center mb-1.5 sm:mb-2" aria-hidden="true">
+                    <CurrencyDollarIcon className="h-4 w-4 sm:h-5 sm:w-5 text-amber-600" />
                   </div>
-                  <div className="text-xl sm:text-2xl font-bold text-gray-900 h-7 sm:h-8 flex items-center justify-center" aria-live="polite">
+                  <div className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 h-6 sm:h-8 flex items-center justify-center" aria-live="polite">
                     {loading ? (
-                      <div className="h-7 w-16 sm:w-20 bg-gray-200/70 rounded-md animate-pulse mx-auto" aria-label={t.hero.stats.loading} />
+                      <div className="h-6 sm:h-7 w-14 sm:w-20 bg-gray-200/70 rounded-md animate-pulse mx-auto" aria-label={t.hero.stats.loading} />
                     ) : poolStats ? (
                       <AnimatedNumber
                         value={parseFloat(poolStats.lifetimeRewards) / 1_000_000}
@@ -244,7 +244,7 @@ export function Hero() {
                       <a href={CARDANOSCAN_POOL_URL} target="_blank" rel="noopener" className="text-gray-400 hover:text-blue-600 transition-colors">—</a>
                     )}
                   </div>
-                  <div className="text-xs sm:text-sm text-gray-500 mt-1.5">{t.hero.stats.lifetimeRewards}</div>
+                  <div className="text-[10px] sm:text-xs md:text-sm text-gray-500 mt-1 sm:mt-1.5">{t.hero.stats.lifetimeRewards}</div>
                 </div>
               </motion.div>
 

@@ -55,7 +55,7 @@ export default async function TagPage({ params }: Props) {
     <div className="min-h-screen relative">
       <div className="absolute inset-0 bg-linear-to-br from-blue-50/30 via-indigo-50/30 to-purple-50/30 -z-10" />
 
-      <div className="relative mx-auto max-w-7xl px-8 py-16">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-16">
         <Breadcrumbs items={breadcrumbs} />
 
         <div className="flex items-center justify-between mb-8">

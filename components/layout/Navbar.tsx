@@ -29,30 +29,33 @@ export function Navbar() {
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, anchor: string) => {
     e.preventDefault()
-    scrollToSection(anchor)
-    setIsOpen(false) // Close mobile menu
+    if (isOpen) {
+      // Close the menu first, then scroll after the exit animation completes
+      setIsOpen(false)
+      setTimeout(() => scrollToSection(anchor), 350)
+    } else {
+      scrollToSection(anchor)
+    }
   }
 
   return (
-    <nav className="sticky w-full z-50 px-4 backdrop-blur-md bg-white/80 border-b border-white/60 shadow-lg left-0 right-0 top-0">
+    <nav className="sticky w-full z-50 px-2 sm:px-4 backdrop-blur-md bg-white/80 border-b border-white/60 shadow-lg left-0 right-0 top-0">
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-        <div className="relative flex items-center justify-between h-16">
-          {/* Mobile menu button - only show on home page */}
-          {isHomePage && (
-            <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="inline-flex items-center justify-center p-2 rounded-lg backdrop-blur-md bg-white/40 border border-white/60 hover:bg-white/60 hover:scale-105 transition-all shadow-sm"
-                aria-label="Toggle menu"
-              >
-                {isOpen ? (
-                  <XMarkIcon className="block h-6 w-6 text-gray-700" aria-hidden="true" />
-                ) : (
-                  <Bars3Icon className="block h-6 w-6 text-gray-700" aria-hidden="true" />
-                )}
-              </button>
-            </div>
-          )}
+        <div className="relative flex items-center justify-between h-14 sm:h-16">
+          {/* Mobile menu button */}
+          <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="inline-flex items-center justify-center p-2 rounded-lg backdrop-blur-md bg-white/40 border border-white/60 hover:bg-white/60 hover:scale-105 transition-all shadow-sm"
+              aria-label="Toggle menu"
+            >
+              {isOpen ? (
+                <XMarkIcon className="block h-6 w-6 text-gray-700" aria-hidden="true" />
+              ) : (
+                <Bars3Icon className="block h-6 w-6 text-gray-700" aria-hidden="true" />
+              )}
+            </button>
+          </div>
 
           {/* Logo and navigation */}
           <div className="flex-1 flex items-center justify-center md:items-stretch md:justify-between">
@@ -65,7 +68,7 @@ export function Navbar() {
                     alt="Sandstone Home Page"
                     width={205}
                     height={25}
-                    className="w-51.25 h-6.25"
+                    className="w-36 sm:w-44 md:w-51.25 h-auto"
                   />
                 </Link>
               ) : (
@@ -75,7 +78,7 @@ export function Navbar() {
                     alt="Sandstone Home Page"
                     width={205}
                     height={25}
-                    className="w-51.25 h-6.25"
+                    className="w-36 sm:w-44 md:w-51.25 h-auto"
                   />
                 </Link>
               )}
@@ -128,43 +131,58 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile menu panel - only show on home page */}
-      {isHomePage && (
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden overflow-hidden backdrop-blur-md bg-white/40 border-t border-white/60"
-            >
-              <div className="px-2 pt-2 pb-3 space-y-2">
-                {navItems.map((item) => (
-                  <a
-                    key={item.anchor}
-                    href={item.anchor}
-                    onClick={(e) => handleClick(e, item.anchor)}
-                    className={`block px-4 py-2 rounded-lg text-base font-semibold cursor-pointer transition-all ${
-                      activeSection === item.anchor
-                        ? 'backdrop-blur-md bg-white/60 border border-white/80 shadow-md bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent'
-                        : 'text-gray-700 border border-transparent hover:backdrop-blur-md hover:bg-white/50 hover:border-white/60'
-                    }`}
-                  >
-                    {item.name}
-                  </a>
-                ))}
-                <Link
-                  href="/blog"
-                  className="block px-4 py-2 rounded-lg text-base font-semibold cursor-pointer transition-all text-gray-700 border border-transparent hover:backdrop-blur-md hover:bg-white/50 hover:border-white/60"
+      {/* Mobile menu panel */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden overflow-hidden backdrop-blur-md bg-white/40 border-t border-white/60"
+          >
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              {isHomePage && navItems.map((item) => (
+                <a
+                  key={item.anchor}
+                  href={item.anchor}
+                  onClick={(e) => handleClick(e, item.anchor)}
+                  className={`block px-4 py-2.5 rounded-lg text-base font-semibold cursor-pointer transition-all ${
+                    activeSection === item.anchor
+                      ? 'backdrop-blur-md bg-white/60 border border-white/80 shadow-md bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent'
+                      : 'text-gray-700 border border-transparent hover:backdrop-blur-md hover:bg-white/50 hover:border-white/60'
+                  }`}
                 >
-                  {t.nav.blog}
+                  {item.name}
+                </a>
+              ))}
+              {!isHomePage && (
+                <Link
+                  href="/"
+                  className="block px-4 py-2.5 rounded-lg text-base font-semibold cursor-pointer transition-all text-gray-700 border border-transparent hover:backdrop-blur-md hover:bg-white/50 hover:border-white/60"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Home
                 </Link>
+              )}
+              <Link
+                href="/blog"
+                className={`block px-4 py-2.5 rounded-lg text-base font-semibold cursor-pointer transition-all ${
+                  pathname.startsWith('/blog')
+                    ? 'backdrop-blur-md bg-white/60 border border-white/80 shadow-md bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent'
+                    : 'text-gray-700 border border-transparent hover:backdrop-blur-md hover:bg-white/50 hover:border-white/60'
+                }`}
+                onClick={() => setIsOpen(false)}
+              >
+                {t.nav.blog}
+              </Link>
+              <div className="px-4 pt-2">
+                <LanguageSwitcher />
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   )
 }

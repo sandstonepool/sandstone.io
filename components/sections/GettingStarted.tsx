@@ -84,7 +84,7 @@ export function GettingStarted() {
   ]
 
   return (
-    <section id="getting-started" className="relative mx-auto max-w-7xl mt-20 mb-20 px-8 py-16">
+    <section id="getting-started" className="relative mx-auto max-w-7xl mt-12 sm:mt-20 mb-12 sm:mb-20 px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
       {/* Gradient background */}
       <div className="absolute inset-0 bg-linear-to-br from-green-50/50 via-teal-50/50 to-cyan-50/50 rounded-3xl -z-10" />
 
@@ -95,13 +95,13 @@ export function GettingStarted() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl sm:text-5xl font-extrabold mb-8">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 sm:mb-8">
             <span className="bg-linear-to-r from-green-600 via-teal-600 to-cyan-600 bg-clip-text text-transparent">
               {t.gettingStarted.title}
             </span>
           </h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6 mt-6 sm:mt-8">
             {steps.map((step, index) => (
               <motion.div
                 key={step.number}
@@ -109,13 +109,13 @@ export function GettingStarted() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="backdrop-blur-md bg-white/40 border border-white/60 rounded-xl p-6 hover:bg-white/50 hover:scale-105 hover:shadow-xl transition-all flex items-start gap-6"
+                className="backdrop-blur-md bg-white/40 border border-white/60 rounded-xl p-4 sm:p-6 hover:bg-white/50 hover:shadow-xl transition-all flex items-start gap-3 sm:gap-6 sm:hover:scale-105"
               >
-                <div className="w-16 h-16 shrink-0 rounded-full bg-linear-to-br from-green-500 to-teal-500 flex items-center justify-center shadow-lg">
-                  <span className="text-3xl font-bold text-white">{step.number}</span>
+                <div className="w-10 h-10 sm:w-16 sm:h-16 shrink-0 rounded-full bg-linear-to-br from-green-500 to-teal-500 flex items-center justify-center shadow-lg">
+                  <span className="text-xl sm:text-3xl font-bold text-white">{step.number}</span>
                 </div>
-                <div className="pt-2 min-w-0">
-                  <p className="text-gray-700 leading-relaxed">
+                <div className="pt-0 sm:pt-2 min-w-0">
+                  <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                     {step.content}
                   </p>
                 </div>

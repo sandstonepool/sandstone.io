@@ -51,11 +51,11 @@ export function Security() {
   ]
 
   return (
-    <div id="security" className="relative w-full mx-auto mt-20 mb-20 py-16 overflow-hidden">
+    <div id="security" className="relative w-full mx-auto mt-12 sm:mt-20 mb-12 sm:mb-20 py-10 sm:py-16 overflow-hidden">
       {/* Gradient background */}
       <div className="absolute inset-0 bg-linear-to-br from-red-50 via-orange-50 to-yellow-50" />
 
-      <section className="relative z-10 mx-auto max-w-7xl px-8">
+      <section className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Container>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -63,12 +63,12 @@ export function Security() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl sm:text-5xl font-extrabold mb-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-3 sm:mb-4">
               <span className="bg-linear-to-r from-red-600 via-orange-600 to-yellow-600 bg-clip-text text-transparent">
                 {t.security.title}
               </span>
             </h2>
-            <p className="text-lg text-gray-700 leading-relaxed mb-8">
+            <p className="text-base sm:text-lg text-gray-700 leading-relaxed mb-6 sm:mb-8">
               {t.security.description}
             </p>
 
@@ -77,13 +77,13 @@ export function Security() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
-              className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8"
+              className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mt-6 sm:mt-8"
             >
               {securityRules.map((rule) => (
                 <motion.div key={rule.number} variants={itemVariants}>
-                  <div className="backdrop-blur-md bg-white/40 border border-white/60 rounded-xl p-6 text-center hover:bg-white/50 hover:scale-105 hover:shadow-xl transition-all h-full">
-                    <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-linear-to-br from-red-500 to-orange-500 flex items-center justify-center">
-                      <span className="text-2xl font-bold text-white">{rule.number}</span>
+                  <div className="backdrop-blur-md bg-white/40 border border-white/60 rounded-xl p-3 sm:p-6 text-center hover:bg-white/50 hover:shadow-xl transition-all h-full sm:hover:scale-105">
+                    <div className="w-9 h-9 sm:w-12 sm:h-12 mx-auto mb-2 sm:mb-4 rounded-full bg-linear-to-br from-red-500 to-orange-500 flex items-center justify-center">
+                      <span className="text-lg sm:text-2xl font-bold text-white">{rule.number}</span>
                     </div>
                     <p className="text-sm leading-relaxed text-gray-700">
                       {rule.text}

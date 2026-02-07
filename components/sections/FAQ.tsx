@@ -11,7 +11,7 @@ export function FAQ() {
   const { t } = useTranslation()
 
   return (
-    <section id="faq" className="relative mx-auto max-w-7xl mt-20 mb-20 px-8 py-16">
+    <section id="faq" className="relative mx-auto max-w-7xl mt-12 sm:mt-20 mb-12 sm:mb-20 px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
       {/* Gradient background */}
       <div className="absolute inset-0 bg-linear-to-br from-purple-50/50 via-pink-50/50 to-rose-50/50 rounded-3xl -z-10" />
 
@@ -22,15 +22,15 @@ export function FAQ() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl sm:text-5xl font-extrabold mb-8">
+          <h2 className="text-4xl sm:text-5xl font-extrabold mb-6 sm:mb-8">
             <span className="bg-linear-to-r from-purple-600 via-pink-600 to-rose-600 bg-clip-text text-transparent">
               {t.faq.title}
             </span>
           </h2>
 
-          <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {/* FAQ Items */}
-            <div className="grid gap-4 md:col-span-2">
+            <div className="grid gap-3 sm:gap-4 md:col-span-2">
               {t.faq.items.map((faq, index) => (
                 <motion.div
                   key={index}
@@ -47,10 +47,10 @@ export function FAQ() {
               ))}
             </div>
 
-            {/* Sidebar */}
-            <div className="sticky w-full top-14 h-fit">
-              <div className="backdrop-blur-md bg-white/40 border border-white/60 rounded-xl p-6 hover:bg-white/50 hover:shadow-xl transition-all">
-                {/* Decorative Icon Stack */}
+            {/* Sidebar - visible on all screens, sticky only on desktop */}
+            <div className="md:sticky w-full md:top-20 h-fit">
+              <div className="backdrop-blur-md bg-white/40 border border-white/60 rounded-xl p-5 sm:p-6 hover:bg-white/50 hover:shadow-xl transition-all">
+                {/* Decorative Icon Stack - hidden on mobile */}
                 <div className="relative w-32 h-32 mx-auto mb-6 hidden md:block">
                   {/* Background circle */}
                   <div className="absolute inset-0 bg-linear-to-br from-purple-100 to-pink-100 rounded-full opacity-50 blur-xl"></div>
@@ -90,11 +90,11 @@ export function FAQ() {
                   </div>
                 </div>
 
-                <p className="mb-6 text-gray-700 leading-relaxed">
+                <p className="mb-4 sm:mb-6 text-gray-700 leading-relaxed">
                   {t.faq.sidebarText}
                 </p>
                 <a
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-linear-to-r from-purple-600 to-pink-600 text-white font-semibold hover:from-purple-700 hover:to-pink-700 hover:scale-105 transition-all shadow-lg hover:shadow-xl"
+                  className="inline-flex items-center gap-2 px-5 sm:px-6 py-3 rounded-full bg-linear-to-r from-purple-600 to-pink-600 text-white font-semibold hover:from-purple-700 hover:to-pink-700 hover:scale-105 transition-all shadow-lg hover:shadow-xl"
                   href={`mailto:${CONTACT_EMAIL}?subject=General Enquiry`}
                 >
                   {t.faq.contactUs}

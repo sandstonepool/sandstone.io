@@ -10,7 +10,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="relative left-0 right-0 pt-16 pb-20 overflow-hidden">
+    <footer className="relative left-0 right-0 pt-10 sm:pt-16 pb-12 sm:pb-20 overflow-hidden">
       {/* Gradient background */}
       <div className="absolute inset-0 bg-linear-to-br from-blue-600 via-indigo-600 to-purple-600" />
 
@@ -18,7 +18,7 @@ export function Footer() {
       <div className="absolute top-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
 
-      <div className="relative z-10 grid gap-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 max-w-7xl px-8 mx-auto text-white">
+      <div className="relative z-10 grid gap-8 sm:gap-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto text-white">
         {/* Logo and Company Info */}
         <div className="flex flex-col text-sm">
           <div className="mb-4">
@@ -145,8 +145,8 @@ export function Footer() {
       </div>
 
       {/* Copyright */}
-      <div className="relative z-10 mt-12 pt-8 border-t border-white/20">
-        <p className="text-center text-sm text-white/70">
+      <div className="relative z-10 mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-white/20 mx-4 sm:mx-6 lg:mx-8">
+        <p className="text-center text-xs sm:text-sm text-white/70">
           {t.footer.copyright.replace('{year}', currentYear.toString()).replace('{company}', COMPANY_NAME)}
         </p>
       </div>

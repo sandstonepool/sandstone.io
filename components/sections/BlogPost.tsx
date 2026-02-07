@@ -144,7 +144,7 @@ export function BlogPost({ post }: BlogPostProps) {
         <ShareButtons url={postUrl} title={post.title} description={post.description} />
       </header>
 
-      <div className="backdrop-blur-md bg-white/40 border border-white/60 rounded-xl p-8 sm:p-12 shadow-lg prose prose-lg prose-gray max-w-none prose-blog
+      <div className="backdrop-blur-md bg-white/40 border border-white/60 rounded-xl p-4 sm:p-8 md:p-12 shadow-lg prose prose-lg prose-gray max-w-none prose-blog
         prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-6
         prose-strong:text-gray-900 prose-strong:font-semibold
         prose-li:text-gray-700
