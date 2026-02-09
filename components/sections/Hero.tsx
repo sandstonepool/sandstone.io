@@ -84,6 +84,29 @@ export function Hero() {
         <div className="relative pb-12">
           {/* Main Content - NO animation delays for critical above-the-fold content */}
           <div className="flex flex-col items-start justify-start">
+              {/* Delegate CTA */}
+              <div className="flex items-center gap-3 mb-4 sm:mb-6">
+                <a
+                  href="https://cexplorer.io/pool/pool1gqvrgg7zycvf65ydkjeph72t0yx0f5ykzd9f477zh4f3smwk997?action=delegate"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn text-sm sm:text-base !rounded-full !px-5 !py-2.5 !shadow-lg hover:!shadow-xl hover:scale-105 transition-all"
+                >
+                  Delegate to [SAND]
+                </a>
+                <motion.svg
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  className="w-7 h-7 sm:w-8 sm:h-8 text-indigo-600 shrink-0 -rotate-90 -scale-x-100"
+                  aria-hidden="true"
+                >
+                  <path d="M6.75 1a.75.75 0 0 1 .75.75V8a.5.5 0 0 0 1 0V5.467l.086-.004c.317-.012.637-.008.816.027.134.027.294.096.448.182.077.042.15.147.15.314V8a.5.5 0 0 0 1 0V6.435l.106-.01c.316-.024.584-.01.708.04.118.046.3.207.486.43.081.096.15.19.2.259V8.5a.5.5 0 1 0 1 0v-1h.342a1 1 0 0 1 .995 1.1l-.271 2.715a2.5 2.5 0 0 1-.317.991l-1.395 2.442a.5.5 0 0 1-.434.252H6.118a.5.5 0 0 1-.447-.276l-1.232-2.465-2.512-4.185a.517.517 0 0 1 .809-.631l2.41 2.41A.5.5 0 0 0 6 9.5V1.75A.75.75 0 0 1 6.75 1M8.5 4.466V1.75a1.75 1.75 0 1 0-3.5 0v6.543L3.443 6.736A1.517 1.517 0 0 0 1.07 8.588l2.491 4.153 1.215 2.43A1.5 1.5 0 0 0 6.118 16h6.302a1.5 1.5 0 0 0 1.302-.756l1.395-2.441a3.5 3.5 0 0 0 .444-1.389l.271-2.715a2 2 0 0 0-1.99-2.199h-.581a5 5 0 0 0-.195-.248c-.191-.229-.51-.568-.88-.716-.364-.146-.846-.132-1.158-.108l-.132.012a1.26 1.26 0 0 0-.56-.642 2.6 2.6 0 0 0-.738-.288c-.31-.062-.739-.058-1.05-.046zm2.094 2.025" />
+                </motion.svg>
+              </div>
+
               {/* Main Heading - rotating top line, static bottom line */}
               <div className="text-left">
                 <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[4.8rem] tracking-tighter font-bold text-gray-900 leading-[1.3]">
