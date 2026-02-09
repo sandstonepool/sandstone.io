@@ -120,7 +120,7 @@ export function Hero() {
                   rel="noopener noreferrer"
                   className="btn text-sm sm:text-base !rounded-full !px-5 !py-2.5 !shadow-lg hover:!shadow-xl hover:scale-105 transition-all"
                 >
-                  Delegate to [SAND]
+                  {t.hero.delegateButton}
                 </a>
                 <motion.svg
                   animate={{ y: [0, -6, 0] }}

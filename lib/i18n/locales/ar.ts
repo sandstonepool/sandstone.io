@@ -22,6 +22,7 @@ export const ar = {
       lifetimeRewards: "إجمالي المكافآت",
       loading: "جاري التحميل",
     },
+    delegateButton: "فوّض إلى [SAND]",
     scroll: "قم بالتمرير للاستكشاف",
   },
   whySandstone: {

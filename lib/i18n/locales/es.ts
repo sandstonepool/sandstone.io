@@ -22,6 +22,7 @@ export const es = {
       lifetimeRewards: "Recompensas Totales",
       loading: "Cargando",
     },
+    delegateButton: "Delegar a [SAND]",
     scroll: "Desplázate para explorar",
   },
   whySandstone: {

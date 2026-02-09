@@ -22,6 +22,7 @@ export const ja = {
       lifetimeRewards: "総報酬",
       loading: "読み込み中",
     },
+    delegateButton: "[SAND]に委任する",
     scroll: "スクロールして探索",
   },
   whySandstone: {
