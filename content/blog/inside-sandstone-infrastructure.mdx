@@ -1,0 +1,105 @@
+---
+title: "Inside the Engine Room: How Sandstone Runs a Professional Stake Pool"
+date: "2026-02-14"
+description: "A behind-the-scenes look at the infrastructure, security practices, and engineering discipline that keep the Sandstone stake pool running around the clock."
+tags:
+  - "Infrastructure"
+  - "Staking"
+  - "Cardano"
+author:
+  name: "Sandstone Team"
+  url: "https://x.com/sandstonepool"
+---
+
+Running a Cardano stake pool is more than spinning up a server and hoping for the best. Behind every minted block is infrastructure that needs to be secure, available, and fast. At Sandstone, we treat our stake pool like production-grade enterprise software, because that is exactly what it is. Here is a look at how we do it.
+
+![Sandstone stake pool architecture diagram](/images/blog/sandstone-infrastructure.svg)
+
+## Infrastructure as Code, Not Guesswork
+
+Every piece of Sandstone infrastructure is defined in code. We do not log into a console and click buttons. Our entire stack is managed through AWS CloudFormation templates, versioned in Git, and deployed through an automated pipeline that validates, lints, and packages everything before a single resource is created.
+
+This means our infrastructure is repeatable, auditable, and recoverable. If something goes wrong, we do not scramble to remember how things were set up. We redeploy from code. If we need to make a change, it goes through the same review and validation process as any code change.
+
+## Multi-AZ High Availability
+
+Downtime is not an option when you are responsible for producing blocks. Our infrastructure spans three AWS Availability Zones, which means our nodes are distributed across physically separate data centres within a region. If one data centre has an issue, the others continue operating.
+
+Our relay nodes sit in public subnets across multiple availability zones, each with a dedicated static IP address for reliable peer connectivity. The block producer, which is the node responsible for minting blocks, runs in a private subnet behind an Auto Scaling Group. If the instance goes down for any reason, a new one automatically launches in its place. It can even scale to a second instance for additional redundancy during maintenance windows.
+
+## Network Security
+
+Security starts at the network layer. We follow a strict separation between public and private components:
+
+- **Relay nodes** are the only components that face the public internet, and only on the Cardano peer-to-peer port. Nothing else is exposed.
+- **The block producer** lives in a private subnet with no direct internet access. It communicates only with our relay nodes over an internal network.
+- **Dedicated security groups** enforce least-privilege access between every component. Relays can talk to the block producer, but the block producer cannot be reached from the outside world.
+- **VPC endpoints** provide private connectivity to AWS services like Systems Manager and S3. Traffic between our nodes and AWS never touches the public internet.
+
+There is no SSH access to manage. We use AWS Systems Manager for secure, audited access to instances when needed, eliminating the need for SSH keys entirely.
+
+## Immutable Node Images
+
+We do not patch our servers in place. Instead, we build immutable machine images using Packer and Ansible. Every time we need to update the Cardano node software, we build a completely fresh image from scratch: starting from a hardened Ubuntu LTS base, compiling Cardano node from source with the exact cryptographic libraries required, and configuring everything through automated Ansible roles.
+
+This approach means every node we deploy is identical, tested, and predictable. There is no configuration drift, no forgotten patches, no "works on my machine" problems. When a new node version is released, we update our build configuration, trigger the pipeline, and the new image is built, validated, and ready to deploy.
+
+The build process compiles Cardano node along with all required cryptographic libraries from source, ensuring we have full control over the software running on our nodes. We use ARM-based Graviton processors, which give us excellent performance per dollar while keeping our operating costs low, savings that translate directly into better returns for our delegators.
+
+## Encrypted Everything
+
+Data at rest is encrypted across the board. Our block producer uses an encrypted Elastic File System (EFS) backed by AWS KMS for storing the blockchain database. EBS volumes on all nodes are encrypted. Ledger snapshots stored in S3 are only accessible through tightly scoped IAM policies.
+
+EFS also gives us shared storage that survives instance failures. If the block producer instance is replaced, the new instance mounts the same encrypted file system and picks up where the old one left off, dramatically reducing sync time and minimising any window where the pool might miss a block.
+
+## Automated Backups and Fast Recovery
+
+We run automated hourly backups of the blockchain state to S3. When a new relay node launches, it downloads the latest snapshot rather than syncing from genesis, which means it can be operational in minutes rather than hours.
+
+For the block producer, the shared EFS storage combined with Auto Scaling Group lifecycle hooks ensures that a replacement instance is automatically registered with our internal service discovery system and connected to the relay network. This automation means recovery happens without manual intervention.
+
+## Service Discovery and Internal DNS
+
+Our nodes find each other through AWS Cloud Map service discovery, backed by private DNS. Relay nodes register themselves automatically when they launch and deregister when they terminate. The block producer connects to relays via internal DNS names that resolve instantly (TTL of zero) to ensure failover is immediate.
+
+This means we can add, remove, or replace nodes without updating configuration files or restarting other components. The network topology is dynamic and self-healing.
+
+## Monitoring and Observability
+
+Every node runs a CloudWatch agent collecting metrics at 30-second intervals: CPU utilisation, memory usage, disk I/O, network connections, and process counts. Cardano node itself exposes Prometheus metrics covering chain sync progress, peer connections, block forge events, and more.
+
+We monitor our infrastructure continuously and can identify issues before they impact block production. All logs are structured and aggregated for analysis.
+
+## The Cardano Node Itself
+
+Our Cardano node runs as a systemd service with automatic restart policies, structured logging, and tuned runtime parameters. We configure the Haskell garbage collector for optimal blockchain workload performance, with settings for allocation area size, CPU utilisation, and memory management that have been tested under production load.
+
+Relay nodes and the block producer run the same binary. The difference is determined at startup by whether pool operator keys are present. This simplifies our image management while maintaining a clear security boundary: operator keys exist only on the block producer, never on relay nodes.
+
+The node is configured for Cardano's peer-to-peer networking mode with peer sharing enabled, allowing our relays to efficiently discover and maintain connections with the broader network.
+
+## CI/CD Pipeline
+
+Our AMI build process runs through a fully automated CI/CD pipeline. When we push changes to our node configuration repository, CodeBuild spins up an ARM build environment, runs Packer to create a fresh image, and notifies us via SNS when the new AMI is ready. The entire process is hands-off from commit to notification.
+
+This means we can respond quickly to Cardano node updates and hard forks. When the network requires an upgrade, we update our build configuration, trigger the pipeline, and have a tested, production-ready image within hours.
+
+## Why This Matters for Delegators
+
+All of this engineering exists for one reason: to maximise the chance that Sandstone produces every block it is elected to produce. Missed blocks mean missed rewards, and missed rewards mean lower returns for our delegators.
+
+By investing in professional-grade infrastructure, immutable deployments, automated recovery, and defence-in-depth security, we aim to provide the reliability that ADA holders deserve from their stake pool.
+
+Running a stake pool is not a set-and-forget operation. It requires ongoing attention to security updates, network upgrades, performance tuning, and infrastructure maintenance. At Sandstone, we take that responsibility seriously.
+
+## Delegate to Sandstone
+
+If you value a professionally operated stake pool with enterprise-grade infrastructure, consider delegating to **SAND**. You can find us on [cexplorer](https://cexplorer.io/pool/pool1gqvrgg7zycvf65ydkjeph72t0yx0f5ykzd9f477zh4f3smwk997) or any Cardano wallet that supports pool selection.
+
+Follow us on [X](https://x.com/sandstonepool) and join our [Telegram](https://t.me/sandstonestakepool) to stay updated.
+
+Happy staking.
+
+---
+
+*This post provides a high-level overview of our infrastructure practices. For security reasons, specific implementation details, network configurations, and operational procedures are not disclosed.*
