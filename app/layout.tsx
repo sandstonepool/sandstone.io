@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   applicationName: "Sandstone Stake Pool",
   icons: {
     icon: "/images/favicon.png",
-    apple: "/images/webclip.jpg",
+    apple: "/images/sandstone-apple-icon-180x180.png",
   },
   openGraph: {
     type: "website",
