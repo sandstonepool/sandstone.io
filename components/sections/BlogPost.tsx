@@ -4,6 +4,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc'
 import { BlogPost as BlogPostType } from '@/lib/types/blog'
 import { ReadingProgress } from '@/components/ui/ReadingProgress'
 import { ShareButtons } from '@/components/ui/ShareButtons'
+import { TweetCard } from '@/components/ui/TweetCard'
 
 interface BlogPostProps {
   post: BlogPostType
@@ -39,6 +40,7 @@ const mdxComponents = {
       : ''
     return <h4 id={id} {...props}>{children}</h4>
   },
+  TweetCard,
 }
 
 export function BlogPost({ post }: BlogPostProps) {
