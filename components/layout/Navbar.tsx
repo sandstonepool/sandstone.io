@@ -115,6 +115,12 @@ export function Navbar() {
             {!isHomePage && (
               <div className="hidden md:flex items-center gap-4">
                 <Link
+                  href="/"
+                  className="px-4 py-2 rounded-lg text-sm font-semibold transition-all text-gray-700 border border-transparent hover:backdrop-blur-md hover:bg-white/40 hover:border-white/60 hover:shadow-sm"
+                >
+                  {t.nav.stakePool}
+                </Link>
+                <Link
                   href="/blog"
                   className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
                     pathname.startsWith('/blog')
@@ -162,7 +168,7 @@ export function Navbar() {
                   className="block px-4 py-2.5 rounded-lg text-base font-semibold cursor-pointer transition-all text-gray-700 border border-transparent hover:backdrop-blur-md hover:bg-white/50 hover:border-white/60"
                   onClick={() => setIsOpen(false)}
                 >
-                  Home
+                  {t.nav.stakePool}
                 </Link>
               )}
               <Link

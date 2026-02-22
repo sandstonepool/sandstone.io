@@ -7,6 +7,7 @@ export const en = {
     gettingStarted: "Getting Started",
     security: "Security",
     faq: "FAQ",
+    stakePool: "Stake Pool",
     blog: "Blog",
   },
   hero: {

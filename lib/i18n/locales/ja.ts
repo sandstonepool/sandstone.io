@@ -7,6 +7,7 @@ export const ja = {
     gettingStarted: "始め方",
     security: "セキュリティ",
     faq: "よくある質問",
+    stakePool: "ステークプール",
     blog: "ブログ",
   },
   hero: {

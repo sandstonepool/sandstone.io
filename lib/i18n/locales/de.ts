@@ -7,6 +7,7 @@ export const de = {
     gettingStarted: "Erste Schritte",
     security: "Sicherheit",
     faq: "Häufige Fragen",
+    stakePool: "Stake Pool",
     blog: "Blog",
   },
   hero: {

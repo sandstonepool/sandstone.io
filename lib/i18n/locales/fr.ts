@@ -7,6 +7,7 @@ export const fr = {
     gettingStarted: "Commencer",
     security: "Sécurité",
     faq: "FAQ",
+    stakePool: "Stake Pool",
     blog: "Blog",
   },
   hero: {

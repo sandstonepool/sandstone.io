@@ -7,6 +7,7 @@ export const ar = {
     gettingStarted: "البدء",
     security: "الأمان",
     faq: "الأسئلة الشائعة",
+    stakePool: "تجمع الحصص",
     blog: "مدونة",
   },
   hero: {
