@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { MDXRemote } from 'next-mdx-remote/rsc'
+import remarkGfm from 'remark-gfm'
+import rehypePrettyCode from 'rehype-pretty-code'
 import { BlogPost as BlogPostType } from '@/lib/types/blog'
 import { ReadingProgress } from '@/components/ui/ReadingProgress'
 import { ShareButtons } from '@/components/ui/ShareButtons'
@@ -40,6 +42,10 @@ const mdxComponents = {
       : ''
     return <h4 id={id} {...props}>{children}</h4>
   },
+  img: ({ src, alt, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src={src} alt={alt || ''} className="w-full h-auto rounded-lg" {...props} />
+  ),
   TweetCard,
 }
 
@@ -70,15 +76,26 @@ export function BlogPost({ post }: BlogPostProps) {
       </Link>
 
       {post.featuredImage && (
-        <div className="relative w-full h-64 sm:h-96 mb-8 rounded-xl overflow-hidden">
-          <Image
-            src={post.featuredImage}
-            alt={post.featuredImageAlt || post.title}
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
+        post.featuredImage.endsWith('.svg') ? (
+          <div className="relative w-full mb-8 rounded-xl overflow-hidden">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={post.featuredImage}
+              alt={post.featuredImageAlt || post.title}
+              className="w-full h-auto"
+            />
+          </div>
+        ) : (
+          <div className="relative w-full h-64 sm:h-96 mb-8 rounded-xl overflow-hidden">
+            <Image
+              src={post.featuredImage}
+              alt={post.featuredImageAlt || post.title}
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        )
       )}
 
       <header className="mb-8">
@@ -155,7 +172,7 @@ export function BlogPost({ post }: BlogPostProps) {
         prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-600
         prose-hr:my-12 prose-hr:border-gray-200
       ">
-        <MDXRemote source={post.content} components={mdxComponents} />
+        <MDXRemote source={post.content} components={mdxComponents} options={{ mdxOptions: { remarkPlugins: [remarkGfm], rehypePlugins: [[rehypePrettyCode, { theme: 'one-dark-pro', keepBackground: true }]] } }} />
       </div>
 
       <div className="mt-8 pt-8 border-t border-gray-200">

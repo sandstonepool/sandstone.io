@@ -308,6 +308,33 @@ body {
     color: #111827;
     font-weight: 600;
   }
+
+  .prose-blog pre {
+    background-color: #111827;
+    color: #f3f4f6;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    overflow-x: auto;
+    margin: 2rem 0;
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+
+  .prose-blog figure[data-rehype-pretty-code-figure] {
+    margin: 2rem 0;
+  }
+
+  .prose-blog figure[data-rehype-pretty-code-figure] pre {
+    margin: 0;
+  }
+
+  .prose-blog pre code,
+  .prose-blog figure[data-rehype-pretty-code-figure] code {
+    background: transparent;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+  }
 }
 
 @media (min-width: 640px) {

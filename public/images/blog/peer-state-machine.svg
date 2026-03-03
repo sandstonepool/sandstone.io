@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 370" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="coldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#64748b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#475569;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="warmGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="hotGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ef4444;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#dc2626;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="govGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+    <marker id="arrowUp" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto" fill="#34d399">
+      <polygon points="0 0, 10 3.5, 0 7" />
+    </marker>
+    <marker id="arrowDown" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto" fill="#f87171">
+      <polygon points="0 0, 10 3.5, 0 7" />
+    </marker>
+    <marker id="arrowGrey" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto" fill="#94a3b8">
+      <polygon points="0 0, 10 3.5, 0 7" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="370" fill="url(#bgGrad)" rx="12"/>
+
+  <!-- Title -->
+  <text x="450" y="32" text-anchor="middle" fill="#e2e8f0" font-size="16" font-weight="700" letter-spacing="0.5">P2P Peer State Machine</text>
+  <text x="450" y="50" text-anchor="middle" fill="#94a3b8" font-size="10">Peer Selection Governor (PSG) manages peer lifecycle</text>
+
+  <!-- ═══════ THREE STATE BOXES ═══════ -->
+
+  <!-- COLD -->
+  <rect x="60" y="90" width="210" height="150" rx="10" fill="url(#coldGrad)" filter="url(#shadow)" opacity="0.95"/>
+  <text x="165" y="120" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">Cold</text>
+  <line x1="85" y1="130" x2="245" y2="130" stroke="#e2e8f0" stroke-opacity="0.2" stroke-width="1"/>
+  <text x="165" y="149" text-anchor="middle" fill="#e2e8f0" font-size="9.5">Known but not connected</text>
+  <text x="165" y="167" text-anchor="middle" fill="#cbd5e1" font-size="9">Sources:</text>
+  <text x="165" y="181" text-anchor="middle" fill="#94a3b8" font-size="8.5">DNS, ledger peers,</text>
+  <text x="165" y="194" text-anchor="middle" fill="#94a3b8" font-size="8.5">peer sharing, config</text>
+
+  <!-- WARM -->
+  <rect x="345" y="90" width="210" height="150" rx="10" fill="url(#warmGrad)" filter="url(#shadow)" opacity="0.95"/>
+  <text x="450" y="120" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">Warm</text>
+  <line x1="370" y1="130" x2="530" y2="130" stroke="#fef3c7" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="450" y="149" text-anchor="middle" fill="#fff" font-size="9.5">Connected, measuring</text>
+  <text x="450" y="167" text-anchor="middle" fill="#fef3c7" font-size="9">Active protocols:</text>
+  <text x="450" y="181" text-anchor="middle" fill="#fef3c7" font-size="8.5">KeepAlive</text>
+  <text x="450" y="194" text-anchor="middle" fill="#fef3c7" font-size="8.5">(health checks only)</text>
+
+  <!-- HOT -->
+  <rect x="630" y="90" width="210" height="150" rx="10" fill="url(#hotGrad)" filter="url(#shadow)" opacity="0.95"/>
+  <text x="735" y="120" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">Hot</text>
+  <line x1="655" y1="130" x2="815" y2="130" stroke="#fecaca" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="735" y="149" text-anchor="middle" fill="#fff" font-size="9.5">Fully active consensus</text>
+  <text x="735" y="167" text-anchor="middle" fill="#fecaca" font-size="9">Active protocols:</text>
+  <text x="735" y="181" text-anchor="middle" fill="#fecaca" font-size="8.5">ChainSync, BlockFetch,</text>
+  <text x="735" y="194" text-anchor="middle" fill="#fecaca" font-size="8.5">TxSubmission2, KeepAlive</text>
+
+  <!-- ═══════ PROMOTION ARROWS (TOP - GREEN) ═══════ -->
+
+  <!-- Cold to Warm -->
+  <line x1="270" y1="135" x2="340" y2="135" stroke="#34d399" stroke-width="2" marker-end="url(#arrowUp)"/>
+  <text x="305" y="127" text-anchor="middle" fill="#34d399" font-size="8" font-weight="600">Promote</text>
+  <text x="305" y="118" text-anchor="middle" fill="#6ee7b7" font-size="7">Establish TCP</text>
+
+  <!-- Warm to Hot -->
+  <line x1="555" y1="135" x2="625" y2="135" stroke="#34d399" stroke-width="2" marker-end="url(#arrowUp)"/>
+  <text x="590" y="127" text-anchor="middle" fill="#34d399" font-size="8" font-weight="600">Promote</text>
+  <text x="590" y="118" text-anchor="middle" fill="#6ee7b7" font-size="7">Activate protocols</text>
+
+  <!-- ═══════ DEMOTION ARROWS (BOTTOM - RED) ═══════ -->
+
+  <!-- Warm to Cold -->
+  <line x1="345" y1="210" x2="275" y2="210" stroke="#f87171" stroke-width="2" marker-end="url(#arrowDown)"/>
+  <text x="310" y="222" text-anchor="middle" fill="#f87171" font-size="8" font-weight="600">Demote</text>
+  <text x="310" y="232" text-anchor="middle" fill="#fca5a5" font-size="7">Stale / error</text>
+
+  <!-- Hot to Warm -->
+  <line x1="630" y1="210" x2="560" y2="210" stroke="#f87171" stroke-width="2" marker-end="url(#arrowDown)"/>
+  <text x="595" y="222" text-anchor="middle" fill="#f87171" font-size="8" font-weight="600">Demote</text>
+  <text x="595" y="232" text-anchor="middle" fill="#fca5a5" font-size="7">Underperforming</text>
+
+  <!-- ═══════ GOVERNORS ═══════ -->
+
+  <rect x="130" y="275" width="280" height="75" rx="8" fill="url(#govGrad)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="270" y="300" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">Peer Selection Governor (PSG)</text>
+  <line x1="155" y1="308" x2="385" y2="308" stroke="#ddd6fe" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="270" y="323" text-anchor="middle" fill="#ddd6fe" font-size="9">Maintains target valency at each level</text>
+  <text x="270" y="337" text-anchor="middle" fill="#ddd6fe" font-size="9">Promotes and demotes peers based on targets</text>
+
+  <rect x="490" y="275" width="280" height="75" rx="8" fill="url(#govGrad)" filter="url(#shadow)" opacity="0.9"/>
+  <text x="630" y="300" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">Peer Churn Governor</text>
+  <line x1="515" y1="308" x2="745" y2="308" stroke="#ddd6fe" stroke-opacity="0.3" stroke-width="1"/>
+  <text x="630" y="323" text-anchor="middle" fill="#ddd6fe" font-size="9">Refreshes ~20% of peers hourly</text>
+  <text x="630" y="337" text-anchor="middle" fill="#ddd6fe" font-size="9">Resists eclipse attacks via tepidity flags</text>
+
+  <!-- Connection lines from governors to state machine -->
+  <line x1="270" y1="275" x2="270" y2="260" stroke="#c4b5fd" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+  <line x1="270" y1="260" x2="450" y2="260" stroke="#c4b5fd" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+  <line x1="450" y1="260" x2="450" y2="240" stroke="#c4b5fd" stroke-width="1" stroke-dasharray="4 3" opacity="0.5" marker-end="url(#arrowGrey)"/>
+
+  <line x1="630" y1="275" x2="630" y2="260" stroke="#c4b5fd" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+  <line x1="630" y1="260" x2="735" y2="260" stroke="#c4b5fd" stroke-width="1" stroke-dasharray="4 3" opacity="0.5"/>
+  <line x1="735" y1="260" x2="735" y2="240" stroke="#c4b5fd" stroke-width="1" stroke-dasharray="4 3" opacity="0.5" marker-end="url(#arrowGrey)"/>
+</svg>
