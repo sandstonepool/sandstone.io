@@ -1,0 +1,178 @@
+---
+title: "Introducing Torsten: A Cardano Full Node Written in Rust"
+date: "2026-03-09"
+description: "Sandstone is building Torsten — a Rust implementation of a Cardano full node targeting 100% compatibility with the Haskell reference implementation, with significant performance benefits. Here's an overview of the project and where it stands today."
+tags:
+  - "Cardano"
+  - "Infrastructure"
+  - "Open Source"
+  - "Technical"
+author:
+  name: "Sandstone Team"
+  url: "https://x.com/sandstonepool"
+featuredImage: "/images/blog/torsten-cardano-rust.png"
+featuredImageAlt: "Cardano and Rust logos side by side representing Torsten, a Cardano full node written in Rust"
+---
+
+What if you could run a Cardano full node that consumed a fraction of the CPU and memory of the current implementation — without sacrificing any compatibility?
+
+That is the question we have been exploring at Sandstone, and the result is [**Torsten**](https://github.com/michaeljfazio/torsten): our attempt at building a complete Cardano full node in Rust. The name comes from the Swedish word for "Thor's stone" — fitting for a project that aims to provide a rock-solid foundation for the Cardano network.
+
+**Important caveat up front:** Torsten is in its early experimentation stages. It is not production-ready, and we would not recommend running it for anything other than testing and exploration. But we believe the direction is promising, and we want to share what we have been building.
+
+## Why Rust? Why Now?
+
+Our [deep dive into cardano-node](/blog/inside-cardano-node) explored how the Haskell reference implementation is architected. It is an impressive piece of engineering — well-structured, rigorously tested, and battle-hardened over years of mainnet operation. But Haskell's runtime characteristics come with trade-offs that are hard to escape:
+
+- **Garbage collection pauses** can introduce latency spikes during block validation
+- **Memory overhead** from lazy evaluation and thunk accumulation means nodes typically consume several gigabytes of RAM
+- **CPU usage** during chain sync and block validation is higher than what a systems-level language could achieve
+- **Compilation times** and toolchain complexity create barriers for new contributors
+
+These are not criticisms of the cardano-node team's work — they are inherent characteristics of the Haskell runtime. For a network where thousands of stake pool operators are running infrastructure 24/7, even modest efficiency improvements compound into real savings in hosting costs, energy consumption, and hardware requirements.
+
+Rust offers a compelling alternative. Its ownership model provides memory safety without garbage collection. Its zero-cost abstractions mean you can write high-level code that compiles down to performance equivalent to hand-written C. And its ecosystem has matured significantly — particularly in the Cardano space, where the [Pallas](https://github.com/txpipe/pallas) library from TxPipe provides excellent foundational primitives.
+
+## Architecture Overview
+
+Torsten is structured as a 10-crate Cargo workspace. Each crate has a focused responsibility, mirroring (and in some cases improving upon) the separation of concerns in the Haskell implementation:
+
+![Torsten architecture diagram](/images/blog/torsten-architecture.svg)
+
+### Core Crates
+
+- **`torsten-node`** — The main binary and orchestration layer. Handles configuration, topology management, the pipelined chain sync pipeline, and [Mithril](https://mithril.network/) snapshot imports for fast initial sync.
+- **`torsten-consensus`** — Full [Ouroboros Praos](https://iohk.io/en/research/library/papers/ouroboros-praos-an-adaptively-secure-semi-synchronous-proof-of-stake-protocol/) consensus implementation including VRF-based slot leader election, KES signature validation, epoch nonce computation, and chain selection.
+- **`torsten-ledger`** — UTxO set management, transaction validation, certificate processing, delegation and rewards calculations, and native script evaluation. Includes Plutus V1, V2, and V3 script evaluation via the `uplc` CEK machine.
+- **`torsten-network`** — Ouroboros mini-protocol implementations (ChainSync, BlockFetch, TxSubmission, KeepAlive) for both node-to-node (N2N) and node-to-client (N2C) communication.
+
+### Supporting Crates
+
+- **`torsten-crypto`** — Ed25519 key operations, VRF proofs, KES signatures, and text envelope format handling.
+- **`torsten-serialization`** — CBOR encoding and decoding for all Cardano data types, built on Pallas.
+- **`torsten-primitives`** — Core type definitions shared across the workspace: hashes, blocks, transactions, addresses, values, and protocol parameters for every era from Byron through Conway.
+- **`torsten-storage`** — A two-tier ChainDB modelled after the Haskell implementation. An **ImmutableDB** backed by [RocksDB](https://rocksdb.org/) stores finalised blocks, while a **VolatileDB** holds the most recent *k*=2160 blocks in memory for potential rollbacks.
+- **`torsten-mempool`** — A thread-safe transaction mempool with rollback awareness.
+- **`torsten-cli`** — A `cardano-cli`-compatible command-line interface with 33+ subcommands covering key generation, address management, transaction building, queries, stake operations, and Conway governance.
+
+## What Works Today
+
+Despite being early-stage, Torsten already implements a surprisingly complete feature set:
+
+**Multi-Era Chain Sync** — Torsten can sync the full Cardano blockchain from Byron through Conway. The pipelined sync architecture collects headers from a primary peer, then distributes block fetching across up to 4 peers in parallel. Blocks are processed in batches of 500 to minimise lock contention.
+
+**Mithril Fast Sync** — For initial bootstrapping, Torsten can import a [Mithril](https://mithril.network/) snapshot and load over 4 million blocks in roughly 60 seconds, then resume regular chain sync from there.
+
+**Full Consensus Validation** — Every block is validated against the Ouroboros Praos rules: VRF proof verification, KES signature checks, operational certificate validation, and slot leader eligibility via the phi function threshold.
+
+**Node-to-Node Server** — Torsten can serve as a peer on the network, responding to ChainSync, BlockFetch, TxSubmission2, PeerSharing, and KeepAlive protocols.
+
+**Node-to-Client Interface** — A Unix domain socket exposes LocalStateQuery (with 20+ query types), LocalTxSubmission (with Phase-1 and Phase-2 validation), and LocalTxMonitor — meaning existing Cardano tooling that speaks the node-to-client protocol can connect to Torsten.
+
+**Block Production** — VRF proof generation, operational certificate handling, and block announcement are implemented, enabling stake pool operation (on testnets).
+
+**Conway Governance** — Full CIP-1694 governance support including DRep registration, voting, delegation, constitutional committee actions, proposals, ratification, and treasury withdrawals.
+
+**P2P Peer Management** — A peer lifecycle system with cold/warm/hot states, EWMA latency tracking, reputation scoring, exponential backoff on failures, and per-IP rate limiting.
+
+**Prometheus Metrics** — Sixteen metrics exposed on port 12798, covering blocks processed, slot height, epoch, UTxO count, mempool status, connected peers, rollbacks, blocks forged, active delegations, and treasury balance.
+
+## The Performance Story
+
+While we do not yet have rigorous benchmarks to publish (that is coming), the architectural advantages of Rust are already visible in practice:
+
+- **No GC pauses** — Block validation latency is consistent and predictable, without the periodic spikes that garbage collection introduces.
+- **Minimal memory overhead** — Rust's ownership model means memory is allocated and freed deterministically. No thunk accumulation, no lazy evaluation surprises.
+- **Zero-copy where possible** — RocksDB reads and key construction are designed to avoid heap allocations on the hot path.
+- **Aggressive compiler optimisation** — The release profile uses `opt-level = 3`, thin LTO, single codegen unit, symbol stripping, and `panic = abort` for maximum performance.
+
+We expect these characteristics to translate into significantly lower resource consumption for stake pool operators — potentially enabling full node operation on hardware that would struggle with the Haskell implementation.
+
+## Built on Pallas
+
+Torsten leans heavily on the [Pallas](https://github.com/txpipe/pallas) ecosystem from [TxPipe](https://txpipe.io/) — a set of Rust libraries that provide Cardano-specific primitives:
+
+- **pallas-network** — Ouroboros multiplexer and protocol framework
+- **pallas-codec** — CBOR encoding infrastructure
+- **pallas-primitives** — Block, transaction, and header types
+- **pallas-traverse** — Multi-era block traversal
+- **pallas-crypto** — Cryptographic primitives
+- **pallas-addresses** — Address parsing and construction
+
+The existence and quality of Pallas is a major reason why building a Rust node is feasible today. The Cardano Rust ecosystem has matured significantly, and Torsten aims to push it further by demonstrating what a full node implementation looks like.
+
+## Supported Networks
+
+Torsten ships with configuration files for multiple Cardano networks:
+
+| Network | Magic | Status |
+|---------|-------|--------|
+| **Mainnet** | 764824073 | Sync and validation |
+| **Preview** | 2 | Full testing |
+| **Preprod** | 1 | Full testing |
+
+We strongly recommend starting with Preview or Preprod for any experimentation.
+
+## What Is Not Ready Yet
+
+Transparency matters, so here is what you should know:
+
+- **Not production-ready.** APIs, storage formats, and on-wire behaviour may change without notice. Do not run Torsten for anything where reliability matters.
+- **Integration testing is incomplete.** While individual components are tested, end-to-end testing against the full range of mainnet edge cases is still in progress.
+- **No formal audit.** The codebase has not been independently reviewed for correctness or security.
+- **Performance benchmarks are pending.** We have strong reason to believe the efficiency story is compelling, but we have not yet published rigorous comparisons.
+- **Documentation is evolving.** The [docs site](https://michaeljfazio.github.io/torsten/) covers the basics, but some areas are still sparse.
+
+This is experimental software. Treat it accordingly.
+
+## Getting Started
+
+If you want to take Torsten for a spin, it is straightforward:
+
+```bash
+# Clone the repository
+git clone https://github.com/michaeljfazio/torsten.git
+cd torsten
+
+# Build in release mode
+cargo build --release
+
+# Fast sync with a Mithril snapshot (recommended for first run)
+./target/release/torsten-node mithril-import \
+  --network-magic 2 \
+  --database-path ./db-preview
+
+# Run the node on Preview testnet
+./target/release/torsten-node run \
+  --config config/preview-config.json \
+  --topology config/preview-topology.json \
+  --database-path ./db-preview \
+  --socket-path ./node.sock \
+  --host-addr 0.0.0.0 \
+  --port 3001
+```
+
+The `mithril-import` subcommand downloads and imports a recent Mithril snapshot, getting you through over 4 million blocks in roughly 60 seconds. After that, the `run` subcommand starts the node and resumes regular chain sync from where the snapshot left off.
+
+## How You Can Help
+
+We are building Torsten in the open because we believe the Cardano ecosystem benefits from implementation diversity. More implementations mean more eyes on the protocol specification, more chances to catch edge cases, and more options for operators to choose the tooling that best fits their needs.
+
+Here is how you can contribute:
+
+- **Try it out.** Run Torsten on a testnet, connect your favourite tools to its N2C socket, and tell us what breaks.
+- **Report issues.** Found a bug or incompatibility? [Open an issue](https://github.com/michaeljfazio/torsten/issues) on GitHub.
+- **Review the code.** The entire codebase is open source. Fresh eyes catch things that tired ones miss.
+- **Join the conversation.** Follow us on [X/Twitter](https://x.com/sandstonepool) for updates, or reach out directly with ideas and feedback.
+
+## The Road Ahead
+
+We want to be upfront: we are not yet certain about the long-term future of Torsten. Building a fully compatible Cardano node from scratch is an enormous undertaking, and there are genuine open questions about whether a Rust implementation can achieve the level of protocol fidelity required for production use. We plan to continue development until we are confident one way or another about the node's feasibility — and we will be transparent about what we find along the way.
+
+If Torsten does prove viable and gains traction within the community, our intention is not to hold onto it as a proprietary Sandstone project. We would look to donate it wholesale to the Cardano community — establishing a group of dedicated maintainers to steward its continued development. We believe infrastructure this fundamental should be community-owned, not controlled by any single entity.
+
+In the meantime, the foundation is solid. The architecture is clean, the core protocols are implemented, and the sync pipeline works. The path forward is about hardening: more tests, more edge cases, more time on testnets, and eventually — if we are confident in correctness — mainnet validation.
+
+We started building Torsten because we believe Cardano deserves a high-performance node implementation, and because Rust is the right language to deliver it. Where it goes from here depends as much on the community's interest as on our own engineering efforts. If that vision resonates with you, come build with us.
+
+*Torsten is open-source software licensed under MIT. You can find the code, documentation, and issue tracker at [github.com/michaeljfazio/torsten](https://github.com/michaeljfazio/torsten).*
