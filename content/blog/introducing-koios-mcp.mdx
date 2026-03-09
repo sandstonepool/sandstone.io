@@ -1,0 +1,171 @@
+---
+title: "Introducing koios-mcp: Giving AI Direct Access to Cardano Blockchain Data"
+date: "2026-03-09"
+description: "We built an MCP server that connects Claude and other LLMs to the Koios API — 95 tools covering every corner of the Cardano blockchain, from UTxO lookups to governance proposals."
+tags:
+  - "Cardano"
+  - "Open Source"
+  - "Technical"
+  - "AI"
+author:
+  name: "Sandstone Team"
+  url: "https://x.com/sandstonepool"
+featuredImage: "/images/blog/koios-mcp-overview.png"
+featuredImageAlt: "Diagram showing an LLM connected to the Cardano blockchain via the koios-mcp server and Koios API"
+---
+
+What if you could ask an AI to look up a Cardano wallet's balance, check a stake pool's delegator count, or summarise the latest governance proposals — and have it pull that data directly from the blockchain in real time?
+
+That is exactly what [**koios-mcp**](https://github.com/michaeljfazio/koios-mcp) enables. It is a [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) server that connects large language models like Claude to the [Koios](https://www.koios.rest/) Cardano blockchain API, giving them the ability to query on-chain data as naturally as they read a web page.
+
+## What Is MCP?
+
+The Model Context Protocol is an open standard — originally developed by Anthropic — that defines how AI models interact with external tools and data sources. Think of it as a USB-C port for AI: a universal interface that lets models plug into any service that speaks the protocol.
+
+An MCP server exposes a set of **tools** — discrete capabilities that a model can invoke when it needs external information. The model sees each tool's name, description, and expected parameters, then decides when and how to call them based on the conversation context. No prompt engineering or API documentation required on the user's end.
+
+This is fundamentally different from pasting API responses into a chat window. The model understands the tools available to it, can chain multiple calls together, and reasons about the results in context. It is the difference between giving someone a phone book and giving them a phone.
+
+## What koios-mcp Does
+
+koios-mcp exposes **95 tools** covering every non-deprecated endpoint in the Koios API. These are organised across 11 categories:
+
+| Category | Tools | What You Can Query |
+|----------|-------|--------------------|
+| **Network** | 8 | Chain tip, genesis parameters, tokenomics, protocol parameters |
+| **Epoch** | 3 | Epoch summaries, protocol parameter snapshots |
+| **Block** | 4 | Block listings, details, transactions, raw CBOR |
+| **Transaction** | 9 | Transaction info, UTxOs, metadata, status, submission |
+| **Address** | 8 | Balances, UTxO sets, asset holdings, credential lookups |
+| **Account** | 11 | Stake accounts, rewards, delegations, history |
+| **Asset** | 11 | Native token metadata, holders, minting history, policy info |
+| **Pool** | 17 | Stake pool details, delegators, blocks minted, voting records |
+| **Governance** | 14 | DRep info, proposals, voting records, committee data |
+| **Script** | 6 | Script metadata, redeemers, datum lookups |
+| **Ogmios** | 1 | JSON-RPC proxy for Ogmios queries |
+
+Every tool supports the full range of [PostgREST](https://postgrest.org/) query parameters that Koios is built on — filtering, column selection, pagination, and ordering. This means the model can make precise, efficient queries rather than pulling entire datasets.
+
+## Why Koios?
+
+[Koios](https://www.koios.rest/) is a decentralised, community-operated API layer for the Cardano blockchain. It is built on [PostgREST](https://postgrest.org/) and backed by a distributed network of provider nodes, so there is no single point of failure.
+
+Several properties make it an excellent foundation for an MCP server:
+
+- **No authentication required.** The public tier is free to use — you can get started without creating an account or managing API keys.
+- **Comprehensive coverage.** Koios exposes everything from low-level UTxO data to high-level governance summaries. The 95 endpoints cover virtually every query you would want to make against the Cardano blockchain.
+- **Structured and predictable.** Because Koios is built on PostgREST, every endpoint follows consistent patterns for filtering, pagination, and response formatting. This makes it straightforward to generate accurate tool definitions that an LLM can reason about.
+- **Multi-network support.** The same API structure works across Mainnet, Preview, Preprod, and Guild networks — switch with a single environment variable.
+
+## Getting Started
+
+### Installation
+
+```bash
+git clone https://github.com/michaeljfazio/koios-mcp.git
+cd koios-mcp
+npm install
+npm run build
+```
+
+### Using with Claude Code
+
+Add the server to your Claude Code configuration in `~/.claude/settings.json` or your project's `.mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "koios": {
+      "command": "node",
+      "args": ["/path/to/koios-mcp/dist/index.js"],
+      "env": {
+        "KOIOS_NETWORK": "mainnet"
+      }
+    }
+  }
+}
+```
+
+### Using with Claude Desktop
+
+Add it to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or `%APPDATA%\Claude\claude_desktop_config.json` (Windows):
+
+```json
+{
+  "mcpServers": {
+    "koios": {
+      "command": "node",
+      "args": ["/path/to/koios-mcp/dist/index.js"],
+      "env": {
+        "KOIOS_NETWORK": "mainnet"
+      }
+    }
+  }
+}
+```
+
+### Configuration
+
+Two environment variables control the server's behaviour:
+
+- **`KOIOS_NETWORK`** — Which Cardano network to query. Options: `mainnet`, `preview`, `preprod`, `guild`. Defaults to `preview`.
+- **`KOIOS_API_KEY`** — Optional Bearer token for increased rate limits. The public tier allows 100 requests per 10 seconds per IP, which is generous for conversational use.
+
+## What Can You Do With It?
+
+Once koios-mcp is connected, the model can answer questions that would normally require manual API calls, block explorers, or custom scripts. Some examples:
+
+**Wallet analysis** — "What assets does this address hold?" The model calls `koios_address_assets` and summarises the results, including token names, quantities, and policy IDs.
+
+**Stake pool research** — "Compare the performance of these three stake pools over the last 10 epochs." The model calls `koios_pool_history` for each pool and presents a comparative analysis.
+
+**Governance tracking** — "What proposals are currently active, and how have DReps voted?" The model combines `koios_proposal_list` with `koios_proposal_votes` to build a comprehensive picture.
+
+**Transaction forensics** — "Trace the flow of funds from this transaction." The model follows UTxO chains using `koios_tx_utxos` and `koios_tx_info`, building a narrative of how value moved.
+
+**Token intelligence** — "Who are the top holders of this native token?" The model calls `koios_asset_addresses` with appropriate ordering and presents the distribution.
+
+**Network monitoring** — "What is the current epoch, and what are the protocol parameters?" A simple `koios_tip` and `koios_epoch_params` call gives the model everything it needs.
+
+The key insight is that the model does not just fetch data — it reasons about it. It can combine multiple queries, compare results, spot patterns, and explain findings in plain language. The MCP interface turns raw blockchain data into conversational intelligence.
+
+## PostgREST Power
+
+Because Koios is built on PostgREST, every GET-based tool in koios-mcp supports powerful query parameters:
+
+- **`select`** — Choose specific columns: `"block_height,epoch_no,hash"`
+- **`order`** — Sort results: `"block_height.desc"`
+- **`limit` / `offset`** — Paginate through large result sets
+- **Column filters** — Use operators like `eq`, `gt`, `lt`, `gte`, `lte`, `neq`, `like`, and `in` directly on any column
+
+This means the model can make surgical queries — asking for exactly the data it needs rather than pulling everything and filtering client-side. When you ask a question about the top 5 pools by stake, the model constructs a query with the right ordering and limit, keeping responses fast and focused.
+
+## Rate Limits and Fair Use
+
+The public Koios tier is generous but has sensible limits:
+
+- 100 requests per 10 seconds per IP
+- 1,000 rows maximum per paginated response
+- 30-second query timeout
+- 1 KB request body size (5 KB with authentication)
+
+For conversational AI use, these limits are rarely an issue — a typical question might require 1–5 API calls. If you need higher throughput for automated workloads, you can obtain an API key from Koios for increased limits.
+
+## Why We Built This
+
+At Sandstone, we run Cardano infrastructure and build tools for the ecosystem. We have been exploring how AI can make blockchain data more accessible — not just for developers, but for anyone who wants to understand what is happening on-chain.
+
+One of the immediate motivations was our own work on [**Torsten**](/blog/introducing-torsten), our [Rust implementation of a Cardano full node](https://github.com/michaeljfazio/torsten). Building a node from scratch means constantly cross-referencing on-chain state: checking how the reference implementation handles a particular epoch boundary, verifying that our ledger calculations match what is actually on mainnet, or inspecting the structure of governance transactions in the Conway era. Before koios-mcp, that meant manually querying APIs or writing one-off scripts. Now, we can ask Claude to pull the exact data we need — mid-conversation, while working through an implementation problem — and it handles the API calls transparently. It has become a genuine part of our development workflow.
+
+More broadly, the Cardano blockchain contains an extraordinary amount of information: every transaction, every delegation, every governance vote, every token mint. But accessing that information typically requires knowing which API to call, how to format the request, and how to interpret the response. MCP eliminates that friction entirely. You ask a question in plain language, and the model handles the rest.
+
+koios-mcp is our contribution to making that vision real. It is open source under the MIT license, and we hope it serves as both a useful tool and a reference for others building MCP servers in the Cardano ecosystem.
+
+## Get Involved
+
+- **Try it out.** Connect koios-mcp to Claude Code or Claude Desktop and start asking questions about the Cardano blockchain.
+- **Report issues.** Found a bug or have a feature request? [Open an issue](https://github.com/michaeljfazio/koios-mcp/issues) on GitHub.
+- **Contribute.** The codebase is TypeScript and straightforward to extend. Pull requests are welcome.
+- **Follow along.** We share updates on [X/Twitter](https://x.com/sandstonepool) as we continue building tools for the Cardano ecosystem.
+
+*koios-mcp is open-source software licensed under MIT. You can find the code and documentation at [github.com/michaeljfazio/koios-mcp](https://github.com/michaeljfazio/koios-mcp).*
