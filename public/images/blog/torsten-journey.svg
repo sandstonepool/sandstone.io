@@ -1,0 +1,255 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <!-- Gradient for background -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#131d38"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <!-- Rust orange glow -->
+    <radialGradient id="rustGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#CE422B" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#CE422B" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Cardano blue glow -->
+    <radialGradient id="cardanoGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0033AD" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#0033AD" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Gold glow for milestones -->
+    <radialGradient id="goldGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#D4A843" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#D4A843" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Path gradient -->
+    <linearGradient id="pathGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#CE422B"/>
+      <stop offset="50%" stop-color="#D4A843"/>
+      <stop offset="100%" stop-color="#0033AD"/>
+    </linearGradient>
+    <!-- Milestone marker gradient -->
+    <linearGradient id="milestoneGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#D4A843"/>
+      <stop offset="100%" stop-color="#b8912e"/>
+    </linearGradient>
+    <!-- Grid pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5" opacity="0.5"/>
+    </pattern>
+    <!-- Dot pattern -->
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="12" cy="12" r="0.8" fill="#334155" opacity="0.4"/>
+    </pattern>
+    <!-- Filter for glow effect -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+  <rect width="1200" height="630" fill="url(#grid)" opacity="0.3"/>
+
+  <!-- Ambient glows -->
+  <ellipse cx="200" cy="350" rx="250" ry="200" fill="url(#rustGlow)"/>
+  <ellipse cx="1000" cy="300" rx="280" ry="220" fill="url(#cardanoGlow)"/>
+  <ellipse cx="600" cy="380" rx="200" ry="150" fill="url(#goldGlow)"/>
+
+  <!-- Abstract code elements - left side (Rust) -->
+  <g opacity="0.15" font-family="monospace" font-size="11" fill="#CE422B">
+    <text x="30" y="80">fn main() {</text>
+    <text x="30" y="96">  let node = Node::new();</text>
+    <text x="30" y="112">  node.sync_chain();</text>
+    <text x="30" y="128">  node.validate_block();</text>
+    <text x="30" y="144">}</text>
+    <text x="30" y="176">impl BlockValidator {</text>
+    <text x="30" y="192">  pub fn verify(&amp;self)</text>
+    <text x="30" y="208">    -&gt; Result&lt;()&gt;</text>
+    <text x="30" y="224">  {</text>
+    <text x="30" y="240">    self.check_header()?;</text>
+    <text x="30" y="256">    Ok(())</text>
+    <text x="30" y="272">  }</text>
+    <text x="30" y="288">}</text>
+  </g>
+
+  <!-- Abstract code elements - right side -->
+  <g opacity="0.12" font-family="monospace" font-size="11" fill="#0033AD">
+    <text x="1020" y="420">struct Epoch {</text>
+    <text x="1020" y="436">  number: u64,</text>
+    <text x="1020" y="452">  slot_count: u32,</text>
+    <text x="1020" y="468">  blocks: Vec&lt;Block&gt;,</text>
+    <text x="1020" y="484">}</text>
+    <text x="1020" y="516">trait Consensus {</text>
+    <text x="1020" y="532">  fn elect_leader(</text>
+    <text x="1020" y="548">    &amp;self, slot: u64</text>
+    <text x="1020" y="564">  ) -&gt; PoolId;</text>
+    <text x="1020" y="580">}</text>
+  </g>
+
+  <!-- More code fragments scattered -->
+  <g opacity="0.08" font-family="monospace" font-size="10" fill="#D4A843">
+    <text x="850" y="90">use torsten::chain::*;</text>
+    <text x="850" y="106">use ouroboros::protocol;</text>
+    <text x="800" y="140">#[derive(Debug, Clone)]</text>
+    <text x="800" y="156">pub struct ChainState;</text>
+  </g>
+
+  <!-- The Journey Path - a flowing S-curve -->
+  <path d="M 120 400 C 200 400, 250 280, 350 280 C 450 280, 450 420, 550 420 C 650 420, 650 260, 750 260 C 850 260, 850 400, 950 400 C 1010 400, 1050 340, 1080 340"
+        fill="none" stroke="url(#pathGrad)" stroke-width="3" stroke-dasharray="8,4" opacity="0.6" filter="url(#softGlow)"/>
+
+  <!-- Outer glow path -->
+  <path d="M 120 400 C 200 400, 250 280, 350 280 C 450 280, 450 420, 550 420 C 650 420, 650 260, 750 260 C 850 260, 850 400, 950 400 C 1010 400, 1050 340, 1080 340"
+        fill="none" stroke="url(#pathGrad)" stroke-width="8" opacity="0.1"/>
+
+  <!-- Connected nodes along the path -->
+  <!-- Node 1 - Start -->
+  <g filter="url(#glow)">
+    <circle cx="120" cy="400" r="8" fill="#CE422B" opacity="0.9"/>
+    <circle cx="120" cy="400" r="12" fill="none" stroke="#CE422B" stroke-width="1" opacity="0.4"/>
+    <circle cx="120" cy="400" r="4" fill="#fff" opacity="0.8"/>
+  </g>
+
+  <!-- Milestone 1 - Architecture -->
+  <g filter="url(#glow)">
+    <circle cx="350" cy="280" r="14" fill="url(#milestoneGrad)"/>
+    <circle cx="350" cy="280" r="19" fill="none" stroke="#D4A843" stroke-width="1.5" opacity="0.5"/>
+    <circle cx="350" cy="280" r="24" fill="none" stroke="#D4A843" stroke-width="0.5" opacity="0.2"/>
+    <!-- Diamond inside -->
+    <rect x="344" y="274" width="12" height="12" rx="2" fill="#0f172a" transform="rotate(45 350 280)"/>
+    <text x="350" y="258" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#D4A843" font-weight="600">Architecture</text>
+  </g>
+
+  <!-- Milestone 2 - Networking -->
+  <g filter="url(#glow)">
+    <circle cx="550" cy="420" r="14" fill="url(#milestoneGrad)"/>
+    <circle cx="550" cy="420" r="19" fill="none" stroke="#D4A843" stroke-width="1.5" opacity="0.5"/>
+    <circle cx="550" cy="420" r="24" fill="none" stroke="#D4A843" stroke-width="0.5" opacity="0.2"/>
+    <!-- Network icon inside -->
+    <circle cx="550" cy="420" r="3" fill="#0f172a"/>
+    <line x1="547" y1="417" x2="553" y2="423" stroke="#0f172a" stroke-width="1.5"/>
+    <line x1="553" y1="417" x2="547" y2="423" stroke="#0f172a" stroke-width="1.5"/>
+    <text x="550" y="452" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#D4A843" font-weight="600">Networking</text>
+  </g>
+
+  <!-- Milestone 3 - Chain Sync -->
+  <g filter="url(#glow)">
+    <circle cx="750" cy="260" r="14" fill="url(#milestoneGrad)"/>
+    <circle cx="750" cy="260" r="19" fill="none" stroke="#D4A843" stroke-width="1.5" opacity="0.5"/>
+    <circle cx="750" cy="260" r="24" fill="none" stroke="#D4A843" stroke-width="0.5" opacity="0.2"/>
+    <!-- Chain link inside -->
+    <rect x="743" y="256" width="6" height="8" rx="2" fill="none" stroke="#0f172a" stroke-width="1.5"/>
+    <rect x="751" y="256" width="6" height="8" rx="2" fill="none" stroke="#0f172a" stroke-width="1.5"/>
+    <text x="750" y="242" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#D4A843" font-weight="600">Chain Sync</text>
+  </g>
+
+  <!-- Milestone 4 - Validation -->
+  <g filter="url(#glow)">
+    <circle cx="950" cy="400" r="14" fill="url(#milestoneGrad)"/>
+    <circle cx="950" cy="400" r="19" fill="none" stroke="#D4A843" stroke-width="1.5" opacity="0.5"/>
+    <circle cx="950" cy="400" r="24" fill="none" stroke="#D4A843" stroke-width="0.5" opacity="0.2"/>
+    <!-- Check mark inside -->
+    <polyline points="943,400 948,405 957,395" fill="none" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="950" y="432" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#D4A843" font-weight="600">Validation</text>
+  </g>
+
+  <!-- Endpoint arrow -->
+  <g filter="url(#glow)">
+    <circle cx="1080" cy="340" r="6" fill="#0033AD" opacity="0.9"/>
+    <circle cx="1080" cy="340" r="10" fill="none" stroke="#0033AD" stroke-width="1" opacity="0.4"/>
+    <polygon points="1090,340 1100,334 1100,346" fill="#0033AD" opacity="0.7"/>
+  </g>
+
+  <!-- Small connector nodes between milestones -->
+  <circle cx="230" cy="350" r="3" fill="#CE422B" opacity="0.5" filter="url(#glow)"/>
+  <circle cx="450" cy="350" r="3" fill="#D4A843" opacity="0.5" filter="url(#glow)"/>
+  <circle cx="650" cy="340" r="3" fill="#D4A843" opacity="0.5" filter="url(#glow)"/>
+  <circle cx="850" cy="330" r="3" fill="#0033AD" opacity="0.5" filter="url(#glow)"/>
+
+  <!-- Floating block elements (abstract blockchain blocks) -->
+  <g opacity="0.15">
+    <rect x="170" y="150" width="30" height="30" rx="4" fill="none" stroke="#CE422B" stroke-width="1"/>
+    <line x1="170" y1="160" x2="200" y2="160" stroke="#CE422B" stroke-width="0.5"/>
+    <line x1="175" y1="166" x2="195" y2="166" stroke="#CE422B" stroke-width="0.5" opacity="0.5"/>
+    <line x1="175" y1="172" x2="190" y2="172" stroke="#CE422B" stroke-width="0.5" opacity="0.3"/>
+  </g>
+  <g opacity="0.12">
+    <rect x="280" y="480" width="28" height="28" rx="4" fill="none" stroke="#0033AD" stroke-width="1"/>
+    <line x1="280" y1="490" x2="308" y2="490" stroke="#0033AD" stroke-width="0.5"/>
+    <line x1="285" y1="496" x2="303" y2="496" stroke="#0033AD" stroke-width="0.5" opacity="0.5"/>
+  </g>
+  <g opacity="0.1">
+    <rect x="680" y="140" width="26" height="26" rx="4" fill="none" stroke="#D4A843" stroke-width="1"/>
+    <line x1="680" y1="149" x2="706" y2="149" stroke="#D4A843" stroke-width="0.5"/>
+    <line x1="685" y1="155" x2="701" y2="155" stroke="#D4A843" stroke-width="0.5" opacity="0.5"/>
+  </g>
+  <g opacity="0.12">
+    <rect x="920" y="160" width="30" height="30" rx="4" fill="none" stroke="#0033AD" stroke-width="1"/>
+    <line x1="920" y1="170" x2="950" y2="170" stroke="#0033AD" stroke-width="0.5"/>
+    <line x1="925" y1="176" x2="945" y2="176" stroke="#0033AD" stroke-width="0.5" opacity="0.5"/>
+    <line x1="925" y1="182" x2="940" y2="182" stroke="#0033AD" stroke-width="0.5" opacity="0.3"/>
+  </g>
+
+  <!-- Connecting lines between floating blocks (network effect) -->
+  <line x1="200" y1="165" x2="280" y2="494" stroke="#1e293b" stroke-width="0.5" opacity="0.3"/>
+  <line x1="308" y1="494" x2="680" y2="153" stroke="#1e293b" stroke-width="0.5" opacity="0.2"/>
+  <line x1="706" y1="153" x2="920" y2="175" stroke="#1e293b" stroke-width="0.5" opacity="0.3"/>
+
+  <!-- Rust gear/cog icon (top left area) -->
+  <g transform="translate(90, 520)" opacity="0.2">
+    <circle cx="0" cy="0" r="14" fill="none" stroke="#CE422B" stroke-width="2"/>
+    <circle cx="0" cy="0" r="6" fill="none" stroke="#CE422B" stroke-width="1.5"/>
+    <!-- Gear teeth -->
+    <rect x="-3" y="-18" width="6" height="8" rx="1" fill="#CE422B"/>
+    <rect x="-3" y="10" width="6" height="8" rx="1" fill="#CE422B"/>
+    <rect x="-18" y="-3" width="8" height="6" rx="1" fill="#CE422B"/>
+    <rect x="10" y="-3" width="8" height="6" rx="1" fill="#CE422B"/>
+  </g>
+
+  <!-- Cardano-style concentric circles (right side) -->
+  <g transform="translate(1100, 520)" opacity="0.12">
+    <circle cx="0" cy="0" r="20" fill="none" stroke="#0033AD" stroke-width="1"/>
+    <circle cx="0" cy="0" r="30" fill="none" stroke="#0033AD" stroke-width="0.8"/>
+    <circle cx="0" cy="0" r="40" fill="none" stroke="#0033AD" stroke-width="0.5"/>
+    <circle cx="0" cy="0" r="4" fill="#0033AD"/>
+  </g>
+
+  <!-- Title text -->
+  <text x="600" y="85" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#94a3b8" font-weight="400" letter-spacing="4">THE JOURNEY SO FAR</text>
+
+  <text x="600" y="135" text-anchor="middle" font-family="sans-serif" font-size="38" fill="#ffffff" font-weight="700" letter-spacing="0.5">Building a Cardano Node</text>
+
+  <text x="600" y="178" text-anchor="middle" font-family="sans-serif" font-size="32" fill="#ffffff" font-weight="700" letter-spacing="0.5">in <tspan fill="#CE422B">Rust</tspan></text>
+
+  <!-- Decorative line under title -->
+  <line x1="440" y1="198" x2="600" y2="198" stroke="#CE422B" stroke-width="2" opacity="0.6"/>
+  <line x1="600" y1="198" x2="760" y2="198" stroke="#0033AD" stroke-width="2" opacity="0.6"/>
+  <circle cx="600" cy="198" r="3" fill="#D4A843"/>
+
+  <!-- Bottom branding bar -->
+  <rect x="0" y="600" width="1200" height="30" fill="#0a1020" opacity="0.6"/>
+  <text x="600" y="620" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#475569" font-weight="500" letter-spacing="2">SANDSTONE  |  TORSTEN PROJECT</text>
+
+  <!-- Small decorative particles -->
+  <circle cx="400" cy="500" r="1.5" fill="#CE422B" opacity="0.3"/>
+  <circle cx="520" cy="160" r="1" fill="#D4A843" opacity="0.4"/>
+  <circle cx="780" cy="490" r="1.5" fill="#0033AD" opacity="0.3"/>
+  <circle cx="300" cy="120" r="1" fill="#CE422B" opacity="0.2"/>
+  <circle cx="1050" cy="250" r="1.5" fill="#0033AD" opacity="0.25"/>
+  <circle cx="450" cy="550" r="1" fill="#D4A843" opacity="0.3"/>
+  <circle cx="850" cy="520" r="1" fill="#CE422B" opacity="0.2"/>
+  <circle cx="150" cy="450" r="1.5" fill="#D4A843" opacity="0.25"/>
+  <circle cx="700" cy="560" r="1" fill="#0033AD" opacity="0.3"/>
+</svg>

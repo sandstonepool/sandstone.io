@@ -1,0 +1,214 @@
+---
+title: "Building a Cardano Node in Rust: The Journey So Far"
+date: "2026-03-14"
+description: "533 commits, 181,000 lines of Rust, and more than a few humbling encounters with the Cardano protocol. Here's what we've learned building Torsten — a from-scratch Cardano node — and the bugs, breakthroughs, and hard-won lessons along the way."
+tags:
+  - "Cardano"
+  - "Infrastructure"
+  - "Open Source"
+  - "Technical"
+author:
+  name: "Sandstone Team"
+  url: "https://x.com/sandstonepool"
+featuredImage: "/images/blog/torsten-journey.svg"
+featuredImageAlt: "Abstract timeline showing the journey of building Torsten, a Cardano node in Rust, with milestone markers and code elements"
+---
+
+We [introduced Torsten](/blog/introducing-torsten) a few weeks ago — our attempt at building a Cardano full node entirely in Rust. The reception was encouraging, and a common request was: *tell us more about the actual process of building this thing*.
+
+So here it is. Not the polished architecture overview — we already wrote that. This is the story of what it actually feels like to reimplement a consensus protocol from scratch, fight with 34-digit fixed-point arithmetic, and discover at 2am that your block validation has been wrong for reasons you never could have anticipated.
+
+## The Scale of the Problem
+
+Let's start with some numbers to set the scene.
+
+The Haskell [cardano-node](https://github.com/IntersectMBO/cardano-node) doesn't live in one repository. The actual node binary is a thin integration layer that composes four major subsystems, each in its own repo: [ouroboros-consensus](https://github.com/IntersectMBO/ouroboros-consensus), [ouroboros-network](https://github.com/IntersectMBO/ouroboros-network), [cardano-ledger](https://github.com/IntersectMBO/cardano-ledger), and [cardano-api](https://github.com/IntersectMBO/cardano-api). Collectively, you're looking at hundreds of thousands of lines of Haskell that have been refined by dozens of researchers and engineers over years.
+
+We're reimplementing all of it. In a different language. With one person.
+
+As of today, [Torsten](https://github.com/michaeljfazio/torsten) sits at **533 commits**, **181,872 lines of Rust**, **1,608 unit tests**, and **174 conformance test vectors**. It syncs the Preview testnet from a [Mithril](https://mithril.network/) snapshot, applies ledger rules across all eras including [Plutus](https://docs.cardano.org/about-cardano/learn/plutus/) script evaluation, implements full Ouroboros Praos consensus validation, serves the complete node-to-client protocol suite, and can even forge blocks on testnet.
+
+Getting here was not a straight line.
+
+## The First Block
+
+The earliest commits are deceptively simple. Parse some CBOR. Deserialise a block header. Connect to a peer and receive a chain tip. There's a honeymoon period when you're building the scaffolding where everything just *works* — lean on [Pallas](https://github.com/txpipe/pallas) for the wire format, let Tokio handle async I/O, and suddenly you have a process that connects to a real Cardano node and starts receiving data.
+
+This feeling is dangerous. It tricks you into thinking you understand the protocol.
+
+You do not understand the protocol.
+
+## The Bugs That Humbled Us
+
+### 34 Digits of Precision (No More, No Less)
+
+The Cardano protocol uses non-integral arithmetic for stake ratio calculations, reward distributions, and the VRF leader election threshold (the "phi function"). The Haskell implementation uses a custom bounded-precision rational type that maintains exactly 34 decimal digits of precision — not floating point, not arbitrary precision, but a specific fixed window.
+
+This matters more than you might think. The phi function computes `1 - (1 - f)^σ` where `f` is the active slot coefficient and `σ` is the relative stake. Get the precision wrong — even by one digit — and you'll disagree with the reference implementation about who was eligible to produce a given block.
+
+We built a custom `Rat` type backed by `i128` that implements exact rational arithmetic for these calculations. It works. But the experience of debugging stake threshold mismatches, where your answer is 0.0000000000000000000000000000000001 off from the expected value, is an exercise in existential dread.
+
+### The Reference Script Blind Spot
+
+One of our more educational bugs involved the `ScriptDataHash` computation for transactions that use reference scripts. When a transaction includes Plutus scripts, the node must compute a hash over the "language views" — a canonical representation of the cost model parameters for each Plutus language version used in the transaction.
+
+Our implementation correctly collected the language versions from scripts attached directly to the transaction. What it did *not* do was check the language versions of **reference scripts** — scripts that live in UTxOs referenced by the transaction rather than being included inline.
+
+This meant that a transaction using only reference scripts (increasingly common as the ecosystem matures) would compute its language views over an empty set, producing the wrong hash, and our node would reject a perfectly valid block.
+
+The Haskell implementation handles this in [cardano-ledger](https://github.com/IntersectMBO/cardano-ledger), where the script resolution logic naturally traverses both inline and referenced scripts. We had inadvertently split this traversal across two different code paths that didn't share state. The fix was straightforward once we understood the problem — but the problem only manifested when we hit specific transactions on the live network, sometimes thousands of blocks into a sync.
+
+### Collateral: More Nuanced Than It Looks
+
+Cardano requires transactions with Plutus scripts to post collateral — ADA that gets consumed if script evaluation fails. A reasonable-sounding validation rule is: *collateral inputs must contain only ADA, no native tokens*.
+
+We implemented exactly that. Then a valid block failed validation.
+
+It turns out the actual rule is more subtle. Collateral inputs *can* contain native tokens, **as long as** the transaction specifies a `collateral_return` output. The protocol allows the "change" from collateral to be returned, so the effective collateral consumed is only the difference between the collateral inputs and the return output. Tokens go back to the sender.
+
+This is the kind of nuance that doesn't jump out from a protocol specification but is critical for compatibility. The real Cardano network has transactions that exercise this rule, and if you get it wrong, you halt at whatever block first uses it.
+
+## The Storage Problem
+
+### Storing 3 Million UTxOs
+
+By the time you've replayed the Preview testnet, your ledger state contains roughly 2.9 million UTxOs. Keeping these in memory is possible — we do it as the default path — but it demands careful management.
+
+We integrated [cardano-lsm](https://github.com/nickkatsios/cardano-lsm-rust), a Rust port of the LSM (Log-Structured Merge-tree) storage engine used by the Haskell node for its on-disk UTxO backend. The LSM engine has a lot of tunable parameters — memtable size, block cache allocation, compaction thresholds — and getting them right for different hardware is non-trivial. Rather than forcing operators to figure this out themselves, we added a set of preset storage profiles as a starting point:
+
+| Profile | Memtable | Block Cache | Est. RSS |
+|---------|----------|-------------|----------|
+| Ultra (32GB) | 2 GB | 24 GB | ~27 GB |
+| High (16GB) | 1 GB | 12 GB | ~14 GB |
+| Low (8GB) | 512 MB | 5 GB | ~6.5 GB |
+| Minimal (4GB) | 256 MB | 2 GB | ~3 GB |
+
+Every value can be overridden individually if you know what you're doing. The profiles are really just a convenience — we're still not entirely sure this is the right abstraction. We've been kicking around alternatives, including an auto-tuning mode that detects available system resources and configures itself accordingly. For now the presets exist, but they might evolve or disappear entirely as we learn more about real-world usage patterns.
+
+The LSM integration itself came with its own adventures. Under load, we observed quadratic degradation in SSTable lookups due to an O(n) traversal on the read path. We patched this in a [fork](https://github.com/michaeljfazio/cardano-lsm-rust) and submitted a pull request upstream — ideally that gets merged at some point so we can stop maintaining the fork, but for now it's a dependency we carry.
+
+### The ImmutableDB and VolatileDB Split
+
+Following the Haskell node's architecture, we split block storage into two tiers:
+
+- An **ImmutableDB** for finalised blocks — append-only chunk files that are never modified
+- A **VolatileDB** for the most recent *k*=2160 blocks — kept in memory for potential rollbacks
+
+This split is elegant in theory. In practice, the boundary management is fiddly. When do you flush from volatile to immutable? How do you handle crash recovery when a flush was interrupted? What happens to the block index when you restart?
+
+Our current solution uses a write-ahead log (WAL) for the volatile store and a snapshot rotation strategy (latest → previous → latest_tmp) for crash safety. It works, but every edge case we found was a reminder that storage reliability is its own discipline — the kind of thing that seems straightforward until you're staring at a corrupted block index after a simulated crash.
+
+## The Performance Payoff
+
+Despite all the challenges, the architectural bet on Rust is paying off. Here are the numbers from our most recent Preview testnet run:
+
+**Mithril snapshot import**: 4.1 million blocks loaded and indexed in ~6 minutes from a 2.7 GB archive.
+
+**Ledger replay**: Those same 4.1 million blocks replayed in **116 seconds**, peaking at **35,164 blocks per second**. A caveat: replay mode skips cryptographic verification (VRF proofs, KES signatures, operational certificate checks) and trusts block producers' script validity flags rather than re-evaluating Plutus scripts. This matches how the Haskell node handles replay — these blocks were already validated when they were first received, so re-verifying every signature would be wasted work. Full validation kicks in once the node reaches the chain tip and has had enough epoch transitions for nonces and stake snapshots to stabilise.
+
+The throughput profile during replay is interesting — it starts at around 25,000 blocks/sec during the early eras (fewer transactions, simpler validation), drops to about 8,000 blocks/sec around slot 12 million as the UTxO set grows and transactions become more complex, then recovers as internal caching warms up.
+
+**Chain sync catch-up**: After connecting to network peers, we consumed 617 new blocks in ~35 seconds to reach the chain tip — this time with full validation enabled.
+
+No GC pauses. Deterministic memory usage. Predictable latency. This is what Rust gives you for free — and it's exactly what you want in consensus-critical infrastructure.
+
+## The CLI: Because Operators Need Tools
+
+A node without tooling is a curiosity. A node with a compatible CLI is something you can actually use.
+
+[`torsten-cli`](https://github.com/michaeljfazio/torsten) implements 33+ subcommands that mirror the interface of `cardano-cli`:
+
+```bash
+# Generate keys
+torsten-cli address key-gen --signing-key-file pay.skey --verification-key-file pay.vkey
+
+# Build an address
+torsten-cli address build --payment-verification-key-file pay.vkey --testnet-magic 2
+
+# Query the UTxO set
+torsten-cli query utxo --address addr_test1... --socket-path ./node.sock --testnet-magic 2
+
+# Build and submit transactions
+torsten-cli transaction build-raw --tx-in ... --tx-out ... --fee 200000 --out-file tx.raw
+```
+
+The goal is drop-in compatibility. If your scripts work with `cardano-cli`, they should work with `torsten-cli`. We're not there yet on every command, but the core key management, address, transaction, and query workflows are functional.
+
+## The Little Things That Matter
+
+Building the node itself is one challenge. Making it something an operator would actually want to run is another. We've taken a few liberties along the way to invest in quality-of-life features that aren't strictly necessary for protocol correctness but make a real difference in practice:
+
+- **Health check endpoint** — A ready-state HTTP endpoint that reports whether the node is synced and healthy. Simple, but essential if you're running behind a load balancer or in a container orchestration system that needs to know when a node is ready to serve traffic.
+- **Helm chart** — An authoritative [Helm](https://helm.sh/) chart ships in the repository, so deploying Torsten to Kubernetes is a first-class workflow rather than something operators have to cobble together themselves.
+- **Grafana dashboard** — A starter dashboard configuration that wires up the Prometheus metrics out of the box. Nothing fancy, but it means you can go from `helm install` to seeing blocks tick by on a graph in minutes rather than hours.
+
+None of these are groundbreaking. But they reflect a philosophy that operational experience matters from day one — not as an afterthought bolted on once the "real work" is done.
+
+## Conway Governance: The Latest Frontier
+
+The Conway era introduced [CIP-1694](https://cips.cardano.org/cip/CIP-1694/) on-chain governance — a system where ADA holders can delegate voting power to Delegated Representatives (DReps), who vote on governance actions that control the protocol's evolution.
+
+Implementing Conway governance was a significant effort. The system includes:
+
+- **7 governance action types**: parameter changes, hard fork initiation, treasury withdrawals, info actions, new constitution, update constitutional committee, and no-confidence motions
+- **Ratification logic**: each action type has its own voting thresholds across three governance bodies (constitutional committee, DReps, and stake pools)
+- **Proposal lifecycle**: submission → voting → ratification → enactment, with expiration and deposit tracking
+- **DRep mechanics**: registration, delegation, activity tracking, and the "always abstain" / "always no confidence" sentinel DReps
+
+We recently added 45 dedicated unit tests for the governance module and fixed 6 bugs in the ratification logic. The subtleties are endless — for example, did you know that `NoConfidence` actions require different voting thresholds depending on whether a constitutional committee currently exists?
+
+## What's Left
+
+Transparency has been a core value throughout this project, so here's an honest accounting of what's still incomplete:
+
+**Ouroboros Genesis**: The protocol's trustless bootstrap mechanism ([Limit on Eagerness](https://iohk.io/en/research/library/papers/ouroboros-genesis-composable-proof-of-stake-blockchains-with-dynamic-availability/)) is tracked but not enforced. This matters for nodes bootstrapping from genesis without Mithril.
+
+**Reward calculation validation**: Our reward formula uses exact rational arithmetic, but we haven't validated it against historical mainnet reward distributions. The formula might be correct on paper and wrong in practice.
+
+**Byron ledger validation**: The Byron era ledger rules are essentially a stub. Blocks pass through without UTxO validation. This is acceptable if you're bootstrapping from a Mithril snapshot (which starts well past Byron), but it means genesis-to-tip sync without Mithril is not fully validated.
+
+**The cardano-lsm fork**: Running a fork of a critical storage dependency is technical debt we need to resolve.
+
+## What We've Learned
+
+Building a Cardano node from scratch teaches you things about the protocol that you simply cannot learn any other way:
+
+1. **The specification is necessary but not sufficient.** The real protocol lives in the interaction between spec, implementation, and the actual transaction history on-chain. Plenty of valid behaviour on mainnet isn't obvious from the spec alone.
+
+2. **Conformance testing is everything.** We now maintain 174 conformance test vectors that validate our implementation against expected outputs. Every time we fix a bug, we add a test vector. This suite is the only thing standing between us and silent divergence from the reference implementation.
+
+3. **The Cardano Rust ecosystem is mature enough.** Three years ago, this project wouldn't have been feasible. Today, between [Pallas](https://github.com/txpipe/pallas), [uplc](https://github.com/pragma-org/uplc), and the broader Rust crypto ecosystem, the building blocks exist. The integration work is still enormous, but you're not starting from bare metal.
+
+4. **Performance compounds.** A 3x improvement in block validation speed doesn't just mean faster sync — it means lower hosting costs, smaller hardware requirements, and the possibility of running a full node on machines that can't handle the Haskell implementation. For a decentralised network, that's a meaningful contribution to accessibility.
+
+5. **Edge cases are the entire game.** The happy path — syncing blocks, validating transactions, producing outputs — comes together relatively quickly. The vast majority of the remaining effort is the long tail of edge cases that only surface in specific transactions scattered across millions of blocks on the live network.
+
+## A Note on the Politics
+
+If you've been following Cardano governance lately, you'll have noticed that alternative node implementations have become a surprisingly heated topic. There are treasury proposals requesting significant ADA allocations to fund production-ready nodes in languages like Go and Rust. DReps are divided. Some see multi-client diversity as essential infrastructure resilience — the Ethereum playbook. Others worry about duplication, long-term maintenance burden, and whether treasury funds are better spent elsewhere. The debates are substantive but not always calm.
+
+We want to be straightforward about where Torsten sits in all of this: **we don't have a dog in this race.**
+
+We didn't apply for treasury funding. We have no plans to. Torsten is not a business proposal or a governance initiative. It's a speed run — one semi-competent engineer with AI assistance, seeing how far we can push a from-scratch Cardano node implementation out of curiosity and a belief that the exercise itself is valuable regardless of the outcome.
+
+We're aware of other teams building nodes in Go, Rust, and other languages. As far as we're concerned — power to them. The more people who deeply understand the Cardano protocol at the implementation level, the better the ecosystem gets. Whether those efforts are treasury-funded, self-funded, or built on weekends between other commitments, the work itself is what matters.
+
+The political questions around how the community should allocate resources are important, but they're not our questions to answer. We just wanted to build something.
+
+## Here Be Dragons
+
+We want to be crystal clear: **Torsten is alpha software.** It has known bugs. It has unknown bugs. Storage formats, APIs, and CLI interfaces may change without notice. We would not recommend running it for anything where reliability or correctness matters — not yet. If you point it at mainnet, do so with the understanding that you are exploring, not operating.
+
+That said — alpha doesn't mean abandoned. It means we're building in the open, warts and all, because we think the Cardano ecosystem benefits from seeing the work in progress rather than waiting for a polished reveal that may never come.
+
+## Come Build With Us
+
+Torsten is [open source under MIT](https://github.com/michaeljfazio/torsten). We run all 1,608 tests on every commit. The conformance suite is growing weekly. And we're always looking for contributors who want to dive into the deep end of blockchain systems programming.
+
+If anything in this post made you think "I'd like to dig into that" — check out the [GitHub repo](https://github.com/michaeljfazio/torsten), pick an open issue, or just run the node on Preview testnet and tell us what breaks. The best bug reports come from people who try to use the thing for real.
+
+A special shout-out to [Andrew Westberg](https://x.com/AndrewWestwordy) — we've known Andrew since before Cardano mainnet even went live, and he's been generous with developer advice, technical insights, and signal-boosting the project on socials. Building in public is a lot easier when people in the community take the time to engage with the work rather than just the hype. Thanks, Andrew.
+
+The journey is far from over. But 533 commits in, we're more convinced than ever that Rust is the right tool for this job — and that the Cardano ecosystem will be stronger for having a second implementation pushing on every corner of the protocol.
+
+*Follow [@sandstonepool](https://x.com/sandstonepool) on X for updates on Torsten and everything else we're building at Sandstone.*

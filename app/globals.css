@@ -213,6 +213,7 @@ body {
     color: transparent;
     text-decoration: none;
     transition: all 0.2s ease;
+    padding-right: 0.05em;
   }
 
   .prose-blog a:hover {
