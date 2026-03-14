@@ -24,7 +24,7 @@ Let's start with some numbers to set the scene.
 
 The Haskell [cardano-node](https://github.com/IntersectMBO/cardano-node) doesn't live in one repository. The actual node binary is a thin integration layer that composes four major subsystems, each in its own repo: [ouroboros-consensus](https://github.com/IntersectMBO/ouroboros-consensus), [ouroboros-network](https://github.com/IntersectMBO/ouroboros-network), [cardano-ledger](https://github.com/IntersectMBO/cardano-ledger), and [cardano-api](https://github.com/IntersectMBO/cardano-api). Collectively, you're looking at hundreds of thousands of lines of Haskell that have been refined by dozens of researchers and engineers over years.
 
-We're reimplementing all of it. In a different language. With one person.
+We're reimplementing all of it. In a different language. With one person and an AI coding assistant.
 
 As of today, [Torsten](https://github.com/michaeljfazio/torsten) sits at **533 commits**, **181,872 lines of Rust**, **1,608 unit tests**, and **174 conformance test vectors**. It syncs the Preview testnet from a [Mithril](https://mithril.network/) snapshot, applies ledger rules across all eras including [Plutus](https://docs.cardano.org/about-cardano/learn/plutus/) script evaluation, implements full Ouroboros Praos consensus validation, serves the complete node-to-client protocol suite, and can even forge blocks on testnet.
 
@@ -207,7 +207,7 @@ Torsten is [open source under MIT](https://github.com/michaeljfazio/torsten). We
 
 If anything in this post made you think "I'd like to dig into that" — check out the [GitHub repo](https://github.com/michaeljfazio/torsten), pick an open issue, or just run the node on Preview testnet and tell us what breaks. The best bug reports come from people who try to use the thing for real.
 
-A special shout-out to [Andrew Westberg](https://x.com/AndrewWestwordy) — we've known Andrew since before Cardano mainnet even went live, and he's been generous with developer advice, technical insights, and signal-boosting the project on socials. Building in public is a lot easier when people in the community take the time to engage with the work rather than just the hype. Thanks, Andrew.
+A special shout-out to [Andrew Westberg](https://x.com/amw7) — we've known Andrew since before Cardano mainnet even went live, and he's been generous with developer advice, technical insights, and signal-boosting the project on socials. Building in public is a lot easier when people in the community take the time to engage with the work rather than just the hype. Thanks, Andrew.
 
 The journey is far from over. But 533 commits in, we're more convinced than ever that Rust is the right tool for this job — and that the Cardano ecosystem will be stronger for having a second implementation pushing on every corner of the protocol.
 
