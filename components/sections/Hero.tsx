@@ -3,10 +3,11 @@
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { CubeIcon, BanknotesIcon, ShieldCheckIcon, ChartBarIcon, CurrencyDollarIcon } from "@heroicons/react/24/solid";
 import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
-import { useRef, useState, useEffect, lazy, Suspense } from "react";
+import { useRef, useState, useEffect, lazy, Suspense, useCallback } from "react";
 import { usePoolStats } from "@/lib/hooks/usePoolStats";
 import { POOL_ID_HEX, POOL_ID_BECH } from "@/lib/utils/constants";
 import { useTranslation } from "@/lib/i18n";
+import { DelegateModal } from "@/components/ui/DelegateModal";
 
 const CARDANOSCAN_POOL_URL = `https://cardanoscan.io/pool/${POOL_ID_BECH}`;
 
@@ -18,6 +19,10 @@ export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { data: poolStats, loading } = usePoolStats(POOL_ID_HEX);
   const { t } = useTranslation();
+
+  // Delegate modal state
+  const [delegateOpen, setDelegateOpen] = useState(false);
+  const closeDelegateModal = useCallback(() => setDelegateOpen(false), []);
 
   // Defer heavy effects until after first paint
   const [showEffects, setShowEffects] = useState(false);
@@ -114,14 +119,12 @@ export function Hero() {
 
               {/* Delegate CTA */}
               <div className="flex items-center gap-3 mt-3 sm:mt-4">
-                <a
-                  href="https://cexplorer.io/pool/pool1gqvrgg7zycvf65ydkjeph72t0yx0f5ykzd9f477zh4f3smwk997?action=delegate"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={() => setDelegateOpen(true)}
                   className="btn text-sm sm:text-base !rounded-full !px-5 !py-2.5 !shadow-lg hover:!shadow-xl hover:scale-105 transition-all"
                 >
                   {t.hero.delegateButton}
-                </a>
+                </button>
                 <motion.svg
                   animate={{ y: [0, -6, 0] }}
                   transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
@@ -308,6 +311,9 @@ export function Hero() {
         </motion.div>
       </motion.div>
       )}
+
+      {/* Delegate Modal */}
+      <DelegateModal open={delegateOpen} onClose={closeDelegateModal} />
     </section>
   );
 }
