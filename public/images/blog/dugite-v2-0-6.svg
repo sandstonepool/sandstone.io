@@ -1,0 +1,204 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1424"/>
+      <stop offset="50%" stop-color="#131d38"/>
+      <stop offset="100%" stop-color="#0d1424"/>
+    </linearGradient>
+    <!-- Snake body gradient (sand -> bronze -> rust), spans the motif -->
+    <linearGradient id="snakeGrad" x1="236" y1="398" x2="980" y2="372" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E6B45A"/>
+      <stop offset="45%" stop-color="#D2802F"/>
+      <stop offset="100%" stop-color="#B5532A"/>
+    </linearGradient>
+    <!-- Glows -->
+    <radialGradient id="rustGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#CE422B" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#CE422B" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cardanoGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0033AD" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#0033AD" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="goldGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#D4A843" stop-opacity="0.42"/>
+      <stop offset="100%" stop-color="#D4A843" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="greenGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3FB950" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#3FB950" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Patterns -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5" opacity="0.5"/>
+    </pattern>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="12" cy="12" r="0.8" fill="#334155" opacity="0.4"/>
+    </pattern>
+    <!-- Filters -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- Hexagon scale -->
+    <g id="hex">
+      <polygon points="0,-9 -7.8,-4.5 -7.8,4.5 0,9 7.8,4.5 7.8,-4.5"
+               fill="#c8761f" fill-opacity="0.35" stroke="#ffe6a8" stroke-width="1.3" stroke-opacity="0.55"/>
+    </g>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+  <rect width="1200" height="630" fill="url(#grid)" opacity="0.3"/>
+
+  <!-- Ambient glows -->
+  <ellipse cx="250" cy="400" rx="280" ry="210" fill="url(#goldGlow)"/>
+  <ellipse cx="640" cy="430" rx="300" ry="200" fill="url(#rustGlow)"/>
+  <ellipse cx="1000" cy="360" rx="300" ry="230" fill="url(#cardanoGlow)"/>
+  <ellipse cx="500" cy="540" rx="260" ry="120" fill="url(#greenGlow)"/>
+
+  <!-- Faint code fragments (left, Rust) -->
+  <g opacity="0.12" font-family="monospace" font-size="11" fill="#CE422B">
+    <text x="26" y="300">impl CekMachine {</text>
+    <text x="26" y="316">  fn eval(&amp;mut self)</text>
+    <text x="26" y="332">    -&gt; EvalResult { .. }</text>
+    <text x="26" y="348">}</text>
+    <text x="26" y="380">#![deny(clippy::unwrap_used)]</text>
+    <text x="26" y="396">// panic-free on the wire</text>
+  </g>
+  <!-- Faint code fragments (right, Cardano blue) -->
+  <g opacity="0.11" font-family="monospace" font-size="11" fill="#4f8cff">
+    <text x="980" y="300">enum GsmState {</text>
+    <text x="980" y="316">  PreSyncing,</text>
+    <text x="980" y="332">  Syncing,</text>
+    <text x="980" y="348">  CaughtUp,</text>
+    <text x="980" y="364">}</text>
+    <text x="980" y="396">// ouroboros genesis</text>
+  </g>
+
+  <!-- ===================== SERPENT-AS-BLOCKCHAIN MOTIF ===================== -->
+  <!-- Genesis block at the tail (origin of the chain) -->
+  <g filter="url(#softGlow)">
+    <g transform="translate(222,398) rotate(45)">
+      <rect x="-17" y="-17" width="34" height="34" rx="7" fill="#1a1208" stroke="#D4A843" stroke-width="2"/>
+      <rect x="-9" y="-9" width="18" height="18" rx="4" fill="#D4A843" opacity="0.9"/>
+    </g>
+  </g>
+  <text x="222" y="452" text-anchor="middle" font-family="sans-serif" font-size="11"
+        fill="#D4A843" font-weight="700" letter-spacing="2.5">GENESIS</text>
+
+  <!-- Body: shadow / outline -->
+  <path d="M 250 398 C 352 398 372 312 482 312 C 592 312 582 470 692 470 C 802 470 802 360 902 360 C 932 360 945 364 962 366"
+        fill="none" stroke="#3a2410" stroke-width="50" stroke-linecap="round" opacity="0.55" filter="url(#softGlow)"/>
+  <!-- Body: main -->
+  <path d="M 250 398 C 352 398 372 312 482 312 C 592 312 582 470 692 470 C 802 470 802 360 902 360 C 932 360 945 364 962 366"
+        fill="none" stroke="url(#snakeGrad)" stroke-width="40" stroke-linecap="round"/>
+  <!-- Dorsal highlight -->
+  <path d="M 250 398 C 352 398 372 312 482 312 C 592 312 582 470 692 470 C 802 470 802 360 902 360 C 932 360 945 364 962 366"
+        fill="none" stroke="#ffe2a6" stroke-width="5" stroke-linecap="round" opacity="0.20"/>
+
+  <!-- Hexagon scales riding the back -->
+  <use href="#hex" x="330" y="372"/>
+  <use href="#hex" x="412" y="330"/>
+  <use href="#hex" x="498" y="316"/>
+  <use href="#hex" x="585" y="386"/>
+  <use href="#hex" x="675" y="456"/>
+  <use href="#hex" x="760" y="442"/>
+  <use href="#hex" x="845" y="388"/>
+  <use href="#hex" x="912" y="360"/>
+
+  <!-- Head, eye, tongue (the live tip) -->
+  <g transform="translate(958,366)">
+    <!-- head -->
+    <path d="M -10,-21 C 30,-28 60,-18 76,-3 C 80,1 80,-1 76,3 C 60,18 30,28 -10,21 C -22,12 -22,-12 -10,-21 Z"
+          fill="#B5532A" stroke="#3a2410" stroke-width="2"/>
+    <path d="M -10,-21 C 30,-28 60,-18 76,-3 C 80,1 80,-1 76,3 C 60,18 30,28 -10,21 C -22,12 -22,-12 -10,-21 Z"
+          fill="#E6B45A" opacity="0.18"/>
+    <!-- eye (gold, glowing) -->
+    <circle cx="40" cy="-7" r="6.5" fill="#F4D06A" filter="url(#glow)"/>
+    <ellipse cx="41" cy="-7" rx="1.8" ry="4.2" fill="#1a1208"/>
+    <!-- forked tongue reaching the tip -->
+    <path d="M 78,2 L 104,2 M 104,2 L 118,-6 M 104,2 L 118,10"
+          fill="none" stroke="#CE422B" stroke-width="2.6" stroke-linecap="round"/>
+  </g>
+  <!-- Live-tip glow at the tongue -->
+  <circle cx="1088" cy="362" r="6" fill="#3FB950" opacity="0.85" filter="url(#glow)"/>
+  <circle cx="1088" cy="362" r="13" fill="none" stroke="#3FB950" stroke-width="1" opacity="0.35"/>
+  <text x="1088" y="392" text-anchor="middle" font-family="sans-serif" font-size="10"
+        fill="#6fce7d" font-weight="700" letter-spacing="2">TIP</text>
+
+  <!-- Floating blocks / network accents -->
+  <g opacity="0.16">
+    <rect x="150" y="180" width="28" height="28" rx="4" fill="none" stroke="#D4A843" stroke-width="1"/>
+    <line x1="150" y1="190" x2="178" y2="190" stroke="#D4A843" stroke-width="0.5"/>
+    <line x1="155" y1="196" x2="173" y2="196" stroke="#D4A843" stroke-width="0.5" opacity="0.5"/>
+  </g>
+  <g opacity="0.14">
+    <rect x="1020" y="170" width="30" height="30" rx="4" fill="none" stroke="#4f8cff" stroke-width="1"/>
+    <line x1="1020" y1="180" x2="1050" y2="180" stroke="#4f8cff" stroke-width="0.5"/>
+    <line x1="1025" y1="186" x2="1045" y2="186" stroke="#4f8cff" stroke-width="0.5" opacity="0.5"/>
+  </g>
+
+  <!-- ===================== TITLE BLOCK ===================== -->
+  <text x="600" y="58" text-anchor="middle" font-family="sans-serif" font-size="15"
+        fill="#94a3b8" font-weight="500" letter-spacing="4.5">SANDSTONE &#160; &#183; &#160; A CARDANO NODE IN RUST</text>
+
+  <text x="600" y="150" text-anchor="middle" font-family="sans-serif" font-size="94"
+        fill="#ffffff" font-weight="800" letter-spacing="3" filter="url(#glow)">DUGITE</text>
+
+  <!-- version pill -->
+  <g>
+    <rect x="506" y="170" width="188" height="32" rx="16" fill="#1a1208" fill-opacity="0.55" stroke="#D4A843" stroke-width="1.3"/>
+    <text x="600" y="191" text-anchor="middle" font-family="sans-serif" font-size="14"
+          fill="#E8C56A" font-weight="700" letter-spacing="2.5">RELEASE v2.0.6</text>
+  </g>
+
+  <text x="600" y="232" text-anchor="middle" font-family="sans-serif" font-size="19"
+        fill="#aebbcd" font-weight="400">Genesis consensus &#160;&#183;&#160; a first-party UPLC &#160;&#183;&#160; valid blocks on every network</text>
+
+  <!-- ===================== STAT CHIPS ===================== -->
+  <g font-family="sans-serif" font-size="13" font-weight="600" letter-spacing="1">
+    <!-- chip 1 -->
+    <rect x="220" y="506" width="196" height="36" rx="18" fill="#101a30" fill-opacity="0.85" stroke="#27324a" stroke-width="1"/>
+    <circle cx="244" cy="524" r="5" fill="#D4A843"/>
+    <text x="262" y="529" fill="#cbd5e1">GENESIS CONSENSUS</text>
+    <!-- chip 2 -->
+    <rect x="432" y="506" width="176" height="36" rx="18" fill="#101a30" fill-opacity="0.85" stroke="#27324a" stroke-width="1"/>
+    <circle cx="456" cy="524" r="5" fill="#3FB950"/>
+    <text x="474" y="529" fill="#cbd5e1">999 / 999 UPLC</text>
+    <!-- chip 3 -->
+    <rect x="624" y="506" width="160" height="36" rx="18" fill="#101a30" fill-opacity="0.85" stroke="#27324a" stroke-width="1"/>
+    <circle cx="648" cy="524" r="5" fill="#4f8cff"/>
+    <text x="666" y="529" fill="#cbd5e1">6,900+ TESTS</text>
+    <!-- chip 4 -->
+    <rect x="800" y="506" width="176" height="36" rx="18" fill="#101a30" fill-opacity="0.85" stroke="#27324a" stroke-width="1"/>
+    <circle cx="824" cy="524" r="5" fill="#CE422B"/>
+    <text x="842" y="529" fill="#cbd5e1">82% COVERAGE</text>
+  </g>
+
+  <!-- Decorative split underline -->
+  <line x1="470" y1="252" x2="600" y2="252" stroke="#D4A843" stroke-width="2" opacity="0.55"/>
+  <line x1="600" y1="252" x2="730" y2="252" stroke="#0033AD" stroke-width="2" opacity="0.55"/>
+  <circle cx="600" cy="252" r="3" fill="#CE422B"/>
+
+  <!-- Bottom branding bar -->
+  <rect x="0" y="600" width="1200" height="30" fill="#0a1020" opacity="0.6"/>
+  <text x="600" y="620" text-anchor="middle" font-family="sans-serif" font-size="12"
+        fill="#4a5568" font-weight="500" letter-spacing="2">SANDSTONE &#160;&#183;&#160; DUGITE &#160;&#183;&#160; APACHE-2.0 &#160;&#183;&#160; github.com/michaeljfazio/dugite</text>
+
+  <!-- Decorative particles -->
+  <circle cx="380" cy="486" r="1.5" fill="#D4A843" opacity="0.35"/>
+  <circle cx="520" cy="170" r="1" fill="#CE422B" opacity="0.35"/>
+  <circle cx="780" cy="200" r="1.5" fill="#4f8cff" opacity="0.30"/>
+  <circle cx="300" cy="150" r="1" fill="#D4A843" opacity="0.25"/>
+  <circle cx="1040" cy="470" r="1.5" fill="#3FB950" opacity="0.30"/>
+  <circle cx="180" cy="470" r="1" fill="#CE422B" opacity="0.25"/>
+  <circle cx="900" cy="180" r="1" fill="#4f8cff" opacity="0.30"/>
+  <circle cx="660" cy="180" r="1.5" fill="#D4A843" opacity="0.25"/>
+</svg>

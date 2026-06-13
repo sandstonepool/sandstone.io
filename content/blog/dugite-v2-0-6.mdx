@@ -1,0 +1,224 @@
+---
+title: "Introducing Dugite v2.0.6: Genesis Consensus, First-Party Plutus, and Block Production on Every Cardano Network"
+date: "2026-06-13"
+description: "Dugite v2.0.6 — the Rust Cardano node formerly known as Torsten — gains Ouroboros Genesis consensus, an in-house UPLC machine, and adversarial devnet validation against a real Haskell node."
+tags:
+  - "Cardano"
+  - "Infrastructure"
+  - "Open Source"
+  - "Technical"
+author:
+  name: "Sandstone Team"
+  url: "https://x.com/sandstonepool"
+featuredImage: "/images/blog/dugite-v2-0-6.svg"
+featuredImageAlt: "A stylised dugite snake rendered as a Cardano blockchain — its body running from a glowing genesis block at the tail to the live chain tip — with the Dugite v2.0.6 release stats"
+---
+
+What does it take for a from-scratch Cardano node to convince you it actually works?
+
+Not a feature list. Not a green CI badge. Something closer to this: a real Haskell [cardano-node](https://github.com/IntersectMBO/cardano-node) sitting in the loop, re-applying every block your node forges and being handed every transaction your node accepts or rejects — and agreeing with you every single time. When the two disagree, you treat it as a release-blocking bug and you go find out why.
+
+That is the bar we have been building toward, and today we are releasing [Dugite v2.0.6](https://github.com/michaeljfazio/dugite/releases/tag/v2.0.6) — our most complete release ever. It is a [Cardano](https://www.cardano.org/) full node written in Rust, aiming for 100% wire-format compatibility with the Haskell reference implementation. This post is a guided tour of what it can do now, and — just as importantly — the evidence behind each claim.
+
+## First, a quick note on the name
+
+If you have followed this project before, you knew it as Torsten. We have renamed it to **Dugite**. The old repository at `michaeljfazio/torsten` now permanently redirects to [`michaeljfazio/dugite`](https://github.com/michaeljfazio/dugite) — same project, renamed and substantially evolved. Our two earlier posts, [Introducing Torsten](/blog/introducing-torsten) and [The Journey So Far](/blog/torsten-journey-so-far), still describe the same effort; just mentally swap the name as you read them.
+
+Why "Dugite"? The dugite (*Pseudonaja affinis*) is a highly venomous brown snake native to Perth, Western Australia — home turf for the engineer behind this project. The README describes dugites as "fast, resilient, and quietly formidable." We will let you decide whether the node has earned the comparison, but the aspiration is honest enough.
+
+There is one other change worth flagging up front: under the Torsten name, the project was MIT-licensed and leaned on third-party Cardano libraries. Dugite is now **Apache-2.0**, and as you will see below, it has replaced those dependencies with first-party code.
+
+## The headline: Ouroboros Genesis consensus
+
+The marquee capability of this release is **Ouroboros Genesis**, and it is genuinely new. Under the Torsten name, Genesis was "tracked but not enforced." In Dugite v2.0.6, it is fully supported.
+
+Genesis is the trustless bootstrap mechanism for Cardano. The default sync mode, Praos, assumes you start from a trusted checkpoint — in practice, a [Mithril](https://mithril.network/) snapshot or a known-good chain tip. Genesis removes that assumption. A node running in Genesis mode can sync from the genesis block without having to trust any single source, deciding for itself which chain is the honest one by reasoning about chain density across many peers. It is the difference between "trust this snapshot" and "trust the protocol."
+
+You opt in with a single flag — `--consensus-mode genesis`.
+
+Under the hood, it is implemented as a **Genesis State Machine (GSM)** with three states — `PreSyncing`, `Syncing`, and `CaughtUp` — coordinating four cooperating components:
+
+- **The Historical Availability Assumption (HAA)** — sync does not begin until the node has connected to enough trusted Big Ledger Peers. You cannot reason about honest chain density from a single source, so Genesis refuses to start reasoning until it has a quorum.
+- **Big Ledger Peer identification** — pools in the top 90% of active stake. These are the peers whose chains carry enough weight to anchor the density comparison.
+- **The Genesis Density Disconnector (GDD)** — compares chain density across peers within the genesis window and disconnects peers whose density is insufficient. An adversary feeding you a sparse, dishonest chain gets pruned.
+- **The Limit on Eagerness (LoE)** — bounds how far the immutable tip can advance based on candidate chain tips, so the node never commits prematurely to a chain that later evidence might overturn.
+
+For most operators, **Praos remains the default and recommended mode**, paired with a Mithril snapshot import for fast initial sync. Genesis is there for the case Praos cannot serve: a fully trustless bootstrap. If you want the underlying theory, the [Ouroboros Genesis paper](https://iohk.io/en/research/library/papers/ouroboros-genesis-composable-proof-of-stake-blockchains-with-dynamic-availability/) is the primary source.
+
+## The capability tour
+
+Genesis is the headline, but it sits on top of a node that already does a great deal. Here is the broader set.
+
+### Block production on every network
+
+Dugite produces **valid blocks on Preview, Preprod, and Mainnet** — full VRF proof generation, KES signatures, and operational certificates. "Valid" here is not our own assessment: a real Haskell cardano-node accepts every block Dugite forges on our local devnet (more on that shortly).
+
+We need to be precise about what this does and does not mean. Producing a valid mainnet block is a statement about correctness — the bytes are right, the cryptography checks out, the Haskell ledger accepts it. It is **not** a statement about operational readiness. **Dugite is not recommended for production, real stake-pool operation, real funds, or mainnet governance.** Testnets only. We will come back to this in the "what is not ready" section, because it matters.
+
+### First-party UPLC and Plutus
+
+This is the change we are proudest of architecturally. The `dugite-uplc` crate is an **in-house Untyped Plutus Core CEK machine** — no third-party Cardano dependency anywhere in the script-evaluation path. Under the Torsten name, we leaned on the `aiken-lang/uplc` crate and the Pallas chain; Dugite has replaced all of it with first-party code. Combined with our in-house multi-era CBOR decoder, the result is full Cardano wire-format compatibility with **no third-party Cardano dependencies** at all, across a 15-crate Cargo workspace.
+
+The crate implements the UPLC abstract syntax tree, the flat wire codec, the `PlutusData` CBOR codec, the CEK abstract machine, the full Cardano default-builtin suite across Plutus V1/V2/V3, a V1/V2/V3 `ScriptContext` builder, and a phase-2 evaluation facade. Standards coverage includes:
+
+| Standard | Capability |
+|---|---|
+| CIP-381 | BLS12-381 |
+| CIP-127 | Keccak-256 and Blake2b-224 |
+| CIP-101 | RIPEMD-160 |
+| CIP-117 | Integer / ByteString conversions |
+| CIP-123 | Bitwise builtins |
+| CIP-33 | ScriptContext V2 |
+| CIP-35 / [CIP-1694](https://cips.cardano.org/cip/CIP-1694/) | ScriptContext V3 and governance |
+
+A CEK machine that evaluates attacker-supplied bytecode is a security boundary, not just a feature. Adversaries control witness-set script bytes via gossiped transactions, so a panic deep in script evaluation would be a remote denial of service. We harden against this with crate-root `deny` lints that enforce four properties:
+
+1. **Panic-free on adversarial input** — no `unwrap`/`expect`/`panic`/`todo`/`unimplemented`/`unreachable` is reachable from bytes that came off the wire.
+2. **Bounded allocation** — every peer-supplied length header is clamped, so a malicious size field cannot exhaust memory.
+3. **Bounded recursion** — an explicit heap-allocated continuation stack and depth counters replace raw recursion, so a deeply nested term cannot blow the native stack.
+4. **Bit-for-bit byte-exact compatibility** with the Haskell implementation — when Rust and Haskell disagree, Haskell is authoritative by definition.
+
+We will quantify how well this holds up in the conformance section.
+
+### Full Conway governance
+
+Dugite implements [CIP-1694](https://cips.cardano.org/cip/CIP-1694/) governance end to end: DReps, voting, vote delegation, the constitutional committee, all seven governance action types, ratification, and treasury withdrawals.
+
+### The Ouroboros network protocol suite
+
+Both layers of the Ouroboros networking stack are implemented:
+
+- **Node-to-node** — ChainSync, BlockFetch, TxSubmission, KeepAlive, and PeerSharing.
+- **Node-to-client** — LocalStateQuery, LocalTxSubmission, and LocalTxMonitor.
+
+The practical upshot: existing Cardano tooling that speaks node-to-client can connect to Dugite as if it were a Haskell node.
+
+### A cardano-cli-compatible CLI, Mithril sync, and operations
+
+Three more pieces round out a node you can actually operate:
+
+- **`dugite-cli`** mirrors `cardano-cli` workflows. Our devnet exercises 22 query subcommands at parity.
+- **Mithril fast sync** lets you import a snapshot to bootstrap quickly, then resume regular chain sync.
+- **Operations** are first-class from day one: Prometheus metrics, a health endpoint, a Helm chart, a Grafana dashboard, and two terminal UIs — `dugite-monitor` and `dugite-config`. There is also a `dugite-rpc` crate exposing UTxO RPC over gRPC.
+
+Four binaries in total — `dugite-node`, `dugite-cli`, `dugite-monitor`, and `dugite-config` — covering Byron, Shelley, Allegra, Mary, Alonzo, Babbage, and Conway.
+
+## How we know it works
+
+A capability list is a set of promises. Here is how we try to keep ourselves honest about them: conformance vectors, unit tests, and an adversarial local devnet.
+
+### Conformance: the correctness story
+
+On the v2.0.6 tag, **6,027 of 6,027 conformance vectors pass** — every one of them, green. The suite spans seven SHA-pinned upstream sources, all passing:
+
+| Source | What it checks | Result |
+|---|---|---|
+| [IntersectMBO/plutus](https://github.com/IntersectMBO/plutus) (tag 1.65.0.0) | The official `plutus-conformance` UPLC evaluation suite — the *same* one the Haskell node is tested against | 999/999, skip list empty |
+| ouroboros-consensus | Per-era block and header golden files | Passing across all seven eras |
+| cardano-ledger | Genesis JSON, the CDDL schema, and golden transactions (byte-exact on re-encode) | Passing |
+| cardano-node | Genesis spec files | Passing |
+| ledger-rules (ImpSpec) | `NEWEPOCH` and `LEDGER` state-transition CBOR vectors, replayed and compared byte-for-byte | Passing, skip list empty |
+| cardano-base | VRF v03 cryptographic test vectors (what guarantees Praos-compatible leader election) | Passing |
+| mithril | Certificate fixtures | Passing |
+
+The Plutus row is the one we care most about. Those 999 cases come from the official `plutus-conformance` suite — the same corpus the Haskell node is validated against — and Dugite passes all of them with an **empty skip list**. We are not quietly excluding the hard cases. Coverage runs through normalisation-by-evaluation readback, per-builtin cost-model wiring, CIP-122 bit ordering, BLS little-endian scalar handling, and BIP-340 `verify_raw` semantics.
+
+We use two-level SHA pinning — separating which upstream version we test against from which corpus a given run actually consumed — so the whole thing stays deterministic and reproducible. The empty skip list on the Plutus and ImpSpec suites is the detail that matters most: it is the difference between "passes the tests" and "passes the tests we felt like running."
+
+### The unit-test picture
+
+Beyond conformance, the workspace carries **more than 6,900 tests** — roughly 6,600 standard unit tests plus about 360 async tests, near 6,960 in total — alongside roughly 70 property-based (proptest) suites. For context, under the Torsten name in March the project had 1,608 unit tests; it has more than quadrupled since. The codebase is at 2,944 commits, up from 533 in March, and spans more than 400 Rust source files across the 15 crates.
+
+Coverage sits at roughly 82% of lines (codecov reports 81.7% — about 141,800 of 173,600 lines). CI enforces a **zero-warning policy**: every commit must pass `clippy` with warnings-as-errors and `rustfmt`, and the doc tests run too.
+
+### The local devnet — and the adversaries we throw at it
+
+Tests you write yourself can share your blind spots. So the centrepiece of our validation is a **3-node local devnet with a real Haskell node acting as the oracle**:
+
+```
+┌──────────────────────┐     ┌──────────────────────┐     ┌───────────────────────────────┐
+│ dugite-bp            │     │ dugite-relay         │     │ cardano-relay                 │
+│ forger, 95%+ stake   │ ──> │ middle hop           │ ──> │ REAL Haskell cardano-node     │
+│                      │     │                      │     │ 11.0.1 — the validating oracle│
+└──────────────────────┘     └──────────────────────┘     └───────────────────────────────┘
+```
+
+That last hop is a genuine Haskell cardano-node version 11.0.1 sitting in the loop, checking everything Dugite does. The central predicate is a **bidirectional parity oracle**: for every transaction, Dugite and the Haskell node must reach the *same* accept/reject decision regardless of which node ingested it first, and every block Dugite forges must be re-applied and accepted by the Haskell ledger. Any divergence — one accepts, the other rejects — is a P0 bug. The question is not merely "does Dugite reject it" but "does Dugite reject it for the *same reason* the Haskell node does." We don't grade our own homework. The reference implementation grades it for us.
+
+To stress that predicate, we run a "tx-zoo" of **59 transaction scripts across 11 categories**, exercising the full Conway surface: bookkeeping, native scripts, Plutus V1/V2/V3, stake operations, governance certificates, governance proposals (all seven action types), voting, mempool behaviour, CLI parity, and a full governance lifecycle. Crucially, **every positive case has a matched negative**, and both must be classified identically by Dugite and Haskell.
+
+Nineteen of the scripts are deliberately adversarial — transactions designed to be *rejected*. Getting a rejection right is just as important as getting an acceptance right:
+
+| Adversarial transaction | What it probes |
+|---|---|
+| Double-spend | An input already consumed |
+| Value-not-conserved | Inputs ≠ outputs + fees |
+| Bad signature | Witness does not verify |
+| Missing required signer | A mandated key is absent |
+| Fee too low | Below the minimum fee |
+| Expired TTL | Time-to-live already passed |
+| Insufficient collateral | Phase-2 collateral shortfall |
+| No inputs / nonexistent input | Empty or dangling input set |
+| Transaction too large | Over the size limit |
+| Malformed CBOR | Garbage on the wire |
+| Mint without policy | Minting with no governing script |
+| Native-script failure | A native script that must fail |
+| Wrong-network output | Output addressed to the wrong network |
+| Output value too large | Beyond permitted bounds |
+
+We do not stop at the transaction layer:
+
+- **Adversarial protocol tests** push malformed and abusive peers at the node-to-node stack — handshake, chainsync, blockfetch, txsubmission, keepalive, peersharing, and a slow-loris test.
+- **Chaos / fault-injection tests** throw clock skew, disk full, an inbound SYN flood, `kill -9` mid-block-forge, network partition, and macOS app-nap at the node, plus oversized, replay, and flood abuse of the RPC.
+
+The whole thing is organised along six orthogonal coverage axes: transaction type, validity (positive vs matched negative), submit path (every node-to-client socket, `dugite-cli` vs `cardano-cli`, and the gRPC endpoint), propagation direction (forward and reverse through the relay hub), actor (good and bad), and workload (quiescent, trickle, restart, and saturation-plus-burst-plus-adversarial).
+
+The release gate runs an extended **three-round devnet validation** — a baseline round, an epoch-boundary stress round, and a restart round — all green on the v2.0.6 tag, together with soak testing, health probes sampled at least once a minute, and an audit of roughly 70 metrics. The devnet is deliberately tuned for fast iteration: 1-second slots, 400-slot epochs (about 6.7 minutes), an active-slot coefficient of 0.5, and a security parameter *k* of 40. That means a single 7-minute round crosses a full epoch boundary, exercising reward updates, snapshot rotation, KES rollover, and leader-schedule recomputation every round.
+
+On top of all that, this release went through an **adversarial multi-agent code review** that caught real problems and forced corrections to initial fix attempts before they shipped.
+
+## What is still not ready
+
+Transparency has been a constant in this project, so here is the honest accounting.
+
+**Dugite is not production-ready, and we do not recommend it for mainnet operation, real funds, a real stake pool, or mainnet governance.** Testnets only. Concretely:
+
+- **Preview** (network magic 2) — full testing. Go here.
+- **Preprod** (network magic 1) — full testing. Or here.
+- **Mainnet** (network magic 764824073) — sync, validation, and valid block production exist so we can *prove* compatibility against the real chain — not as an invitation to point real stake at it.
+
+The distinction we drew earlier is the one to hold onto: Dugite *can* produce valid blocks on mainnet — a real Haskell ledger accepts them — but producing a valid block is not the same as being ready to run a pool that real delegators depend on. Operational readiness means sustained uptime under real adversarial conditions, on real money, over long periods. We have strong correctness evidence; we do not have that operational track record, and we are not going to pretend otherwise. **If you want to run a pool today, run the Haskell cardano-node.** If you point Dugite at mainnet, do so to explore and validate, not to operate.
+
+A note on what this project is and is not, since alternative node implementations have become a charged topic in Cardano governance: Dugite is **not treasury-funded and carries no governance agenda**. It is a speed run — one engineer working with an AI coding assistant, seeing how far a from-scratch Rust node can be pushed. We are not asking the community to fund it or vote on it. We just wanted to build it, in the open, and show our work.
+
+## Getting started
+
+This release is commit `fd2d240`, tagged on 2026-06-12. Everything below targets testnets, which is where Dugite belongs today.
+
+The fastest path from a clone is to build in release mode, import a Mithril snapshot to bootstrap, and then run on Preview (network magic 2) or Preprod (network magic 1):
+
+```bash
+# Clone the repo
+git clone https://github.com/michaeljfazio/dugite.git
+cd dugite
+
+# Build in release mode
+cargo build --release
+```
+
+From there, use Mithril fast sync to bootstrap quickly, then resume regular chain sync against Preview or Preprod. Our [Quick Start guide](https://michaeljfazio.github.io/dugite/quickstart.html) walks through the exact commands and configuration, so you can get your own node running and start experimenting — and the full [documentation site](https://michaeljfazio.github.io/dugite/) covers everything from topology to block-producer setup.
+
+Prefer containers or Kubernetes? Both ship with this release:
+
+```bash
+# Container image (linux/amd64 and linux/arm64)
+docker pull ghcr.io/michaeljfazio/dugite:2.0.6
+```
+
+A Helm chart, version 2.0.6, is published for Kubernetes — see the [v2.0.6 release page](https://github.com/michaeljfazio/dugite/releases/tag/v2.0.6) and the [Quick Start guide](https://michaeljfazio.github.io/dugite/quickstart.html) for install details. There are also prebuilt binaries for Linux x86_64/aarch64 and macOS x86_64/Apple Silicon, each shipped with a SHA256 checksum, on the [v2.0.6 release page](https://github.com/michaeljfazio/dugite/releases/tag/v2.0.6).
+
+If anything here made you want to dig in, the best contribution you can make is to run the node on Preview or Preprod, connect your favourite node-to-client tooling, and tell us what breaks. The best bug reports come from people who try to use the thing for real — and a node that claims byte-exact parity with Haskell is exactly the kind of claim that deserves a hard look from fresh eyes. The [repository](https://github.com/michaeljfazio/dugite) is the place to start, and the issue tracker is open.
+
+*Dugite is open-source software licensed under Apache-2.0. You can find the code, documentation, and issue tracker at [github.com/michaeljfazio/dugite](https://github.com/michaeljfazio/dugite).*
+
+Happy staking.
